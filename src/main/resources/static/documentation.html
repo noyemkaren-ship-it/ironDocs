@@ -528,6 +528,7 @@
                     <li><a href="#conditions">Условия</a></li>
                     <li><a href="#gui">GUI</a></li>
                     <li><a href="#download">Скачать</a></li>
+                    <li><a href="#cli">🚀 CLI</a></li>
                </ul>
           </div>
      </nav>
@@ -839,6 +840,98 @@
           </blockquote>
 
      </div>
+     <!-- ===== КАК ЗАПУСТИТЬ ИЗ ТЕРМИНАЛА ===== -->
+     <section id="cli" class="animate">
+          <h1>🚀 Запуск из терминала</h1>
+          <p>Iron можно запускать из командной строки, передавая путь к файлу или папке со скриптами.</p>
+
+          <h2>🐧 Linux (Debian / Arch / IronEagleOS)</h2>
+
+          <h3>1. Сделай Iron исполняемым глобально:</h3>
+          <pre><code><span class="comment"># Перейди в папку с Iron</span>
+<span class="function">cd</span> ~/PycharmProjects/MainApp
+
+<span class="comment"># Создай алиас (добавь в ~/.bashrc или ~/.zshrc)</span>
+<span class="function">echo</span> <span class="string">'alias iron="python3 ~/PycharmProjects/MainApp/main.py"'</span> >> ~/.bashrc
+<span class="function">source</span> ~/.bashrc</code></pre>
+
+          <h3>2. Запуск:</h3>
+          <pre><code><span class="comment"># Файл по умолчанию (scr/main.iron)</span>
+<span class="iron-cmd">iron</span>
+
+<span class="comment"># Конкретный файл</span>
+<span class="iron-cmd">iron</span> /путь/к/файлу.iron
+
+<span class="comment"># Все .iron файлы из папки</span>
+<span class="iron-cmd">iron</span> /путь/к/папке/
+
+<span class="comment"># Примеры:</span>
+<span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/
+<span class="iron-cmd">iron</span> /home/user/projects/tests/</code></pre>
+
+          <h3>3. Или сделай исполняемый файл:</h3>
+          <pre><code><span class="comment"># Создай файл /usr/local/bin/iron</span>
+<span class="function">sudo</span> <span class="function">nano</span> /usr/local/bin/iron
+
+<span class="comment"># Вставь это:</span>
+<span class="comment">#!/bin/bash</span>
+<span class="function">python3</span> ~/PycharmProjects/MainApp/main.py <span class="string">"$@"</span>
+
+<span class="comment"># Сделай исполняемым:</span>
+<span class="function">sudo</span> <span class="function">chmod</span> +x /usr/local/bin/iron
+
+<span class="comment"># Теперь можно запускать откуда угодно:</span>
+<span class="iron-cmd">iron</span>
+<span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/</code></pre>
+
+          <h2>🪟 Windows (PowerShell / CMD)</h2>
+
+          <h3>1. Создай bat-файл:</h3>
+          <pre><code><span class="comment">:: Создай файл iron.bat в папке с Iron</span>
+<span class="function">notepad</span> iron.bat</code></pre>
+
+          <h3>2. Вставь в iron.bat:</h3>
+          <pre><code><span class="keyword">@echo off</span>
+<span class="function">python3</span> C:\Users\ТвойПуть\MainApp\main.py %*</code></pre>
+
+          <h3>3. Добавь в PATH:</h3>
+          <pre><code><span class="comment">:: Открой PowerShell от администратора и выполни:</span>
+<span class="function">setx</span> PATH <span class="string">"%PATH%;C:\Users\ТвойПуть\MainApp"</span> /M
+
+<span class="comment">:: Или через графический интерфейс:</span>
+<span class="comment">:: Пуск → Изменение переменных среды → PATH → Добавить</span></code></pre>
+
+          <h3>4. Запуск из любого места:</h3>
+          <pre><code><span class="comment">:: CMD или PowerShell</span>
+<span class="iron-cmd">iron</span>
+<span class="iron-cmd">iron</span> scr\test.iron
+<span class="iron-cmd">iron</span> scr\</code></pre>
+
+          <div class="feature-grid" style="margin-top: 2rem;">
+               <div class="feature-card">
+                    <h3>🐧 Linux</h3>
+                    <pre><code><span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/</code></pre>
+               </div>
+               <div class="feature-card">
+                    <h3>🪟 Windows</h3>
+                    <pre><code><span class="iron-cmd">iron</span> scr\test.iron
+<span class="iron-cmd">iron</span> scr\</code></pre>
+               </div>
+               <div class="feature-card">
+                    <h3>🍎 macOS</h3>
+                    <pre><code><span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/</code></pre>
+               </div>
+          </div>
+
+          <blockquote>
+               💡 <strong>Совет:</strong> После настройки алиаса <code>iron</code> вы можете запускать .iron файлы из
+               любого места системы одной командой!
+          </blockquote>
+     </section>
 
      <!-- ===== FOOTER ===== -->
      <footer>
