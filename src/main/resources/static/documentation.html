@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>IRON — Язык Программирования Будущего</title>
+     <style>
+          :root {
+               --bg: #0a0a0f;
+               --surface: #14141f;
+               --border: #2a2a3a;
+               --text: #e0e0e0;
+               --text-secondary: #a0a0b0;
+               --accent: #ff4d1c;
+               --accent-glow: #ff6b3d;
+               --iron-gradient: linear-gradient(135deg, #ff4d1c 0%, #ff8c5a 50%, #c0392b 100%);
+               --code-bg: #0d0d1a;
+               --success: #00cc88;
+               --warning: #ffaa00;
+               --radius: 12px;
+               --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+               --shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+               --glow: 0 0 30px rgba(255, 77, 28, 0.3);
+               --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+               --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+               --font-display: 'Montserrat', 'Inter', sans-serif;
+          }
+
+          * {
+               margin: 0;
+               padding: 0;
+               box-sizing: border-box;
+          }
+
+          body {
+               background-color: var(--bg);
+               color: var(--text);
+               font-family: var(--font-sans);
+               line-height: 1.7;
+               -webkit-font-smoothing: antialiased;
+               background-image:
+                    radial-gradient(ellipse at 20% 20%, rgba(255, 77, 28, 0.06) 0%, transparent 50%),
+                    radial-gradient(ellipse at 80% 80%, rgba(255, 140, 90, 0.04) 0%, transparent 50%),
+                    radial-gradient(ellipse at 50% 50%, rgba(192, 57, 43, 0.03) 0%, transparent 70%);
+               background-attachment: fixed;
+          }
+
+          /* ===== NAVIGATION ===== */
+          nav {
+               position: sticky;
+               top: 0;
+               z-index: 1000;
+               background: rgba(10, 10, 15, 0.85);
+               backdrop-filter: blur(20px);
+               -webkit-backdrop-filter: blur(20px);
+               border-bottom: 1px solid var(--border);
+               padding: 0 2rem;
+               transition: var(--transition);
+          }
+
+          nav.scrolled {
+               box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+          }
+
+          .nav-inner {
+               max-width: 1300px;
+               margin: 0 auto;
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               height: 70px;
+          }
+
+          .nav-logo {
+               display: flex;
+               align-items: center;
+               gap: 12px;
+               text-decoration: none;
+               color: var(--text);
+               font-family: var(--font-display);
+               font-weight: 800;
+               font-size: 1.6rem;
+               letter-spacing: -0.5px;
+          }
+
+          .nav-logo .icon {
+               width: 42px;
+               height: 42px;
+               background: var(--iron-gradient);
+               border-radius: 10px;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               font-size: 1.5rem;
+               box-shadow: var(--glow);
+          }
+
+          .nav-links {
+               display: flex;
+               gap: 2rem;
+               list-style: none;
+               flex-wrap: wrap;
+          }
+
+          .nav-links a {
+               color: var(--text-secondary);
+               text-decoration: none;
+               font-weight: 500;
+               font-size: 0.95rem;
+               transition: var(--transition);
+               position: relative;
+               padding: 5px 0;
+          }
+
+          .nav-links a::after {
+               content: '';
+               position: absolute;
+               bottom: -2px;
+               left: 0;
+               width: 0;
+               height: 2px;
+               background: var(--accent);
+               transition: var(--transition);
+               border-radius: 2px;
+          }
+
+          .nav-links a:hover {
+               color: #fff;
+          }
+
+          .nav-links a:hover::after {
+               width: 100%;
+          }
+
+          /* ===== MAIN CONTAINER ===== */
+          .container {
+               max-width: 1000px;
+               margin: 0 auto;
+               padding: 2rem 2rem 4rem;
+          }
+
+          /* ===== HERO SECTION ===== */
+          .hero {
+               text-align: center;
+               padding: 4rem 0 3rem;
+               position: relative;
+          }
+
+          .hero-badge {
+               display: inline-block;
+               background: rgba(255, 77, 28, 0.15);
+               color: var(--accent-glow);
+               border: 1px solid rgba(255, 77, 28, 0.3);
+               padding: 8px 20px;
+               border-radius: 50px;
+               font-size: 0.9rem;
+               font-weight: 600;
+               margin-bottom: 2rem;
+               letter-spacing: 0.5px;
+          }
+
+          .hero h1 {
+               font-family: var(--font-display);
+               font-size: clamp(3rem, 8vw, 5rem);
+               font-weight: 900;
+               background: var(--iron-gradient);
+               -webkit-background-clip: text;
+               -webkit-text-fill-color: transparent;
+               background-clip: text;
+               margin-bottom: 1rem;
+               letter-spacing: -1px;
+               line-height: 1.1;
+          }
+
+          .hero-subtitle {
+               font-size: 1.3rem;
+               color: var(--text-secondary);
+               max-width: 700px;
+               margin: 0 auto 2rem;
+               font-weight: 400;
+          }
+
+          .hero-platforms {
+               display: flex;
+               justify-content: center;
+               gap: 1.5rem;
+               flex-wrap: wrap;
+               margin-top: 2rem;
+          }
+
+          .platform-badge {
+               background: var(--surface);
+               border: 1px solid var(--border);
+               padding: 10px 20px;
+               border-radius: 50px;
+               font-size: 0.9rem;
+               font-weight: 500;
+               display: flex;
+               align-items: center;
+               gap: 8px;
+               transition: var(--transition);
+               color: var(--text-secondary);
+          }
+
+          .platform-badge:hover {
+               border-color: var(--accent);
+               color: #fff;
+               transform: translateY(-2px);
+               box-shadow: var(--glow);
+          }
+
+          /* ===== SECTIONS ===== */
+          section {
+               margin-bottom: 3rem;
+          }
+
+          h1 {
+               font-family: var(--font-display);
+               font-size: 2.5rem;
+               font-weight: 800;
+               margin-bottom: 1.5rem;
+               color: #fff;
+               letter-spacing: -0.5px;
+          }
+
+          h2 {
+               font-family: var(--font-display);
+               font-size: 1.6rem;
+               font-weight: 700;
+               margin: 1.5rem 0 0.8rem;
+               color: var(--accent-glow);
+               padding-left: 1rem;
+               border-left: 3px solid var(--accent);
+          }
+
+          h3 {
+               font-size: 1.2rem;
+               font-weight: 600;
+               margin: 1rem 0 0.5rem;
+               color: #fff;
+          }
+
+          p {
+               color: var(--text-secondary);
+               margin-bottom: 0.8rem;
+               font-size: 1.05rem;
+          }
+
+          /* ===== CODE BLOCKS ===== */
+          pre {
+               background: var(--code-bg);
+               border: 1px solid var(--border);
+               border-radius: var(--radius);
+               padding: 1.5rem;
+               margin: 1.2rem 0;
+               overflow-x: auto;
+               position: relative;
+               box-shadow: var(--shadow);
+               transition: var(--transition);
+          }
+
+          pre:hover {
+               border-color: var(--accent);
+               box-shadow: var(--shadow), var(--glow);
+          }
+
+          pre code {
+               font-family: var(--font-mono);
+               font-size: 0.95rem;
+               color: #e0e0e0;
+               line-height: 1.8;
+               white-space: pre;
+               display: block;
+          }
+
+          /* Syntax highlighting */
+          .keyword {
+               color: #ff6b6b;
+          }
+
+          .string {
+               color: #7bed9f;
+          }
+
+          .number {
+               color: #ffa502;
+          }
+
+          .operator {
+               color: #70a1ff;
+          }
+
+          .comment {
+               color: #576574;
+               font-style: italic;
+          }
+
+          .function {
+               color: #eccc68;
+          }
+
+          .variable {
+               color: #ff7f50;
+          }
+
+          .iron-cmd {
+               color: #ff4d1c;
+               font-weight: bold;
+          }
+
+          /* ===== CARDS ===== */
+          .feature-grid {
+               display: grid;
+               grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+               gap: 1.5rem;
+               margin: 2rem 0;
+          }
+
+          .feature-card {
+               background: var(--surface);
+               border: 1px solid var(--border);
+               border-radius: var(--radius);
+               padding: 1.8rem;
+               transition: var(--transition);
+               position: relative;
+               overflow: hidden;
+          }
+
+          .feature-card::before {
+               content: '';
+               position: absolute;
+               top: 0;
+               left: 0;
+               right: 0;
+               height: 3px;
+               background: var(--iron-gradient);
+               opacity: 0;
+               transition: var(--transition);
+          }
+
+          .feature-card:hover {
+               border-color: var(--accent);
+               transform: translateY(-4px);
+               box-shadow: var(--shadow);
+          }
+
+          .feature-card:hover::before {
+               opacity: 1;
+          }
+
+          .feature-card h3 {
+               font-size: 1.2rem;
+               margin-bottom: 0.5rem;
+          }
+
+          .feature-card p {
+               font-size: 0.95rem;
+               margin-bottom: 0;
+          }
+
+          /* ===== QUOTE ===== */
+          blockquote {
+               background: var(--surface);
+               border-left: 4px solid var(--accent);
+               padding: 1.5rem 2rem;
+               margin: 2rem 0;
+               border-radius: 0 var(--radius) var(--radius) 0;
+               font-style: italic;
+               color: var(--text-secondary);
+               font-size: 1.1rem;
+          }
+
+          /* ===== BUTTON ===== */
+          .btn-download {
+               display: inline-flex;
+               align-items: center;
+               gap: 10px;
+               background: var(--iron-gradient);
+               color: #fff;
+               padding: 16px 36px;
+               border-radius: 50px;
+               text-decoration: none;
+               font-weight: 700;
+               font-size: 1.1rem;
+               letter-spacing: 0.5px;
+               transition: var(--transition);
+               box-shadow: var(--glow);
+               margin-top: 1rem;
+               border: none;
+               cursor: pointer;
+          }
+
+          .btn-download:hover {
+               transform: translateY(-3px);
+               box-shadow: 0 8px 40px rgba(255, 77, 28, 0.5);
+          }
+
+          .download-section {
+               text-align: center;
+               padding: 3rem 0;
+               background: var(--surface);
+               border-radius: var(--radius);
+               border: 1px solid var(--border);
+               margin-top: 3rem;
+          }
+
+          .download-section h2 {
+               border-left: none;
+               padding-left: 0;
+               margin-bottom: 0.5rem;
+          }
+
+          /* ===== TABLE OF CONTENTS ===== */
+          .toc {
+               background: var(--surface);
+               border: 1px solid var(--border);
+               border-radius: var(--radius);
+               padding: 1.5rem 2rem;
+               margin-bottom: 3rem;
+          }
+
+          .toc h3 {
+               margin-top: 0;
+               margin-bottom: 1rem;
+          }
+
+          .toc ol {
+               list-style-position: inside;
+               columns: 2;
+               column-gap: 2rem;
+          }
+
+          .toc li {
+               margin-bottom: 0.5rem;
+          }
+
+          .toc a {
+               color: var(--text-secondary);
+               text-decoration: none;
+               transition: var(--transition);
+          }
+
+          .toc a:hover {
+               color: var(--accent);
+          }
+
+          /* ===== RESPONSIVE ===== */
+          @media (max-width: 768px) {
+               .nav-inner {
+                    flex-direction: column;
+                    height: auto;
+                    padding: 1rem 0;
+                    gap: 1rem;
+               }
+
+               .nav-links {
+                    gap: 1rem;
+               }
+
+               .toc ol {
+                    columns: 1;
+               }
+
+               .container {
+                    padding: 1rem 1rem 2rem;
+               }
+
+               h1 {
+                    font-size: 2rem;
+               }
+
+               .hero h1 {
+                    font-size: 2.5rem;
+               }
+          }
+
+          /* ===== FOOTER ===== */
+          footer {
+               text-align: center;
+               padding: 2rem;
+               color: var(--text-secondary);
+               font-size: 0.9rem;
+               border-top: 1px solid var(--border);
+               margin-top: 2rem;
+          }
+
+          footer a {
+               color: var(--accent);
+               text-decoration: none;
+          }
+
+          /* Animations */
+          @keyframes fadeInUp {
+               from {
+                    opacity: 0;
+                    transform: translateY(30px);
+               }
+
+               to {
+                    opacity: 1;
+                    transform: translateY(0);
+               }
+          }
+
+          .animate {
+               animation: fadeInUp 0.6s ease-out forwards;
+          }
+     </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@700;800;900&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+     <!-- ===== NAVIGATION ===== -->
+     <nav id="navbar">
+          <div class="nav-inner">
+               <a href="#" class="nav-logo">
+                    <span class="icon">⚙️</span>
+                    IRON
+               </a>
+               <ul class="nav-links">
+                    <li><a href="#about">О языке</a></li>
+                    <li><a href="#variables">Переменные</a></li>
+                    <li><a href="#http">HTTP</a></li>
+                    <li><a href="#conditions">Условия</a></li>
+                    <li><a href="#gui">GUI</a></li>
+                    <li><a href="#download">Скачать</a></li>
+               </ul>
+          </div>
+     </nav>
+
+     <div class="container">
+
+          <!-- ===== HERO ===== -->
+          <header class="hero animate">
+               <div class="hero-badge">🔥 Версия 3.8 — Production Ready</div>
+               <h1>IRON LANGUAGE</h1>
+               <p class="hero-subtitle">Самый простой, быстрый и гибкий язык программирования. Написан на Python,
+                    работает с C++, поддерживает любой GUI и Python-библиотеки.</p>
+               <div class="hero-platforms">
+                    <span class="platform-badge">🐧 Debian</span>
+                    <span class="platform-badge">🔷 Arch Linux</span>
+                    <span class="platform-badge">🍎 macOS</span>
+                    <span class="platform-badge">🪟 Windows</span>
+                    <span class="platform-badge">🦅 IronEagleOS</span>
+               </div>
+          </header>
+
+          <!-- ===== СОДЕРЖАНИЕ ===== -->
+          <div class="toc animate">
+               <h3>📋 Содержание</h3>
+               <ol>
+                    <li><a href="#about">О языке Iron</a></li>
+                    <li><a href="#variables">Переменные</a></li>
+                    <li><a href="#put">PUT — Вывод</a></li>
+                    <li><a href="#http">REQ / PREQ / REQS — HTTP запросы</a></li>
+                    <li><a href="#memory">MEMORY — Память</a></li>
+                    <li><a href="#conditions">IF / ELSE — Условия</a></li>
+                    <li><a href="#python">%p% / %py% — Python внутри Iron</a></li>
+                    <li><a href="#gui">GUI — Интерфейсы</a></li>
+                    <li><a href="#while">WHILE_E — Циклы</a></li>
+                    <li><a href="#fun">FUN — Функции</a></li>
+                    <li><a href="#read">READ — Ввод данных</a></li>
+                    <li><a href="#comments">LEX_F / LEX_S — Комментарии</a></li>
+                    <li><a href="#import">IMPORT / START — Модули</a></li>
+                    <li><a href="#math">MATH — Математика</a></li>
+                    <li><a href="#sleep">SLEEP — Пауза</a></li>
+                    <li><a href="#save">@SAVE — Логирование</a></li>
+               </ol>
+          </div>
+
+          <!-- ===== О ЯЗЫКЕ ===== -->
+          <section id="about" class="animate">
+               <h1>О языке Iron</h1>
+               <p><strong>Iron</strong> — это современный, удобный и сверхпростой язык программирования, написанный на
+                    <strong>Python 3</strong>. Он создан для того, чтобы любой человек — от школьника до
+                    профессионального разработчика — мог с лёгкостью писать программы, тестировать API, создавать
+                    GUI-приложения и работать с базами данных.
+               </p>
+               <p>Iron объединяет в себе простоту Python, скорость C++ и мощь современной экосистемы. С Iron вы можете:
+               </p>
+               <div class="feature-grid">
+                    <div class="feature-card">
+                         <h3>🚀 Мгновенный старт</h3>
+                         <p>Первая программа за 5 секунд. Никаких сложных конструкций.</p>
+                    </div>
+                    <div class="feature-card">
+                         <h3>🌐 HTTP из коробки</h3>
+                         <p>GET, POST и массовые запросы одной строкой. C++ под капотом для рекордной скорости.</p>
+                    </div>
+                    <div class="feature-card">
+                         <h3>🎨 GUI за 3 строки</h3>
+                         <p>Создавайте окна, кнопки, поля ввода. Поддерживается CustomTkinter и любой Python GUI.</p>
+                    </div>
+                    <div class="feature-card">
+                         <h3>🐍 Python-мост</h3>
+                         <p>Вызывайте ЛЮБОЙ Python-код прямо из Iron. Все 450 000+ библиотек PyPI — ваши.</p>
+                    </div>
+                    <div class="feature-card">
+                         <h3>💾 Базы данных</h3>
+                         <p>Встроенная поддержка SQLite. SELECT, INSERT, DELETE — прямо в коде.</p>
+                    </div>
+                    <div class="feature-card">
+                         <h3>⚡ C++ Модули</h3>
+                         <p>Тяжёлые задачи выполняются на C++. Массовые запросы — до 500 запросов в секунду.</p>
+                    </div>
+               </div>
+          </section>
+
+          <!-- ===== ПЕРЕМЕННЫЕ ===== -->
+          <section id="variables" class="animate">
+               <h1>Переменные</h1>
+               <p>Объявление переменных в Iron — проще некуда. Используйте оператор <code>%=%</code>.</p>
+               <pre><code><span class="variable">i</span> <span class="operator">%=%</span> <span class="number">1</span>
+<span class="variable">name</span> <span class="operator">%=%</span> <span class="string">Iron</span>
+<span class="variable">pi</span> <span class="operator">%=%</span> <span class="number">3.14</span></code></pre>
+               <p>При выводе переменной через <code>put</code> интерпретатор покажет её значение:</p>
+               <pre><code><span class="iron-cmd">put</span> <span class="variable">i</span>      <span class="comment">// Выведет: 1</span>
+<span class="iron-cmd">put</span> <span class="variable">name</span>   <span class="comment">// Выведет: Iron</span></code></pre>
+               <p><strong>Типы данных:</strong> Iron автоматически определяет тип (целое, дробное, строка). Можно явно
+                    указать <code>int</code> или <code>str</code>:</p>
+               <pre><code><span class="keyword">int</span> <span class="variable">age</span> <span class="operator">%=%</span> <span class="number">25</span>
+<span class="keyword">str</span> <span class="variable">city</span> <span class="operator">%=%</span> <span class="string">Москва</span></code></pre>
+          </section>
+
+          <!-- ===== PUT ===== -->
+          <section id="put" class="animate">
+               <h1>PUT — Вывод</h1>
+               <p>Оператор <code>put</code> нужен для вывода чего-либо на экран. Никаких скобок или кавычек!</p>
+               <pre><code><span class="iron-cmd">put</span> Hello World
+<span class="iron-cmd">put</span> Привет, Iron!</code></pre>
+               <p>Это выведет текст прямо в консоль. Сравните с Python: <code>print("Hello World")</code>. Iron — проще.
+               </p>
+          </section>
+
+          <!-- ===== HTTP ===== -->
+          <section id="http" class="animate">
+               <h1>REQ / PREQ / REQS — HTTP запросы</h1>
+               <p>Iron создавался как язык для тестирования API, поэтому HTTP-запросы — его суперсила.</p>
+
+               <h2>REQ — GET запрос</h2>
+               <p>Отправляет один GET-запрос:</p>
+               <pre><code><span class="iron-cmd">req</span> https://api.github.com</code></pre>
+               <p>Ответ сервера будет выведен в консоль.</p>
+
+               <h2>REQS — Массовые GET запросы (C++)</h2>
+               <p>Самая мощная функция Iron! Запросы отправляются через скомпилированный C++ модуль с невероятной
+                    скоростью:</p>
+               <pre><code><span class="iron-cmd">https</span>://api.local/test
+<span class="iron-cmd">reqs</span></code></pre>
+               <p>Интерпретатор спросит количество запросов. C++ отправит их со скоростью <strong>500+
+                         запросов/сек</strong>.</p>
+
+               <h2>PREQ — POST запрос</h2>
+               <p>Отправляет POST-запрос с JSON:</p>
+               <pre><code><span class="iron-cmd">preq</span> <span class="operator">%=%</span> <span class="string">{"name": "Iron", "version": "3.8"}</span></code></pre>
+               <p>URL указывается отдельно через команду <code>http</code> или просто вставляется в любом месте скрипта.
+               </p>
+          </section>
+
+          <!-- ===== MEMORY ===== -->
+          <section id="memory" class="animate">
+               <h1>MEMORY — Память</h1>
+               <p>Оператор <code>memory</code> показывает все переменные и функции, которые сейчас находятся в памяти
+                    интерпретатора:</p>
+               <pre><code><span class="iron-cmd">memory</span></code></pre>
+               <p>Это незаменимый инструмент для отладки!</p>
+          </section>
+
+          <!-- ===== УСЛОВИЯ ===== -->
+          <section id="conditions" class="animate">
+               <h1>IF / ELSE — Условия</h1>
+               <p>Iron поддерживает все основные операторы сравнения: <code>=</code>, <code>&gt;</code>,
+                    <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>.
+               </p>
+               <p>Для указания тела условия используются префиксы:</p>
+               <ul>
+                    <li><strong><code>%i%</code></strong> — выполняется, если условие ИСТИНА</li>
+                    <li><strong><code>%e%</code></strong> — выполняется, если условие ЛОЖЬ</li>
+               </ul>
+               <pre><code><span class="variable">i</span> <span class="operator">%=%</span> <span class="number">1</span>
+
+<span class="keyword">if</span> <span class="variable">i</span> = <span class="number">1</span>
+<span class="iron-cmd">%i%</span> <span class="iron-cmd">put</span> Переменная равна 1
+<span class="iron-cmd">%e%</span> <span class="iron-cmd">put</span> Переменная не равна 1</code></pre>
+               <blockquote>Сравните с Python: 5 строк кода. В Iron — 3 строки! 🎯</blockquote>
+          </section>
+
+          <!-- ===== PYTHON-МОСТ ===== -->
+          <section id="python" class="animate">
+               <h1>%p% / %py%: / %py%/ — Python внутри Iron</h1>
+               <p>Если вам не хватает встроенных функций Iron, вы можете вызвать <strong>ЛЮБУЮ</strong> Python-команду
+                    или библиотеку!</p>
+
+               <h2>%p% — одна Python-команда</h2>
+               <pre><code><span class="iron-cmd">%p%</span> <span class="function">print</span>(<span class="string">'Hello from Python!'</span>)
+<span class="iron-cmd">%p%</span> btn = ctk.CTkButton(root, text=<span class="string">"Кнопка"</span>)</code></pre>
+
+               <h2>%py%: / %py%/ — блок Python-кода</h2>
+               <p>Позволяет выполнить целый блок Python-кода с правильными отступами:</p>
+               <pre><code><span class="iron-cmd">%py%:</span>
+<span class="keyword">def</span> <span class="function">calculate</span>():
+    a = <span class="number">10</span>
+    b = <span class="number">20</span>
+    <span class="function">print</span>(<span class="string">f"Сумма: {a + b}"</span>)
+<span class="iron-cmd">%py%/</span></code></pre>
+               <p>Это делает Iron <strong>бесконечно расширяемым</strong>! Все 450 000+ библиотек PyPI доступны вам.</p>
+          </section>
+
+          <!-- ===== GUI ===== -->
+          <section id="gui" class="animate">
+               <h1>GUI — Графический интерфейс</h1>
+               <p>Iron — один из немногих языков, где GUI можно создать за <strong>3 строки</strong>!</p>
+
+               <h2>Создание окна</h2>
+               <pre><code><span class="iron-cmd">init_root</span> Мой проект
+<span class="iron-cmd">lbl</span> Привет, мир!
+<span class="iron-cmd">close</span></code></pre>
+
+               <h2>Кнопки и поля ввода</h2>
+               <pre><code><span class="iron-cmd">init_root</span> Калькулятор
+
+<span class="iron-cmd">lbl</span> Введите число:
+<span class="iron-cmd">%p%</span> entry = ctk.CTkEntry(root)
+<span class="iron-cmd">%p%</span> entry.pack()
+
+<span class="iron-cmd">%py%:</span>
+<span class="keyword">def</span> <span class="function">submit</span>():
+    <span class="function">print</span>(entry.get())
+<span class="iron-cmd">%py%/</span>
+
+<span class="iron-cmd">btn</span> Отправить <span class="operator">%</span> <span class="iron-cmd">%p%</span>submit()
+<span class="iron-cmd">close</span></code></pre>
+               <p><strong>Важно:</strong> Всегда завершайте GUI-скрипт командой <code>close</code>!</p>
+          </section>
+
+          <!-- ===== WHILE ===== -->
+          <section id="while" class="animate">
+               <h1>WHILE_E — Циклы</h1>
+               <p>Повторяет команду указанное количество раз:</p>
+               <pre><code><span class="iron-cmd">while_e</span> <span class="number">5</span> <span class="operator">%</span> <span class="iron-cmd">put</span> Повторяю!
+
+<span class="comment">// Или для запросов:</span>
+<span class="iron-cmd">while_e</span> <span class="number">10</span> <span class="operator">%</span> <span class="iron-cmd">req</span> https://api.local/test</code></pre>
+               <p>Первый аргумент — количество повторений, после <code>%</code> — команда.</p>
+          </section>
+
+          <!-- ===== FUN ===== -->
+          <section id="fun" class="animate">
+               <h1>FUN — Функции</h1>
+               <p>Создавайте собственные функции с помощью оператора <code>fun</code>:</p>
+               <pre><code><span class="iron-cmd">fun</span> hello <span class="operator">%</span> <span class="iron-cmd">put</span> Привет, мир!
+<span class="iron-cmd">hello</span>  <span class="comment">// Вызовет функцию</span></code></pre>
+               <p>Функции сохраняются в памяти и могут быть вызваны в любой момент.</p>
+          </section>
+
+          <!-- ===== READ ===== -->
+          <section id="read" class="animate">
+               <h1>READ — Ввод данных</h1>
+               <p>Iron поддерживает пользовательский ввод:</p>
+               <pre><code><span class="iron-cmd">read</span> name
+<span class="iron-cmd">put</span> Привет, <span class="variable">name</span>!
+
+<span class="comment">// Числовой ввод:</span>
+<span class="iron-cmd">int read</span> age
+<span class="iron-cmd">put</span> Тебе <span class="variable">age</span> лет</code></pre>
+          </section>
+
+          <!-- ===== КОММЕНТАРИИ ===== -->
+          <section id="comments" class="animate">
+               <h1>LEX_F / LEX_S — Комментарии</h1>
+               <p>В Iron комментарии работают через отключение лексера (валидатора команд):</p>
+               <pre><code><span class="iron-cmd">lex_f</span>
+Это комментарий. Всё что угодно!
+Лексер выключен, код не выполняется.
+<span class="iron-cmd">lex_s</span>
+<span class="iron-cmd">put</span> А это снова код!</code></pre>
+               <p><strong>LEX_F</strong> = LEXer False (выключить), <strong>LEX_S</strong> = LEXer Start (включить).</p>
+          </section>
+
+          <!-- ===== ИМПОРТ ===== -->
+          <section id="import" class="animate">
+               <h1>IMPORT / START — Модули</h1>
+               <p>Iron поддерживает модульную структуру:</p>
+               <pre><code><span class="iron-cmd">import</span> tests/health_check.iron
+<span class="iron-cmd">start</span> tests/main.iron</code></pre>
+               <p><code>import</code> подключает внешний .iron файл, <code>start</code> запускает его как отдельный
+                    скрипт.</p>
+          </section>
+
+          <!-- ===== MATH ===== -->
+          <section id="math" class="animate">
+               <h1>MATH — Математика</h1>
+               <p>Iron умеет считать прямо из коробки:</p>
+               <pre><code><span class="iron-cmd">math</span> <span class="number">5</span> + <span class="number">3</span>    <span class="comment">// 5 + 3 = 8</span>
+<span class="iron-cmd">math</span> <span class="number">10</span> * <span class="number">7</span>   <span class="comment">// 10 * 7 = 70</span>
+<span class="iron-cmd">math</span> <span class="number">100</span> / <span class="number">4</span>  <span class="comment">// 100 / 4 = 25</span>
+<span class="iron-cmd">math</span> <span class="number">50</span> - <span class="number">20</span>   <span class="comment">// 50 - 20 = 30</span></code></pre>
+          </section>
+
+          <!-- ===== SLEEP ===== -->
+          <section id="sleep" class="animate">
+               <h1>SLEEP — Пауза</h1>
+               <p>Приостанавливает выполнение скрипта на указанное количество секунд:</p>
+               <pre><code><span class="iron-cmd">put</span> Ждём...
+<span class="iron-cmd">sleep</span> <span class="number">5</span>
+<span class="iron-cmd">put</span> Прошло 5 секунд!</code></pre>
+          </section>
+
+          <!-- ===== @SAVE ===== -->
+          <section id="save" class="animate">
+               <h1>@SAVE — Логирование</h1>
+               <p>Сохраняет результат выполнения команды в файл <code>scr/save.txt</code>:</p>
+               <pre><code><span class="iron-cmd">@save</span>
+<span class="iron-cmd">put</span> Это сохранится в лог!</code></pre>
+          </section>
+
+          <!-- ===== СКАЧАТЬ ===== -->
+          <section id="download" class="animate">
+               <div class="download-section">
+                    <h2>🚀 Начните использовать Iron сегодня!</h2>
+                    <p style="margin-bottom: 1.5rem;">Iron — это бесплатно, открыто и навсегда. Присоединяйтесь к
+                         революции простого программирования!</p>
+                    <a href="iron.zip" download class="btn-download">
+                         📥 Скачать Iron 3.8
+                    </a>
+                    <p style="margin-top: 1.5rem; font-size: 0.9rem;">Поддерживает: Linux (Debian/Arch), macOS, Windows,
+                         IronEagleOS</p>
+               </div>
+          </section>
+
+          <blockquote class="animate">
+               "Iron — это язык, который уважает своего пользователя. Никаких скобок, никаких кавычек. Только чистый код
+               и бесконечные возможности."<br>
+               — Создатель Iron, 14 лет
+          </blockquote>
+
+     </div>
+
+     <!-- ===== FOOTER ===== -->
+     <footer>
+          <p>© 2025 Iron Language. Создано с ❤️ и 🔥 | <a href="#">GitHub</a> | <a href="#">Документация</a></p>
+          <p>IronEagleOS • Iron Language • Всё для разработчиков</p>
+     </footer>
+
+     <script>
+          // Navbar scroll effect
+          window.addEventListener('scroll', () => {
+               const nav = document.getElementById('navbar');
+               if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+               } else {
+                    nav.classList.remove('scrolled');
+               }
+          });
+
+          // Smooth scroll
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+               anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+               });
+          });
+     </script>
+
+</body>
+
+</html>
