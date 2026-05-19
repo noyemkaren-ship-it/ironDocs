@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Iron — самый простой язык программирования. GUI за 3 строки, HTTP одной командой, встроенная БД, Python-мост. Скачайте бесплатно!">
-    <meta name="keywords" content="iron, iron language, язык программирования, простой язык, программирование для новичков, gui, fastapi, python, sqlite">
+    <meta name="description" content="Iron 4.1 — самый простой язык программирования. GUI за 3 строки, HTTP одной командой, встроенная БД SQLite, Python-мост. Скачайте бесплатно!">
+    <meta name="keywords" content="iron, iron language, язык программирования, простой язык, программирование для новичков, gui, sqlite, python, fastapi">
     <meta name="robots" content="index, follow">
-    <title>IRON 4.1 — Язык Программирования Будущего</title>
+    <title>IRON 4.1 — Язык Программирования Будущего | Документация</title>
     <style>
         :root {
             --bg: #0a0a0f; --surface: #14141f; --border: #2a2a3a; --text: #e0e0e0;
@@ -218,6 +218,7 @@
         <p><strong>Типы данных:</strong> Iron автоматически определяет тип. Можно явно указать <code>int</code> или <code>str</code>:</p>
         <pre><code><span class="keyword">int</span> <span class="variable">age</span> <span class="operator">%=%</span> <span class="number">25</span>
 <span class="keyword">str</span> <span class="variable">city</span> <span class="operator">%=%</span> <span class="string">Москва</span></code></pre>
+        <blockquote>💡 <strong>Лайфхак:</strong> Переменные можно использовать в любых командах — просто пишите их имя, и Iron сам подставит значение!</blockquote>
     </section>
 
     <!-- ===== PUT ===== -->
@@ -225,117 +226,187 @@
         <h1>PUT — Вывод</h1>
         <p>Оператор <code>put</code> нужен для вывода на экран. Никаких скобок или кавычек!</p>
         <pre><code><span class="iron-cmd">put</span> Hello World
-<span class="iron-cmd">put</span> Привет, Iron!</code></pre>
+<span class="iron-cmd">put</span> Привет, Iron!
+<span class="iron-cmd">put</span> Сегодня <span class="number">2025</span> год</code></pre>
+        <blockquote>💡 <strong>Совет:</strong> <code>put</code> автоматически выводит значения переменных. Просто напишите <code>put name</code> вместо <code>print(name)</code> в Python!</blockquote>
     </section>
 
     <!-- ===== HTTP ===== -->
     <section id="http">
         <h1>REQ / PREQ / REQS — HTTP запросы</h1>
         <h2>REQ — GET запрос</h2>
-        <pre><code><span class="iron-cmd">req</span> https://api.github.com</code></pre>
+        <pre><code><span class="comment">// Простой GET запрос</span>
+<span class="iron-cmd">req</span> https://api.github.com
+
+<span class="comment">// GET запрос с переменной</span>
+<span class="variable">url</span> <span class="operator">%=%</span> <span class="string">https://api.local/users</span>
+<span class="iron-cmd">req</span> <span class="variable">url</span></code></pre>
         <h2>REQS — Массовые GET запросы (C++)</h2>
-        <pre><code><span class="iron-cmd">https</span>://api.local/test
-<span class="iron-cmd">reqs</span></code></pre>
+        <pre><code><span class="comment">// Установите URL и запустите массовые запросы</span>
+<span class="iron-cmd">https</span>://api.local/test
+<span class="iron-cmd">reqs</span>
+<span class="comment">// Интерпретатор спросит количество запросов</span></code></pre>
         <p>C++ отправит запросы со скоростью <strong>500+ запросов/сек</strong>.</p>
         <h2>PREQ — POST запрос</h2>
-        <pre><code><span class="iron-cmd">preq</span> <span class="operator">%=%</span> <span class="string">{"name": "Iron", "version": "4.1"}</span></code></pre>
+        <pre><code><span class="comment">// POST запрос с JSON</span>
+<span class="iron-cmd">preq</span> <span class="operator">%=%</span> <span class="string">{"name": "Iron", "version": "4.1"}</span>
+
+<span class="comment">// POST запрос с переменной</span>
+<span class="variable">data</span> <span class="operator">%=%</span> <span class="string">{"user": "admin"}</span>
+<span class="iron-cmd">preq</span> <span class="operator">%=%</span> <span class="variable">data</span></code></pre>
     </section>
 
     <!-- ===== RANDOM ===== -->
     <section id="random">
         <h1>🆕 RAND — Случайные числа</h1>
-        <p>Iron 4.1 поддерживает генерацию случайных чисел:</p>
-        <pre><code><span class="iron-cmd">rand</span> <span class="number">1</span> <span class="operator">%</span> <span class="number">10</span>    <span class="comment">// Случайное число от 1 до 10</span>
-<span class="iron-cmd">rand</span> <span class="number">0</span> <span class="operator">%</span> <span class="number">100</span>   <span class="comment">// Случайное число от 0 до 100</span></code></pre>
-        <p>Идеально для игр, рандомизации тестов и генерации данных!</p>
+        <p>Iron 4.1 поддерживает генерацию случайных чисел через команду <code>rand</code>:</p>
+        <pre><code><span class="comment">// Случайное число от 1 до 10</span>
+<span class="iron-cmd">rand</span> <span class="number">1</span> <span class="operator">%</span> <span class="number">10</span>
+
+<span class="comment">// Случайное число от 0 до 100</span>
+<span class="iron-cmd">rand</span> <span class="number">0</span> <span class="operator">%</span> <span class="number">100</span></code></pre>
+        <blockquote>🎮 <strong>Пример игры:</strong> Создайте генератор случайных чисел для угадайки или броска кубика!</blockquote>
     </section>
 
     <!-- ===== MEMORY ===== -->
     <section id="memory">
         <h1>MEMORY — Память</h1>
         <p>Оператор <code>memory</code> показывает все переменные и функции в памяти интерпретатора:</p>
-        <pre><code><span class="iron-cmd">memory</span></code></pre>
+        <pre><code><span class="iron-cmd">memory</span>
+<span class="comment">// Выведет:
+// ПЕРЕМЕННЫЕ: [{'key': 'i', 'value': 1}, ...]
+// ФУНКЦИИ: [{'name': 'hello', 'value': 'put Привет'}]</span></code></pre>
+        <blockquote>🔧 <strong>Отладка:</strong> Используйте <code>memory</code> для проверки состояния переменных во время выполнения скрипта!</blockquote>
     </section>
 
     <!-- ===== УСЛОВИЯ ===== -->
     <section id="conditions">
         <h1>IF / ELSE — Условия</h1>
-        <p>Iron поддерживает: <code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>.</p>
+        <p>Iron поддерживает все основные операторы сравнения: <code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>.</p>
         <p>Для тела условия используются префиксы: <strong><code>%i%</code></strong> (ИСТИНА) и <strong><code>%e%</code></strong> (ЛОЖЬ).</p>
-        <pre><code><span class="variable">i</span> <span class="operator">%=%</span> <span class="number">1</span>
+        <pre><code><span class="variable">age</span> <span class="operator">%=%</span> <span class="number">18</span>
 
-<span class="keyword">if</span> <span class="variable">i</span> = <span class="number">1</span>
-<span class="iron-cmd">%i%</span> <span class="iron-cmd">put</span> Переменная равна 1
-<span class="iron-cmd">%e%</span> <span class="iron-cmd">put</span> Переменная не равна 1</code></pre>
-        <blockquote>Сравните с Python: 5 строк кода. В Iron — 3 строки! 🎯</blockquote>
+<span class="keyword">if</span> <span class="variable">age</span> > <span class="number">16</span>
+<span class="iron-cmd">%i%</span> <span class="iron-cmd">put</span> Ты можешь получить паспорт!
+<span class="iron-cmd">%e%</span> <span class="iron-cmd">put</span> Ты ещё слишком молод.</code></pre>
+        <blockquote>🎯 <strong>Сравнение с Python:</strong> 5 строк кода. В Iron — 3 строки!</blockquote>
     </section>
 
     <!-- ===== PYTHON-МОСТ ===== -->
     <section id="python">
         <h1>%p% / %py%: / %py%/ — Python внутри Iron</h1>
         <h2>%p% — одна Python-команда</h2>
-        <pre><code><span class="iron-cmd">%p%</span> <span class="function">print</span>(<span class="string">'Hello from Python!'</span>)</code></pre>
+        <pre><code><span class="comment">// Вызов Python функции</span>
+<span class="iron-cmd">%p%</span> <span class="function">print</span>(<span class="string">'Hello from Python!'</span>)
+
+<span class="comment">// Создание GUI элемента</span>
+<span class="iron-cmd">%p%</span> btn = ctk.CTkButton(root, text=<span class="string">"Кнопка"</span>)</code></pre>
         <h2>%py%: / %py%/ — блок Python-кода</h2>
-        <pre><code><span class="iron-cmd">%py%:</span>
+        <pre><code><span class="comment">// Полноценная функция на Python внутри Iron</span>
+<span class="iron-cmd">%py%:</span>
 <span class="keyword">def</span> <span class="function">calculate</span>():
     a = <span class="number">10</span>
     b = <span class="number">20</span>
     <span class="function">print</span>(<span class="string">f"Сумма: {a + b}"</span>)
 <span class="iron-cmd">%py%/</span></code></pre>
+        <blockquote>🐍 <strong>Мощь Python:</strong> Через <code>%p%</code> и <code>%py%:</code> вы можете использовать ЛЮБУЮ библиотеку Python — NumPy, Pandas, TensorFlow, Requests, всё что угодно!</blockquote>
     </section>
 
     <!-- ===== GUI ===== -->
     <section id="gui">
         <h1>GUI — Графический интерфейс</h1>
         <p>Iron — один из немногих языков, где GUI можно создать за <strong>3 строки</strong>!</p>
-        <h2>Создание окна</h2>
+        <h2>Создание окна с текстом</h2>
         <pre><code><span class="iron-cmd">init_root</span> Мой проект
 <span class="iron-cmd">lbl</span> Привет, мир!
 <span class="iron-cmd">close</span></code></pre>
-        <h2>Кнопки</h2>
-        <pre><code><span class="iron-cmd">btn</span> Нажми <span class="operator">%</span> <span class="iron-cmd">%p%</span>print(<span class="string">"Привет!"</span>)
+        <h2>Окно с кнопкой</h2>
+        <pre><code><span class="iron-cmd">init_root</span> Кнопка
+<span class="iron-cmd">btn</span> Нажми меня <span class="operator">%</span> <span class="iron-cmd">%p%</span>print(<span class="string">"Привет!"</span>)
 <span class="iron-cmd">close</span></code></pre>
+        <h2>Калькулятор (полный пример)</h2>
+        <pre><code><span class="iron-cmd">init_root</span> Калькулятор Iron
+
+<span class="iron-cmd">lbl</span> Введите первое число:
+<span class="iron-cmd">%p%</span> entry1 = ctk.CTkEntry(root)
+<span class="iron-cmd">%p%</span> entry1.pack(pady=5)
+
+<span class="iron-cmd">lbl</span> Введите второе число:
+<span class="iron-cmd">%p%</span> entry2 = ctk.CTkEntry(root)
+<span class="iron-cmd">%p%</span> entry2.pack(pady=5)
+
+<span class="iron-cmd">%py%:</span>
+<span class="keyword">def</span> <span class="function">calculate</span>():
+    a = int(entry1.get())
+    b = int(entry2.get())
+    result_label.configure(text=f"Результат: {a + b}")
+<span class="iron-cmd">%py%/</span>
+
+<span class="iron-cmd">%p%</span> result_label = ctk.CTkLabel(root, text="")
+<span class="iron-cmd">%p%</span> result_label.pack(pady=10)
+
+<span class="iron-cmd">btn</span> Сложить <span class="operator">%</span> <span class="iron-cmd">%p%</span>calculate()
+<span class="iron-cmd">close</span></code></pre>
+        <blockquote>🎨 <strong>Совет:</strong> Всегда завершайте GUI-скрипт командой <code>close</code>!</blockquote>
     </section>
 
     <!-- ===== БАЗЫ ДАННЫХ ===== -->
     <section id="db">
         <h1>🆕 Базы данных (SQLite)</h1>
-        <p>Iron 4.1 имеет встроенную поддержку SQLite!</p>
+        <p>Iron 4.1 имеет встроенную поддержку SQLite! Все команды интерактивны — интерпретатор подскажет, что вводить.</p>
         <h2>Создание таблицы</h2>
-        <pre><code><span class="iron-cmd">init_db</span></code></pre>
+        <pre><code><span class="iron-cmd">init_db</span>
+<span class="comment">// Введите SQL: CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)</span></code></pre>
         <h2>Добавление данных</h2>
-        <pre><code><span class="iron-cmd">insert</span></code></pre>
+        <pre><code><span class="iron-cmd">insert</span>
+<span class="comment">// Введите SQL: INSERT INTO users VALUES (1, 'Анна', 25)</span></code></pre>
         <h2>Просмотр данных</h2>
-        <pre><code><span class="iron-cmd">select</span></code></pre>
+        <pre><code><span class="iron-cmd">select</span>
+<span class="comment">// Введите SQL: SELECT * FROM users</span></code></pre>
         <h2>Удаление данных</h2>
-        <pre><code><span class="iron-cmd">delete</span></code></pre>
+        <pre><code><span class="iron-cmd">delete</span>
+<span class="comment">// Введите SQL: DELETE FROM users WHERE id = 1</span></code></pre>
+        <blockquote>💾 <strong>Пример использования:</strong> Храните результаты тестов, пользователей, логи — всё в SQLite прямо из Iron!</blockquote>
     </section>
 
     <!-- ===== WHILE ===== -->
     <section id="while">
         <h1>WHILE_E — Циклы</h1>
-        <pre><code><span class="iron-cmd">while_e</span> <span class="number">5</span> <span class="operator">%</span> <span class="iron-cmd">put</span> Повторяю!</code></pre>
+        <pre><code><span class="comment">// Повторить 5 раз</span>
+<span class="iron-cmd">while_e</span> <span class="number">5</span> <span class="operator">%</span> <span class="iron-cmd">put</span> Повторяю!
+
+<span class="comment">// Повторить запрос 10 раз</span>
+<span class="iron-cmd">while_e</span> <span class="number">10</span> <span class="operator">%</span> <span class="iron-cmd">req</span> https://api.local/test</code></pre>
     </section>
 
     <!-- ===== FUN ===== -->
     <section id="fun">
         <h1>FUN — Функции</h1>
-        <pre><code><span class="iron-cmd">fun</span> hello <span class="operator">%</span> <span class="iron-cmd">put</span> Привет, мир!
+        <pre><code><span class="comment">// Создание функции</span>
+<span class="iron-cmd">fun</span> hello <span class="operator">%</span> <span class="iron-cmd">put</span> Привет, мир!
+
+<span class="comment">// Вызов функции</span>
 <span class="iron-cmd">hello</span></code></pre>
     </section>
 
     <!-- ===== READ ===== -->
     <section id="read">
         <h1>READ — Ввод данных</h1>
-        <pre><code><span class="iron-cmd">read</span> name
-<span class="iron-cmd">put</span> Привет, <span class="variable">name</span>!</code></pre>
+        <pre><code><span class="comment">// Строковый ввод</span>
+<span class="iron-cmd">read</span> name
+<span class="iron-cmd">put</span> Привет, <span class="variable">name</span>!
+
+<span class="comment">// Числовой ввод</span>
+<span class="iron-cmd">int read</span> age
+<span class="iron-cmd">put</span> Тебе <span class="variable">age</span> лет</code></pre>
     </section>
 
     <!-- ===== КОММЕНТАРИИ ===== -->
     <section id="comments">
         <h1>LEX_F / LEX_S — Комментарии</h1>
         <pre><code><span class="iron-cmd">lex_f</span>
-Это комментарий.
+Это комментарий. Здесь можно писать что угодно!
+Лексер выключен, код не выполняется.
 <span class="iron-cmd">lex_s</span>
 <span class="iron-cmd">put</span> А это снова код!</code></pre>
     </section>
@@ -343,7 +414,10 @@
     <!-- ===== ИМПОРТ ===== -->
     <section id="import">
         <h1>IMPORT / START — Модули</h1>
-        <pre><code><span class="iron-cmd">import</span> tests/health_check.iron
+        <pre><code><span class="comment">// Импорт другого .iron файла</span>
+<span class="iron-cmd">import</span> tests/health_check.iron
+
+<span class="comment">// Запуск другого скрипта</span>
 <span class="iron-cmd">start</span> tests/main.iron</code></pre>
     </section>
 
@@ -351,40 +425,167 @@
     <section id="math">
         <h1>MATH — Математика</h1>
         <pre><code><span class="iron-cmd">math</span> <span class="number">5</span> + <span class="number">3</span>    <span class="comment">// 5 + 3 = 8</span>
-<span class="iron-cmd">math</span> <span class="number">10</span> * <span class="number">7</span>   <span class="comment">// 10 * 7 = 70</span></code></pre>
+<span class="iron-cmd">math</span> <span class="number">10</span> * <span class="number">7</span>   <span class="comment">// 10 * 7 = 70</span>
+<span class="iron-cmd">math</span> <span class="number">100</span> / <span class="number">4</span>  <span class="comment">// 100 / 4 = 25</span>
+<span class="iron-cmd">math</span> <span class="number">50</span> - <span class="number">20</span>   <span class="comment">// 50 - 20 = 30</span></code></pre>
     </section>
 
     <!-- ===== SLEEP ===== -->
     <section id="sleep">
         <h1>SLEEP — Пауза</h1>
-        <pre><code><span class="iron-cmd">sleep</span> <span class="number">5</span></code></pre>
+        <pre><code><span class="iron-cmd">put</span> Ждём...
+<span class="iron-cmd">sleep</span> <span class="number">5</span>
+<span class="iron-cmd">put</span> Прошло 5 секунд!</code></pre>
     </section>
 
     <!-- ===== @SAVE ===== -->
     <section id="save">
         <h1>@SAVE — Логирование</h1>
         <pre><code><span class="iron-cmd">@save</span>
-<span class="iron-cmd">put</span> Это сохранится в лог!</code></pre>
+<span class="iron-cmd">put</span> Это сохранится в файл scr/save.txt!</code></pre>
     </section>
 
-    <!-- ===== CLI ===== -->
+    <!-- ===== CLI - ПОЛНАЯ ИНСТРУКЦИЯ ===== -->
     <section id="cli">
-        <h1>🚀 Запуск из терминала</h1>
-        <pre><code><span class="comment"># Linux/Mac</span>
-<span class="iron-cmd">iron</span> scr/test.iron
-<span class="iron-cmd">iron</span> scr/
+        <h1>🚀 Запуск из терминала (CLI)</h1>
+        <p>Iron можно запускать из командной строки, передавая путь к файлу или папке со скриптами. После настройки алиаса <code>iron</code> вы можете запускать .iron файлы из любого места системы одной командой!</p>
 
-<span class="comment"># Windows</span>
+        <!-- LINUX -->
+        <h2>🐧 Linux (Debian / Ubuntu / Arch / IronEagleOS)</h2>
+        <h3>Способ 1: Алиас (рекомендуется)</h3>
+        <pre><code><span class="comment"># 1. Открой терминал и выполни:</span>
+<span class="function">echo</span> <span class="string">'alias iron="python3 ~/PycharmProjects/MainApp/main.py"'</span> >> ~/.bashrc
+
+<span class="comment"># 2. Обнови конфигурацию:</span>
+<span class="function">source</span> ~/.bashrc
+
+<span class="comment"># 3. Готово! Теперь Iron доступен отовсюду:</span>
+<span class="iron-cmd">iron</span>
+<span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/</code></pre>
+
+        <h3>Способ 2: Исполняемый файл (для продвинутых)</h3>
+        <pre><code><span class="comment"># 1. Создай файл:</span>
+<span class="function">sudo</span> <span class="function">nano</span> /usr/local/bin/iron
+
+<span class="comment"># 2. Вставь содержимое:</span>
+<span class="comment">#!/bin/bash</span>
+<span class="function">python3</span> ~/PycharmProjects/MainApp/main.py <span class="string">"$@"</span>
+
+<span class="comment"># 3. Сделай исполняемым:</span>
+<span class="function">sudo</span> <span class="function">chmod</span> +x /usr/local/bin/iron
+
+<span class="comment"># 4. Готово!</span>
+<span class="iron-cmd">iron</span> scr/test.iron</code></pre>
+
+        <h3>Способ 3: Добавление в PATH</h3>
+        <pre><code><span class="comment"># 1. Создай скрипт-обёртку:</span>
+<span class="function">nano</span> ~/iron</code></pre>
+        <pre><code><span class="comment"># 2. Вставь содержимое:</span>
+<span class="comment">#!/bin/bash</span>
+<span class="function">python3</span> ~/PycharmProjects/MainApp/main.py <span class="string">"$@"</span></code></pre>
+        <pre><code><span class="comment"># 3. Сделай исполняемым и добавь в PATH:</span>
+<span class="function">chmod</span> +x ~/iron
+<span class="function">echo</span> <span class="string">'export PATH="$HOME:$PATH"'</span> >> ~/.bashrc
+<span class="function">source</span> ~/.bashrc
+
+<span class="comment"># 4. Готово!</span>
+<span class="iron-cmd">iron</span> scr/test.iron</code></pre>
+
+        <!-- macOS -->
+        <h2>🍎 macOS</h2>
+        <h3>Способ 1: Алиас (рекомендуется)</h3>
+        <pre><code><span class="comment"># 1. Открой терминал и выполни:</span>
+<span class="function">echo</span> <span class="string">'alias iron="python3 ~/PycharmProjects/MainApp/main.py"'</span> >> ~/.zshrc
+
+<span class="comment"># 2. Обнови конфигурацию:</span>
+<span class="function">source</span> ~/.zshrc
+
+<span class="comment"># 3. Готово!</span>
+<span class="iron-cmd">iron</span>
+<span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/</code></pre>
+
+        <h3>Способ 2: Добавление в PATH</h3>
+        <pre><code><span class="comment"># 1. Создай папку для скриптов (если ещё нет):</span>
+<span class="function">mkdir</span> -p ~/bin
+
+<span class="comment"># 2. Создай скрипт-обёртку:</span>
+<span class="function">nano</span> ~/bin/iron</code></pre>
+        <pre><code><span class="comment"># 3. Вставь содержимое:</span>
+<span class="comment">#!/bin/bash</span>
+<span class="function">python3</span> ~/PycharmProjects/MainApp/main.py <span class="string">"$@"</span></code></pre>
+        <pre><code><span class="comment"># 4. Сделай исполняемым:</span>
+<span class="function">chmod</span> +x ~/bin/iron
+
+<span class="comment"># 5. Добавь в PATH (добавь строку в ~/.zshrc):</span>
+<span class="function">echo</span> <span class="string">'export PATH="$HOME/bin:$PATH"'</span> >> ~/.zshrc
+<span class="function">source</span> ~/.zshrc
+
+<span class="comment"># 6. Готово!</span>
+<span class="iron-cmd">iron</span> scr/test.iron</code></pre>
+
+        <!-- WINDOWS -->
+        <h2>🪟 Windows</h2>
+        <h3>Способ 1: Создание bat-файла</h3>
+        <pre><code><span class="comment">:: 1. Открой Блокнот и вставь:</span>
+<span class="keyword">@echo off</span>
+<span class="function">python3</span> C:\Users\ТвойПользователь\PycharmProjects\MainApp\main.py %*
+
+<span class="comment">:: 2. Сохрани как iron.bat в папке C:\Users\ТвойПользователь\</span></code></pre>
+
+        <h3>Способ 2: Добавление в PATH (Windows 10/11)</h3>
+        <pre><code><span class="comment">:: 1. Нажми Win + X → Система → Дополнительные параметры системы</span>
+<span class="comment">:: 2. Переменные среды → Path → Изменить → Добавить</span>
+<span class="comment">:: 3. Добавь путь: C:\Users\ТвойПользователь\</span>
+<span class="comment">:: 4. Нажми ОК и перезапусти терминал</span>
+
+<span class="comment">:: 5. Теперь можно запускать из любого места:</span>
+<span class="iron-cmd">iron</span>
 <span class="iron-cmd">iron</span> scr\test.iron
 <span class="iron-cmd">iron</span> scr\</code></pre>
+
+        <h3>Способ 3: PowerShell (альтернативный)</h3>
+        <pre><code><span class="comment"># 1. Открой PowerShell от администратора:</span>
+<span class="function">New-Item</span> -Path $PROFILE -Force
+<span class="function">notepad</span> $PROFILE
+
+<span class="comment"># 2. Вставь строку:</span>
+<span class="function">function</span> iron { python3 C:\Users\ТвойПользователь\PycharmProjects\MainApp\main.py $args }
+
+<span class="comment"># 3. Сохрани и перезапусти PowerShell</span>
+<span class="iron-cmd">iron</span> scr\test.iron</code></pre>
+
+        <div class="feature-grid" style="margin-top: 2rem;">
+            <div class="feature-card">
+                <h3>🐧 Linux</h3>
+                <pre><code><span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/</code></pre>
+            </div>
+            <div class="feature-card">
+                <h3>🪟 Windows</h3>
+                <pre><code><span class="iron-cmd">iron</span> scr\test.iron
+<span class="iron-cmd">iron</span> scr\</code></pre>
+            </div>
+            <div class="feature-card">
+                <h3>🍎 macOS</h3>
+                <pre><code><span class="iron-cmd">iron</span> scr/test.iron
+<span class="iron-cmd">iron</span> scr/</code></pre>
+            </div>
+        </div>
+
+        <blockquote>
+            💡 <strong>Совет:</strong> После настройки алиаса <code>iron</code> вы можете запускать .iron файлы из любого места системы одной командой! Попробуйте: <code>iron scr/test.iron</code>
+        </blockquote>
     </section>
 
     <!-- ===== СКАЧАТЬ ===== -->
     <section id="download">
         <div class="download-section">
             <h2>🚀 Начните использовать Iron 4.1 сегодня!</h2>
-            <p>Iron — это бесплатно, открыто и навсегда.</p>
+            <p>Iron — это бесплатно, открыто и навсегда. Присоединяйтесь к революции простого программирования!</p>
             <a href="iron.zip" download class="btn-download">📥 Скачать Iron 4.1</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">Поддерживает: Linux (Debian/Arch), macOS, Windows, IronEagleOS</p>
         </div>
     </section>
 
