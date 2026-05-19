@@ -147,6 +147,7 @@
             <li><a href="#random">Random</a></li>
             <li><a href="#cli">🚀 CLI</a></li>
             <li><a href="#download">Скачать</a></li>
+            <li><a href="#files">📂 FILE.R — Чтение файлов 🆕</a></li>
         </ul>
     </div>
 </nav>
@@ -577,6 +578,59 @@
         <blockquote>
             💡 <strong>Совет:</strong> После настройки алиаса <code>iron</code> вы можете запускать .iron файлы из любого места системы одной командой! Попробуйте: <code>iron scr/test.iron</code>
         </blockquote>
+    <!-- ===== РАБОТА С ФАЙЛАМИ ===== -->
+<section id="files" class="animate">
+    <h1>📂 FILE.R — Чтение файлов</h1>
+    <p>Iron 4.2 позволяет читать содержимое любого файла прямо из скрипта одной командой. Это открывает возможности для парсинга логов, загрузки конфигураций или простого просмотра текста.</p>
+
+    <h2>Синтаксис</h2>
+    <pre><code><span class="iron-cmd">file.r</span> <span class="string">путь/к/файлу.txt</span></code></pre>
+
+    <h2>📋 Примеры использования</h2>
+
+    <h3>Чтение текстового файла</h3>
+    <pre><code><span class="comment">// Прочитать и вывести содержимое config.txt</span>
+<span class="iron-cmd">file.r</span> scr/config.txt
+
+<span class="comment">// Прочитать системный файл (Linux)</span>
+<span class="iron-cmd">file.r</span> /etc/hostname</code></pre>
+
+    <h3>Чтение другого .iron скрипта</h3>
+    <pre><code><span class="comment">// Загрузить и показать содержимое другого скрипта</span>
+<span class="iron-cmd">file.r</span> scr/old_version.iron</code></pre>
+
+    <h3>Комбинирование с другими командами</h3>
+    <pre><code><span class="comment">// Прочитать файл и сохранить результат в лог</span>
+<span class="iron-cmd">@save</span>
+<span class="iron-cmd">file.r</span> scr/report.txt
+
+<span class="comment">// Прочитать все .iron файлы из папки через CLI</span>
+<span class="comment">// Запустите в терминале:</span>
+<span class="comment">// iron scr/</span></code></pre>
+
+    <h2>💡 Идеи для применения</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>📊 Парсинг логов</h3>
+            <p>Читайте файлы логов вашего сервера прямо во время тестов API.</p>
+            <pre><code><span class="iron-cmd">file.r</span> /var/log/syslog</code></pre>
+        </div>
+        <div class="feature-card">
+            <h3>⚙️ Загрузка конфигураций</h3>
+            <p>Храните URL и параметры в отдельных текстовых файлах.</p>
+            <pre><code><span class="iron-cmd">file.r</span> configs/api_url.txt</code></pre>
+        </div>
+        <div class="feature-card">
+            <h3>📝 Просмотр кода</h3>
+            <p>Быстро просматривайте содержимое ваших старых скриптов.</p>
+            <pre><code><span class="iron-cmd">file.r</span> scr/backup.iron</code></pre>
+        </div>
+    </div>
+
+    <blockquote>
+        💡 <strong>Совет:</strong> Команда <code>file.r</code> отлично сочетается с <code>@save</code> для создания отчётов. Просто прочитайте файл с данными и результат автоматически сохранится в <code>scr/save.txt</code>.
+    </blockquote>
+</section>
     </section>
 
     <!-- ===== СКАЧАТЬ ===== -->
