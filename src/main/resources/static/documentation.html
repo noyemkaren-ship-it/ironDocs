@@ -197,6 +197,17 @@
             background: #ff9800;
         }
         
+        .badge-new {
+            background: #ff5722;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
         .comparison {
             display: flex;
             gap: 20px;
@@ -269,7 +280,6 @@
             resize: vertical;
         }
         
-        /* Подсветка синтаксиса в редакторе */
         .syntax-highlight {
             position: relative;
         }
@@ -349,6 +359,22 @@
             border-left: 3px solid #ff9800;
         }
         
+        .info-box {
+            background: #0d0d15;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .warning-box {
+            background: #1a1a0d;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 3px solid #ff9800;
+        }
+        
         footer {
             text-align: center;
             padding: 40px;
@@ -382,7 +408,9 @@
                 <li><a href="#loops">Циклы</a></li>
                 <li><a href="#functions">Функции</a></li>
                 <li><a href="#files">Файлы</a></li>
+                <li><a href="#new-functions">Новые функции</a></li>
                 <li><a href="#gui">GUI</a></li>
+                <li><a href="#vscode">VS Code</a></li>
                 <li><a href="#terminal">Терминал</a></li>
                 <li><a href="#download">Скачать</a></li>
                 <li><a href="#ide">Онлайн IDE</a></li>
@@ -559,6 +587,26 @@ if_e(user_input, <span class="string">"=="</span>, <span class="string">"admin"<
 while_e(5, <span class="string">'count += 1; put(f"Шаг {count}")'</span>)</code></pre>
         </div>
         
+        <!-- Функции -->
+        <div class="chapter" id="functions">
+            <h2>🔧 Функции в Iron</h2>
+            
+            <h3>Определение функций</h3>
+            <pre><code><span class="comment"># Базовая функция</span>
+<span class="keyword">def</span> <span class="function">greet</span>(name):
+    <span class="keyword">return</span> put(f<span class="string">"Привет, {name}!"</span>)
+
+<span class="comment"># Функция с несколькими параметрами</span>
+<span class="keyword">def</span> <span class="function">calculate</span>(a, b):
+    result = a + b
+    put(f<span class="string">"{a} + {b} = {result}"</span>)
+    <span class="keyword">return</span> result
+
+<span class="comment"># Вызов функций</span>
+greet(<span class="string">"Анна"</span>)
+sum_value = calculate(5, 3)</code></pre>
+        </div>
+        
         <!-- Файлы -->
         <div class="chapter" id="files">
             <h2>📁 Работа с файлами в Iron</h2>
@@ -592,22 +640,145 @@ while_e(5, <span class="string">'count += 1; put(f"Шаг {count}")'</span>)</co
     put(<span class="string">"Файл не найден"</span>)</code></pre>
         </div>
         
+        <!-- НОВЫЕ ФУНКЦИИ -->
+        <div class="chapter" id="new-functions">
+            <h2>🆕 Новые функции в Iron 2.0</h2>
+            
+            <h3><span class="badge badge-new">NEW</span> read_file() — чтение файла в список строк</h3>
+            <p>Функция <code class="function">read_file()</code> читает файл и возвращает список строк. Это намного проще, чем использовать стандартные методы Python!</p>
+            
+            <pre><code><span class="comment"># Синтаксис: read_file(имя_файла)</span>
+<span class="comment"># Возвращает список строк файла</span>
+
+<span class="comment"># Пример 1: Чтение файла и вывод всех строк</span>
+<span class="keyword">file_lines</span> = read_file(<span class="string">"save.txt"</span>)
+<span class="keyword">for</span> line <span class="keyword">in</span> file_lines:
+    put(line)
+
+<span class="comment"># Пример 2: Чтение конфигурационного файла</span>
+<span class="keyword">config</span> = read_file(<span class="string">"config.ini"</span>)
+put(f<span class="string">"Конфигурация загружена! {len(config)} строк"</span>)
+
+<span class="comment"># Пример 3: Обработка данных из файла</span>
+<span class="keyword">data</span> = read_file(<span class="string">"numbers.txt"</span>)
+<span class="keyword">total</span> = 0
+<span class="keyword">for</span> num <span class="keyword">in</span> data:
+    total += int(num)
+put(f<span class="string">"Сумма: {total}"</span>)</code></pre>
+
+            <div class="info-box">
+                <h4>📌 Преимущества read_file()</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Автоматически открывает и закрывает файл</li>
+                    <li>Возвращает готовый список строк</li>
+                    <li>Работает с кодировкой UTF-8</li>
+                    <li>Игнорирует пустые строки в конце файла</li>
+                </ul>
+            </div>
+            
+            <h3><span class="badge badge-new">NEW</span> sleep() — пауза в программе</h3>
+            <p>Функция <code class="function">sleep()</code> приостанавливает выполнение программы на указанное количество секунд.</p>
+            
+            <pre><code><span class="comment"># Синтаксис: sleep(секунды)</span>
+
+<span class="comment"># Пример 1: Простая пауза</span>
+put(<span class="string">"Загрузка..."</span>)
+sleep(2)
+put(<span class="string">"Готово!"</span>)
+
+<span class="comment"># Пример 2: Таймер с обратным отсчётом</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> range(5, 0, -1):
+    put(i)
+    sleep(1)
+put(<span class="string">"ПУСК! 🚀"</span>)
+
+<span class="comment"># Пример 3: Анимация загрузки</span>
+put(<span class="string">"Установка Iron..."</span>)
+<span class="keyword">for</span> i <span class="keyword">in</span> range(10):
+    put(<span class="string">"."</span>, end=<span class="string">""</span>)
+    sleep(0.5)
+put(<span class="string">"\n✅ Установка завершена!"</span>)</code></pre>
+            
+            <h3><span class="badge badge-new">NEW</span> rand() — генерация случайных чисел</h3>
+            <p>Функция <code class="function">rand()</code> возвращает случайное число в заданном диапазоне (включая границы).</p>
+            
+            <pre><code><span class="comment"># Синтаксис: rand(минимум, максимум)</span>
+<span class="comment"># Возвращает случайное целое число от минимум до максимум</span>
+
+<span class="comment"># Пример 1: Простая игра "Угадай число"</span>
+<span class="keyword">if</span> rand(1, 3) == 1:
+    put(<span class="string">"Вы победили! 🎉"</span>)
+<span class="keyword">else</span>:
+    put(<span class="string">"Вы проиграли :("</span>)
+
+<span class="comment"># Пример 2: Генерация пароля</span>
+<span class="keyword">password</span> = <span class="string">""</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> range(8):
+    <span class="keyword">char_code</span> = rand(65, 90)  <span class="comment"># Коды заглавных букв</span>
+    password += chr(char_code)
+put(f<span class="string">"Ваш пароль: {password}"</span>)
+
+<span class="comment"># Пример 3: Бросание кубика</span>
+<span class="keyword">def</span> <span class="function">roll_dice</span>():
+    <span class="keyword">return</span> rand(1, 6)
+
+put(f<span class="string">"Выпало: {roll_dice()}"</span>)
+
+<span class="comment"># Пример 4: Случайный выбор из списка</span>
+<span class="keyword">fruits</span> = [<span class="string">"яблоко"</span>, <span class="string">"банан"</span>, <span class="string">"апельсин"</span>]
+<span class="keyword">random_index</span> = rand(0, len(fruits) - 1)
+put(f<span class="string">"Сегодня едим: {fruits[random_index]}"</span>)</code></pre>
+        </div>
+        
         <!-- GUI -->
         <div class="chapter" id="gui">
-            <h2>🪟 Графический интерфейс (GUI)</h2>
-            <p>Iron имеет встроенную поддержку GUI через customtkinter. Создание окон — в 2 строки кода!</p>
+            <h2>🪟 Графический интерфейс (GUI) — Подробное руководство</h2>
+            <p>Iron имеет встроенную поддержку GUI через customtkinter. Создание окон — невероятно просто!</p>
             
-            <h3>Функции для работы с GUI</h3>
+            <div class="info-box">
+                <h4>🚀 Быстрый старт GUI</h4>
+                <p>Всего 2 строки кода для создания окна с надписью:</p>
+                <pre><code>win = init_root(<span class="string">"Моё первое окно"</span>)
+lbl(win, <span class="string">"Привет, Iron!"</span>)
+win.mainloop()</code></pre>
+            </div>
+            
+            <h3>Полный список функций GUI</h3>
             <table>
-                <tr><th>Функция</th><th>Описание</th><th>Пример</th></tr>
-                <tr><td>init_root(title)</td><td>Создаёт окно</td><td>win = init_root("Моё окно")</td></tr>
-                <tr><td>lbl(parent, text)</td><td>Текстовая метка</td><td>lbl(win, "Привет!")</td></tr>
-                <tr><td>btn(parent, text, command)</td><td>Кнопка</td><td>btn(win, "Нажми", func)</td></tr>
-                <tr><td>inp(parent, placeholder)</td><td>Поле ввода</td><td>entry = inp(win, "Введите текст")</td></tr>
-                <tr><td>get_inp(entry)</td><td>Получить текст</td><td>text = get_inp(entry)</td></tr>
+                <tr><th>Функция</th><th>Описание</th><th>Параметры</th><th>Возвращает</th></tr>
+                <tr>
+                    <td><code class="function">init_root(title)</code></td>
+                    <td>Создаёт главное окно приложения</td>
+                    <td>title — заголовок окна</td>
+                    <td>Объект окна</td>
+                </tr>
+                <tr>
+                    <td><code class="function">lbl(parent, text)</code></td>
+                    <td>Создаёт текстовую метку</td>
+                    <td>parent — родительский элемент<br>text — текст метки</td>
+                    <td>Объект метки</td>
+                </tr>
+                <tr>
+                    <td><code class="function">btn(parent, text, command)</code></td>
+                    <td>Создаёт кнопку</td>
+                    <td>parent — родительский элемент<br>text — текст на кнопке<br>command — функция-обработчик</td>
+                    <td>Объект кнопки</td>
+                </tr>
+                <tr>
+                    <td><code class="function">inp(parent, placeholder)</code></td>
+                    <td>Создаёт поле ввода</td>
+                    <td>parent — родительский элемент<br>placeholder — текст-подсказка</td>
+                    <td>Объект поля ввода</td>
+                </tr>
+                <tr>
+                    <td><code class="function">get_inp(entry)</code></td>
+                    <td>Получает текст из поля ввода</td>
+                    <td>entry — объект поля ввода</td>
+                    <td>Строка с введённым текстом</td>
+                </tr>
             </table>
             
-            <h3>Пример: Кликер</h3>
+            <h3>Пример 1: Простой кликер</h3>
             <pre><code>win = init_root(<span class="string">"Кликер"</span>)
 
 <span class="keyword">clicks</span> = 0
@@ -620,6 +791,95 @@ label = lbl(win, f<span class="string">"Счёт: {clicks}"</span>)
 
 btn(win, <span class="string">"Кликни меня!"</span>, on_click)
 win.mainloop()</code></pre>
+            
+            <h3>Пример 2: Калькулятор</h3>
+            <pre><code>win = init_root(<span class="string">"Калькулятор"</span>)
+
+lbl(win, <span class="string">"Введите два числа:"</span>)
+
+num1_entry = inp(win, <span class="string">"Первое число"</span>)
+num2_entry = inp(win, <span class="string">"Второе число"</span>)
+
+result_label = lbl(win, <span class="string">"Результат: "</span>)
+
+<span class="keyword">def</span> <span class="function">calculate</span>():
+    num1 = float(get_inp(num1_entry))
+    num2 = float(get_inp(num2_entry))
+    result = num1 + num2
+    result_label.configure(text=f<span class="string">"Результат: {result}"</span>)
+
+btn(win, <span class="string">"Сложить"</span>, calculate)
+win.mainloop()</code></pre>
+            
+            <h3>Пример 3: Игра "Угадай число" с GUI</h3>
+            <pre><code>win = init_root(<span class="string">"Угадай число"</span>)
+
+<span class="keyword">secret_number</span> = rand(1, 10)
+<span class="keyword">attempts</span> = 0
+
+lbl(win, <span class="string">"Я загадал число от 1 до 10"</span>)
+guess_entry = inp(win, <span class="string">"Твой вариант"</span>)
+message_label = lbl(win, <span class="string">""</span>)
+
+<span class="keyword">def</span> <span class="function">check_guess</span>():
+    <span class="keyword">global</span> attempts
+    <span class="keyword">guess</span> = int(get_inp(guess_entry))
+    attempts += 1
+    
+    <span class="keyword">if</span> guess == secret_number:
+        message_label.configure(text=f<span class="string">"🎉 Угадал за {attempts} попыток!"</span>)
+    <span class="keyword">elif</span> guess < secret_number:
+        message_label.configure(text=<span class="string">"📈 Больше!"</span>)
+    <span class="keyword">else</span>:
+        message_label.configure(text=<span class="string">"📉 Меньше!"</span>)
+
+btn(win, <span class="string">"Проверить"</span>, check_guess)
+win.mainloop()</code></pre>
+            
+            <div class="warning-box">
+                <h4>⚠️ Важные правила GUI</h4>
+                <ul style="margin-left: 20px;">
+                    <li>Всегда вызывайте <code>win.mainloop()</code> в конце программы</li>
+                    <li>Функции-обработчики кнопок должны быть определены ДО создания кнопки</li>
+                    <li>Для обновления текста используйте <code>.configure(text="новый текст")</code></li>
+                    <li>Не забывайте про <code>global</code> при изменении внешних переменных в функциях</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- VS Code -->
+        <div class="chapter" id="vscode">
+            <h2>💻 Расширение Iron для VS Code</h2>
+            <p><span class="badge badge-new">NEW</span> Теперь в папке с интерпретатором Iron доступно расширение <strong>iron-vscode</strong> для Visual Studio Code!</p>
+            
+            <div class="info-box">
+                <h4>🎨 Что даёт iron-vscode?</h4>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Подсветка синтаксиса</strong> — все ключевые слова и функции Iron подсвечиваются правильно</li>
+                    <li><strong>Автодополнение</strong> — IntelliSense для всех встроенных функций</li>
+                    <li><strong>Сниппеты</strong> — быстрые шаблоны кода (if, for, def, gui и др.)</li>
+                    <li><strong>Проверка синтаксиса</strong> — базовая валидация .iron файлов</li>
+                </ul>
+            </div>
+            
+            <h3>Установка расширения</h3>
+            <pre><code><span class="comment"># Способ 1: Через VS Code Marketplace</span>
+<span class="comment"># 1. Откройте VS Code</span>
+<span class="comment"># 2. Нажмите Ctrl+Shift+X (Расширения)</span>
+<span class="comment"># 3. Найдите "iron-vscode"</span>
+<span class="comment"># 4. Нажмите "Установить"</span>
+
+<span class="comment"># Способ 2: Установка из папки с интерпретатором</span>
+<span class="comment"># Расширение находится в папке iron-vscode/ рядом с main.py</span>
+<span class="comment"># Скопируйте папку в ~/.vscode/extensions/</span>
+cp -r iron-vscode ~/.vscode/extensions/</code></pre>
+            
+            <h3>Использование сниппетов</h3>
+            <pre><code><span class="comment"># Введите сокращение и нажмите Tab:</span>
+<span class="comment"># iron-gui → создаст шаблон GUI приложения</span>
+<span class="comment"># iron-func → создаст шаблон функции</span>
+<span class="comment"># iron-for → создаст цикл for</span>
+<span class="comment"># iron-if → создаст условный блок</span></code></pre>
         </div>
         
         <!-- Терминал -->
@@ -687,6 +947,7 @@ iron /path/to/file.iron <span class="comment"># Полный путь</span></co
         <div class="download-section" id="download">
             <h2>📥 Скачать Iron Interpreter</h2>
             <p>Скачай интерпретатор Iron и начни программировать уже сегодня!</p>
+            <p style="margin-top: 10px;"><span class="badge badge-new">NEW</span> В пакет включено расширение iron-vscode для подсветки синтаксиса!</p>
             <a href="#" id="downloadZipBtn" class="download-btn">📦 Скачать iron.zip</a>
             <a href="#" id="downloadMainPyBtn" class="download-btn">🐍 Скачать main.py</a>
         </div>
@@ -698,8 +959,8 @@ iron /path/to/file.iron <span class="comment"># Полный путь</span></co
             
             <div class="editor-toolbar">
                 <button class="editor-btn" id="runBtn">▶️ Запустить код</button>
-                <button class="editor-btn" id="clearBtn" class="editor-btn-danger">🗑️ Очистить вывод</button>
-                <button class="editor-btn" id="saveAsBtn" class="editor-btn-success">💾 Скачать .iron файл</button>
+                <button class="editor-btn editor-btn-danger" id="clearBtn">🗑️ Очистить вывод</button>
+                <button class="editor-btn editor-btn-success" id="saveAsBtn">💾 Скачать .iron файл</button>
                 <button class="editor-btn" id="loadFileBtn">📂 Открыть .iron файл</button>
                 <input type="file" id="fileInput" class="file-input" accept=".iron,.txt">
             </div>
@@ -730,6 +991,7 @@ iron /path/to/file.iron <span class="comment"># Полный путь</span></co
 1. main.py - Интерпретатор Iron
 2. functions.py - Стандартная библиотека
 3. example.iron - Пример программы
+4. iron-vscode/ - Расширение для VS Code
 
 === main.py ===
 from functions import *
@@ -746,6 +1008,8 @@ if __name__ == "__main__":
 === functions.py ===
 import requests
 import customtkinter as ctk
+import time
+import random
 
 def req(url): return requests.get(url)
 def put(text): print(text); return text
@@ -758,7 +1022,14 @@ def while_e(kolv, code): exec(f'for _ in range({kolv}): {code}', globals())
 def if_e(what1, sign, what2, code):
     ops = {'=': '==', '==': '==', '>': '>', '<': '<', '>=': '>=', '<=': '<=', '!=': '!='}
     exec(f'if {what1} {ops.get(sign, "==")} {what2}: {code}', globals())
-def read(prompt): return input(prompt)`;
+def read(prompt): return input(prompt)
+def read_file(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        return f.read().splitlines()
+def sleep(seconds):
+    time.sleep(seconds)
+def rand(min_val, max_val):
+    return random.randint(min_val, max_val)`;
             
             const blob = new Blob([zipContent], { type: 'application/zip' });
             const url = URL.createObjectURL(blob);
@@ -810,7 +1081,7 @@ if __name__ == "__main__":
                 highlighted = highlighted.replace(re, '<span class="keyword">$&</span>');
             });
             // Функции
-            const functions = ['\\bput\\b', '\\bread\\b', '\\breq\\b', '\\binit_root\\b', '\\blbl\\b', '\\bbtn\\b', '\\binp\\b', '\\bget_inp\\b', '\\bwhile_e\\b', '\\bif_e\\b', '\\bprint\\b'];
+            const functions = ['\\bput\\b', '\\bread\\b', '\\breq\\b', '\\binit_root\\b', '\\blbl\\b', '\\bbtn\\b', '\\binp\\b', '\\bget_inp\\b', '\\bwhile_e\\b', '\\bif_e\\b', '\\bprint\\b', '\\bread_file\\b', '\\bsleep\\b', '\\brand\\b'];
             functions.forEach(func => {
                 const re = new RegExp(func, 'g');
                 highlighted = highlighted.replace(re, '<span class="function">$&</span>');
@@ -850,6 +1121,18 @@ if __name__ == "__main__":
                 if (line.includes('read(')) {
                     const match = line.match(/read\(["'](.+?)["']\)/);
                     if (match) output += `[Ввод] ${match[1]}\n`;
+                }
+                if (line.includes('sleep(')) {
+                    const match = line.match(/sleep\((\d+)\)/);
+                    if (match) output += `[Пауза] ${match[1]} сек.\n`;
+                }
+                if (line.includes('rand(')) {
+                    const match = line.match(/rand\((\d+),\s*(\d+)\)/);
+                    if (match) output += `[Случайное] от ${match[1]} до ${match[2]}: ${Math.floor(Math.random() * (parseInt(match[2]) - parseInt(match[1]) + 1)) + parseInt(match[1])}\n`;
+                }
+                if (line.includes('read_file(')) {
+                    const match = line.match(/read_file\(["'](.+?)["']\)/);
+                    if (match) output += `[Файл] Чтение: ${match[1]}\n`;
                 }
             }
             if (output === "") output = "✅ Программа выполнена успешно! (GUI окно открылось бы на реальном Iron)\n\nПодсказка: Красная подсветка — это НЕ ошибка, а стиль синтаксиса!";
@@ -892,9 +1175,26 @@ if __name__ == "__main__":
         });
         
         // Пример кода по умолчанию
-        document.getElementById('editor').value = `# Пример программы на Iron
+        document.getElementById('editor').value = `# Пример программы на Iron 2.0
 # Красная подсветка — это стиль, не ошибка!
 
+put("Демонстрация новых функций Iron 2.0:")
+
+# read_file() - чтение файла
+put("Читаем файл...")
+# file_lines = read_file("save.txt")
+
+# rand() - случайное число
+if rand(1, 3) == 1:
+    put("Вы победили!")
+else:
+    put("Вы проиграли :(")
+
+# sleep() - пауза
+put("Ждём 2 секунды...")
+# sleep(2)
+
+# GUI пример
 win = init_root("Моё приложение")
 lbl(win, "Добро пожаловать в Iron!")
 
