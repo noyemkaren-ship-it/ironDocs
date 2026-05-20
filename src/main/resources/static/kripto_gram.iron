@@ -1,0 +1,61 @@
+import json
+
+def all_coins():
+     result = req("https://api.coinlore.net/api/tickers/")
+     data = result.json()
+     for coin in data["data"]:
+          put(f"{coin['symbol']}: ${coin['price_usd']}, {coin['id']} id")
+     return data
+
+def get_coin_oper_24h(coin_id: int):
+     result = req(f"https://api.coinlore.net/api/coin/ohlcv/?coin={coin_id}")
+     data = result.json()
+     if data:
+          return data.get('history', [])
+     return []
+
+def get_coin(id: int):
+     result = req(f"https://api.coinlore.net/api/ticker/?id={id}")
+     return result
+
+def search_coin(keyword: str):
+    """Поиск монеты по названию"""
+    result = req("https://api.coinlore.net/api/tickers/")
+    data = result.json()
+    found = []
+    for coin in data["data"]:
+        if keyword.lower() in coin['name'].lower() or keyword.lower() in coin['symbol'].lower():
+            found.append(coin)
+            put(f"{coin['symbol']}: ${coin['price_usd']}")
+    return found
+
+def help_krypto():
+    put("""
+╔══════════════════════════════════════════════════════════════╗
+║              🔥 IRON CRYPTO LIBRARY v1.0 🔥                  ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  📊 all_coins()                                              ║
+║     → Показать ВСЕ монеты (символ, цена, ID)                 ║
+║                                                              ║
+║  📈 get_coin_oper_24h(coin_id)                               ║
+║     → Получить историю монеты за 24 часа (OHLCV)             ║
+║     → Нужен ID монеты (можно узнать через all_coins())       ║
+║                                                              ║
+║  🪙 get_coin(id)                                             ║
+║     → Получить полную информацию о монете по ID              ║
+║     → Пример: get_coin(90) - Bitcoin                        ║
+║                                                              ║
+║  🔍 search_coin("keyword")                                   ║
+║     → Поиск монеты по названию или символу                   ║
+║     → Пример: search_coin("bitcoin")                        ║
+║     → Пример: search_coin("btc")                            ║
+║                                                              ║
+║  ❓ help_krypto()                                            ║
+║     → Показать эту справку                                   ║
+║                                                              ║
+╠══════════════════════════════════════════════════════════════╣
+║  💡 ID популярных монет:                                     ║
+║     Bitcoin: 90 | Ethereum: 80 | Doge: 2 | XRP: 58          ║
+╚══════════════════════════════════════════════════════════════╝
+""")

@@ -10,4 +10,8 @@ public class MainIron {
      public String getMethodName() {
           return "documentation.html";
      }
+     @GetMapping("/bib")
+     public String getMethodNam() {
+          return "biblia.html";
+     }
 }

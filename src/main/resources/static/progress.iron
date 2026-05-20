@@ -1,0 +1,9 @@
+from rich.progress import track
+
+def bar_progress(max: int):
+     for i in track(range(max), description="Загрузка..."):
+          sleep(0.05)
+
+def help_progress():
+     put("I can create progress bar")
+     put("bar_progress(maxnum))

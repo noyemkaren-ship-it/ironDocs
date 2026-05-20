@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Iron Библиотека — официальная документация</title>
+     <style>
+          * {
+               margin: 0;
+               padding: 0;
+               box-sizing: border-box;
+          }
+
+          body {
+               font-family: 'Segoe UI', 'Fira Code', monospace;
+               background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 100%);
+               color: #e0e0e0;
+               line-height: 1.6;
+          }
+
+          .container {
+               max-width: 1300px;
+               margin: 0 auto;
+               padding: 20px;
+          }
+
+          header {
+               text-align: center;
+               padding: 60px 20px;
+               background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+               border-radius: 30px;
+               margin-bottom: 40px;
+          }
+
+          h1 {
+               font-size: 3.5em;
+               margin-bottom: 15px;
+          }
+
+          .subtitle {
+               font-size: 1.2em;
+               opacity: 0.9;
+          }
+
+          .library {
+               background: #12121c;
+               border-radius: 25px;
+               padding: 35px;
+               margin-bottom: 40px;
+               border-left: 5px solid #667eea;
+               transition: transform 0.3s;
+          }
+
+          .library:hover {
+               transform: translateY(-5px);
+          }
+
+          .library h2 {
+               color: #667eea;
+               font-size: 2em;
+               margin-bottom: 10px;
+          }
+
+          .version {
+               display: inline-block;
+               background: #2a2a3e;
+               padding: 4px 12px;
+               border-radius: 20px;
+               font-size: 0.8em;
+               margin-bottom: 20px;
+          }
+
+          .badge {
+               display: inline-block;
+               background: #4caf50;
+               padding: 3px 10px;
+               border-radius: 15px;
+               font-size: 0.7em;
+               margin-left: 10px;
+          }
+
+          .install-section {
+               background: #0d0d15;
+               border-radius: 15px;
+               padding: 20px;
+               margin: 20px 0;
+               border: 1px solid #2a2a3e;
+          }
+
+          .code-block {
+               background: #0a0a10;
+               border: 1px solid #2a2a3e;
+               border-radius: 12px;
+               padding: 15px;
+               font-family: 'Fira Code', monospace;
+               font-size: 0.9em;
+               overflow-x: auto;
+               margin: 10px 0;
+          }
+
+          .function-table {
+               width: 100%;
+               border-collapse: collapse;
+               margin: 20px 0;
+               background: #0d0d15;
+               border-radius: 15px;
+               overflow: hidden;
+          }
+
+          .function-table th,
+          .function-table td {
+               padding: 12px 15px;
+               text-align: left;
+               border-bottom: 1px solid #2a2a3e;
+          }
+
+          .function-table th {
+               background: #667eea;
+               color: white;
+               font-weight: bold;
+          }
+
+          .function-table tr:hover {
+               background: #1a1a2e;
+          }
+
+          .function-name {
+               color: #82aaff;
+               font-family: monospace;
+               font-weight: bold;
+          }
+
+          .example-title {
+               color: #c3e88d;
+               margin: 15px 0 10px 0;
+               font-weight: bold;
+          }
+
+          .install-btn {
+               background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+               color: white;
+               border: none;
+               padding: 12px 30px;
+               font-size: 1em;
+               border-radius: 50px;
+               cursor: pointer;
+               transition: all 0.3s;
+               margin-top: 10px;
+               font-weight: bold;
+          }
+
+          .install-btn:hover {
+               transform: scale(1.02);
+               box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+          }
+
+          .note {
+               background: #2a1a3e;
+               border-left: 3px solid #c792ea;
+               padding: 10px 15px;
+               margin: 15px 0;
+               border-radius: 8px;
+          }
+
+          footer {
+               text-align: center;
+               padding: 40px;
+               margin-top: 20px;
+               border-top: 1px solid #2a2a3e;
+          }
+
+          hr {
+               border-color: #2a2a3e;
+               margin: 20px 0;
+          }
+     </style>
+</head>
+
+<body>
+     <div class="container">
+          <header>
+               <h1>📚 Iron Libraries</h1>
+               <div class="subtitle">Официальный репозиторий библиотек для языка программирования Iron</div>
+               <div class="version">Репозиторий версии 1.0 | Iron Lang Inc.</div>
+          </header>
+
+          <!-- ==================== БИБЛИОТЕКА 1: PROGRESS ==================== -->
+          <div class="library">
+               <h2>⏳ Iron Progress Bar</h2>
+               <div class="version">Версия 1.0 <span class="badge">Стабильная</span></div>
+
+               <div class="install-section">
+                    <h3>📥 Установка</h3>
+                    <p>1. Скачайте файл <strong>progress.iron</strong> (кнопка внизу)<br>
+                         2. Поместите файл в папку с вашим проектом<br>
+                         3. Добавьте в начало вашего кода:</p>
+                    <div class="code-block">exec(open("progress.iron").read(), globals())</div>
+                    <button class="install-btn" data-library="progress">📦 Скачать progress.iron</button>
+               </div>
+
+               <h3>🎯 Доступные функции</h3>
+               <table class="function-table">
+                    <tr>
+                         <th>Функция</th>
+                         <th>Параметры</th>
+                         <th>Описание</th>
+                    </tr>
+                    <tr>
+                         <td class="function-name">bar_progress()</td>
+                         <td>max: int (количество шагов)</td>
+                         <td>Создаёт интерактивный прогресс-бар в терминале. Автоматически показывает процент
+                              выполнения, анимированный индикатор и оценочное время завершения. Идеально подходит для
+                              отображения хода загрузки файлов, обработки данных или любых длительных операций.</td>
+                    </tr>
+                    <tr>
+                         <td class="function-name">help_progress()</td>
+                         <td>Нет</td>
+                         <td>Выводит в консоль подробную справку по работе с библиотекой: примеры использования,
+                              описание всех функций и советы по настройке.</td>
+                    </tr>
+               </table>
+
+               <div class="example-title">📖 Пример использования:</div>
+               <div class="code-block">
+                    <code># Активация библиотеки<br>
+exec(open("progress.iron").read(), globals())<br>
+<br>
+# Простой прогресс-бар на 50 шагов<br>
+put("Начинаем загрузку данных...")<br>
+bar_progress(50)<br>
+put("Загрузка завершена!")<br>
+<br>
+# Прогресс-бар внутри цикла<br>
+for i in range(100):<br>
+    bar_progress(i)<br>
+    sleep(0.01)<br>
+<br>
+# Справка<br>
+help_progress()</code>
+               </div>
+
+               <div class="note">
+                    💡 <strong>Примечание:</strong> Для работы библиотеки требуется установленный Python пакет
+                    <strong>rich</strong>. Установка: <code>pip install rich</code>
+               </div>
+          </div>
+
+          <!-- ==================== БИБЛИОТЕКА 2: KRYPTO GRAM ==================== -->
+          <div class="library">
+               <h2>₿ Iron Krypto Gram</h2>
+               <div class="version">Версия 1.0 <span class="badge">Стабильная</span></div>
+
+               <div class="install-section">
+                    <h3>📥 Установка</h3>
+                    <p>1. Скачайте файл <strong>kripto_gram.iron</strong> (кнопка внизу)<br>
+                         2. Поместите файл в папку с вашим проектом<br>
+                         3. Добавьте в начало вашего кода:</p>
+                    <div class="code-block">exec(open("kripto_gram.iron").read(), globals())</div>
+                    <button class="install-btn" data-library="krypto">📦 Скачать kripto_gram.iron</button>
+               </div>
+
+               <h3>🎯 Доступные функции</h3>
+               <table class="function-table">
+                    <tr>
+                         <th>Функция</th>
+                         <th>Параметры</th>
+                         <th>Описание</th>
+                    </tr>
+                    <tr>
+                         <td class="function-name">all_coins()</td>
+                         <td>Нет</td>
+                         <td>Получает и отображает список ВСЕХ криптовалют с биржи. Для каждой монеты показывает:
+                              название (symbol), текущую цену в USD, уникальный идентификатор (ID). Возвращает полный
+                              JSON-ответ от API CoinLore для дальнейшей обработки. Всего доступно более 14 000+ монет.
+                         </td>
+                    </tr>
+                    <tr>
+                         <td class="function-name">get_coin()</td>
+                         <td>id: int (ID монеты)</td>
+                         <td>Получает детальную информацию о конкретной монете по её уникальному ID. Возвращает: текущую
+                              цену, рыночную капитализацию, объём торгов за 24 часа, изменение цены в процентах (1ч,
+                              24ч, 7д), максимальную и минимальную цену за всё время, оборотное предложение и другие
+                              метрики. Пример: get_coin(90) — информация о Bitcoin.</td>
+                    </tr>
+                    <tr>
+                         <td class="function-name">get_coin_oper_24h()</td>
+                         <td>coin_id: int (ID монеты)</td>
+                         <td>Анализирует исторические данные монеты за последние 24 часа. Возвращает OHLCV данные: Open
+                              (цена открытия), High (максимум), Low (минимум), Close (цена закрытия), Volume (объём
+                              торгов). Идеально подходит для технического анализа, построения графиков и определения
+                              трендов. Данные разбиты по 4-часовым интервалам.</td>
+                    </tr>
+                    <tr>
+                         <td class="function-name">search_coin()</td>
+                         <td>keyword: str (поисковый запрос)</td>
+                         <td>Ищет криптовалюты по названию (name) или символу (symbol). Поддерживает частичное
+                              совпадение (например, "coin" найдёт Bitcoin, Dogecoin и другие). Выводит все найденные
+                              совпадения с их ценой и ID. Возвращает список найденных монет. Пример: search_coin("bit")
+                              — найдёт Bitcoin, BitTorrent, BitShares.</td>
+                    </tr>
+                    <tr>
+                         <td class="function-name">help_krypto()</td>
+                         <td>Нет</td>
+                         <td>Выводит в консоль полную документацию по библиотеке: список всех функций с описанием, ID
+                              популярных монет (Bitcoin: 90, Ethereum: 80, Doge: 2, XRP: 58, Cardano: 14, Solana: 161),
+                              примеры использования и советы по работе с API.</td>
+                    </tr>
+               </table>
+
+               <div class="example-title">📖 Примеры использования:</div>
+               <div class="code-block">
+                    <code># Активация библиотеки<br>
+exec(open("kripto_gram.iron").read(), globals())<br>
+<br>
+# 1. Показать все монеты<br>
+all_coins()<br>
+<br>
+# 2. Поиск Bitcoin по названию<br>
+search_coin("bitcoin")<br>
+<br>
+# 3. Получить информацию о Dogecoin (ID = 2)<br>
+doge = get_coin(2)<br>
+put(doge)<br>
+<br>
+# 4. Анализ истории Ethereum за 24ч (ID = 80)<br>
+history = get_coin_oper_24h(80)<br>
+for candle in history:<br>
+    put(f"Open: {candle['open']}, Close: {candle['close']}")<br>
+<br>
+# 5. Справка<br>
+help_krypto()</code>
+               </div>
+
+               <div class="example-title">💡 ID популярных криптовалют:</div>
+               <div class="code-block">
+                    <code>Bitcoin (BTC): 90<br>
+Ethereum (ETH): 80<br>
+Dogecoin (DOGE): 2<br>
+XRP (XRP): 58<br>
+Cardano (ADA): 14<br>
+Solana (SOL): 161<br>
+Polkadot (DOT): 88<br>
+Litecoin (LTC): 4</code>
+               </div>
+
+               <div class="note">
+                    📡 <strong>Источник данных:</strong> API CoinLore (бесплатный, без регистрации, без API-ключей).
+                    Данные обновляются в реальном времени.
+               </div>
+          </div>
+
+          <footer>
+               <p>⚡ Iron Libraries — Официальный репозиторий сообщества Iron Language</p>
+               <p>Библиотеки полностью совместимы с Iron 2.0 и выше | Распространяется бесплатно</p>
+               <p>© 2026 Iron Lang Inc.</p>
+          </footer>
+     </div>
+
+     <script>
+          // Содержимое progress.iron
+          const progressIron = `from rich.progress import track
+
+def bar_progress(max_value):
+    for i in track(range(max_value), description="Загрузка..."):
+        sleep(0.05)
+
+def help_progress():
+    put("""
+╔════════════════════════════════════════════════╗
+║         🔥 IRON PROGRESS BAR v1.0 🔥           ║
+╠════════════════════════════════════════════════╣
+║                                                ║
+║  📊 bar_progress(max)                          ║
+║     → max - количество шагов (от 1 до 1000)    ║
+║     → Создаёт анимированный прогресс-бар       ║
+║                                                ║
+║  ❓ help_progress()                            ║
+║     → Показывает эту справку                   ║
+║                                                ║
+║  💡 Требуется: pip install rich                ║
+║                                                ║
+╚════════════════════════════════════════════════╝
+""")`;
+
+          // Содержимое kripto_gram.iron
+          const kryptoIron = `import json
+
+def all_coins():
+    result = req("https://api.coinlore.net/api/tickers/")
+    data = result.json()
+    for coin in data["data"]:
+        put(f"{coin['symbol']}: ${coin['price_usd']}, id: {coin['id']}")
+    return data
+
+def get_coin_oper_24h(coin_id: int):
+    result = req(f"https://api.coinlore.net/api/coin/ohlcv/?coin={coin_id}")
+    data = result.json()
+    if data:
+        return data.get('history', [])
+    return []
+
+def get_coin(id: int):
+    result = req(f"https://api.coinlore.net/api/ticker/?id={id}")
+    return result
+
+def search_coin(keyword: str):
+    result = req("https://api.coinlore.net/api/tickers/")
+    data = result.json()
+    found = []
+    for coin in data["data"]:
+        if keyword.lower() in coin['name'].lower() or keyword.lower() in coin['symbol'].lower():
+            found.append(coin)
+            put(f"{coin['symbol']}: ${coin['price_usd']} (id: {coin['id']})")
+    return found
+
+def help_krypto():
+    put("""
+╔════════════════════════════════════════════════════════════════════════╗
+║                     🔥 IRON KRYPTO GRAM v1.0 🔥                         ║
+╠════════════════════════════════════════════════════════════════════════╣
+║                                                                        ║
+║  📊 all_coins()                                                        ║
+║     → Показать все криптовалюты (символ, цена, ID)                     ║
+║                                                                        ║
+║  📈 get_coin_oper_24h(coin_id)                                         ║
+║     → История монеты за 24ч (Open, High, Low, Close, Volume)           ║
+║                                                                        ║
+║  🪙 get_coin(id)                                                       ║
+║     → Полная информация по ID монеты                                   ║
+║     → Пример: get_coin(90) - Bitcoin                                  ║
+║                                                                        ║
+║  🔍 search_coin("keyword")                                             ║
+║     → Поиск монеты по названию или символу                             ║
+║                                                                        ║
+║  ❓ help_krypto()                                                      ║
+║     → Показать эту справку                                             ║
+║                                                                        ║
+╠════════════════════════════════════════════════════════════════════════╣
+║  💡 ID популярных монет:                                               ║
+║     Bitcoin: 90   | Ethereum: 80   | Dogecoin: 2   | XRP: 58           ║
+║     Cardano: 14   | Solana: 161    | Polkadot: 88  | Litecoin: 4       ║
+╚════════════════════════════════════════════════════════════════════════╝
+""")`;
+
+          // Обработка кнопок установки
+          document.querySelectorAll('.install-btn').forEach(btn => {
+               btn.addEventListener('click', function () {
+                    const library = this.dataset.library;
+                    let filename = '';
+                    let content = '';
+
+                    if (library === 'progress') {
+                         filename = 'progress.iron';
+                         content = progressIron;
+                    } else if (library === 'krypto') {
+                         filename = 'kripto_gram.iron';
+                         content = kryptoIron;
+                    }
+
+                    // Создаём и скачиваем файл
+                    const blob = new Blob([content], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    // Анимация подтверждения
+                    const originalText = btn.textContent;
+                    btn.textContent = '✅ Скачан!';
+                    btn.style.background = '#4caf50';
+                    setTimeout(() => {
+                         btn.textContent = originalText;
+                         btn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    }, 2000);
+               });
+          });
+     </script>
+</body>
+
+</html>
