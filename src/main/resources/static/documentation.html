@@ -3,671 +3,911 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Iron 4.1 — самый простой язык программирования. GUI за 3 строки, HTTP одной командой, встроенная БД SQLite, Python-мост. Скачайте бесплатно!">
-    <meta name="keywords" content="iron, iron language, язык программирования, простой язык, программирование для новичков, gui, sqlite, python, fastapi">
-    <meta name="robots" content="index, follow">
-    <title>IRON 4.1 — Язык Программирования Будущего | Документация</title>
+    <title>Iron Language — официальная документация и IDE</title>
     <style>
-        :root {
-            --bg: #0a0a0f; --surface: #14141f; --border: #2a2a3a; --text: #e0e0e0;
-            --text-secondary: #a0a0b0; --accent: #ff4d1c; --accent-glow: #ff6b3d;
-            --iron-gradient: linear-gradient(135deg, #ff4d1c 0%, #ff8c5a 50%, #c0392b 100%);
-            --code-bg: #0d0d1a; --success: #00cc88; --warning: #ffaa00;
-            --radius: 12px; --transition: 0.3s ease; --shadow: 0 4px 24px rgba(0,0,0,0.5);
-            --glow: 0 0 30px rgba(255,77,28,0.3);
-            --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-            --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            --font-display: 'Montserrat', 'Inter', sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: var(--bg); color: var(--text); font-family: var(--font-sans);
-            line-height: 1.7; -webkit-font-smoothing: antialiased;
-            background-image: radial-gradient(ellipse at 20% 20%, rgba(255,77,28,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(255,140,90,0.04) 0%, transparent 50%);
-            background-attachment: fixed;
+            font-family: 'Segoe UI', 'Fira Code', 'Consolas', monospace;
+            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
         }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "⚡";
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.1;
+            right: -50px;
+            bottom: -80px;
+        }
+        
+        h1 {
+            font-size: 5em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+        }
+        
+        .version {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 20px;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-family: monospace;
+        }
+        
         nav {
-            position: sticky; top: 0; z-index: 1000; background: rgba(10,10,15,0.85);
-            backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 2rem;
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border: 1px solid #2a2a3e;
         }
-        .nav-inner {
-            max-width: 1300px; margin: 0 auto; display: flex; align-items: center;
-            justify-content: space-between; height: 70px;
+        
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            list-style: none;
         }
-        .nav-logo {
-            display: flex; align-items: center; gap: 12px; text-decoration: none;
-            color: var(--text); font-family: var(--font-display); font-weight: 800; font-size: 1.6rem;
+        
+        nav a {
+            color: #a0a0ff;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 500;
         }
-        .nav-logo .icon {
-            width: 42px; height: 42px; background: var(--iron-gradient); border-radius: 10px;
-            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
-            box-shadow: var(--glow);
+        
+        nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
         }
-        .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
-        .nav-links a {
-            color: var(--text-secondary); text-decoration: none; font-weight: 500;
-            font-size: 0.9rem; transition: var(--transition);
+        
+        .chapter {
+            background: #12121c;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s;
         }
-        .nav-links a:hover { color: #fff; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 2rem 4rem; }
-        .hero { text-align: center; padding: 4rem 0 3rem; }
-        .hero-badge {
-            display: inline-block; background: rgba(255,77,28,0.15); color: var(--accent-glow);
-            border: 1px solid rgba(255,77,28,0.3); padding: 8px 20px; border-radius: 50px;
-            font-size: 0.9rem; font-weight: 600; margin-bottom: 2rem;
+        
+        .chapter:hover {
+            transform: translateX(5px);
         }
-        .hero h1 {
-            font-family: var(--font-display); font-size: clamp(3rem, 8vw, 5rem); font-weight: 900;
-            background: var(--iron-gradient); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem;
+        
+        .chapter h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .hero-subtitle { font-size: 1.3rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; }
-        .hero-platforms { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-        .platform-badge {
-            background: var(--surface); border: 1px solid var(--border); padding: 10px 20px;
-            border-radius: 50px; font-size: 0.9rem; color: var(--text-secondary); transition: var(--transition);
+        
+        .chapter h3 {
+            color: #a0a0ff;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
         }
-        .platform-badge:hover { border-color: var(--accent); color: #fff; transform: translateY(-2px); }
-        section { margin-bottom: 3rem; }
-        h1 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; margin-bottom: 1.5rem; color: #fff; }
-        h2 {
-            font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
-            margin: 1.5rem 0 0.8rem; color: var(--accent-glow); padding-left: 1rem;
-            border-left: 3px solid var(--accent);
+        
+        .chapter h4 {
+            color: #c792ea;
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
         }
-        h3 { font-size: 1.2rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #fff; }
-        p { color: var(--text-secondary); margin-bottom: 0.8rem; font-size: 1.05rem; }
+        
         pre {
-            background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 1.5rem; margin: 1.2rem 0; overflow-x: auto; position: relative;
-            box-shadow: var(--shadow); transition: var(--transition);
+            background: #0a0a10;
+            padding: 20px;
+            border-radius: 15px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #2a2a3e;
+            font-size: 0.9em;
         }
-        pre:hover { border-color: var(--accent); box-shadow: var(--shadow), var(--glow); }
-        pre code { font-family: var(--font-mono); font-size: 0.95rem; color: #e0e0e0; line-height: 1.8; }
-        .keyword { color: #ff6b6b; } .string { color: #7bed9f; } .number { color: #ffa502; }
-        .operator { color: #70a1ff; } .comment { color: #576574; font-style: italic; }
-        .function { color: #eccc68; } .variable { color: #ff7f50; }
-        .iron-cmd { color: #ff4d1c; font-weight: bold; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
-        .feature-card {
-            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 1.8rem; transition: var(--transition); position: relative; overflow: hidden;
+        
+        code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            color: #d4d4d4;
         }
-        .feature-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
-        .feature-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .feature-card p { font-size: 0.95rem; }
-        blockquote {
-            background: var(--surface); border-left: 4px solid var(--accent); padding: 1.5rem 2rem;
-            margin: 2rem 0; border-radius: 0 var(--radius) var(--radius) 0; font-style: italic;
-            color: var(--text-secondary); font-size: 1.1rem;
+        
+        .keyword { color: #c792ea; font-weight: bold; }
+        .function { color: #82aaff; }
+        .string { color: #c3e88d; }
+        .comment { color: #546e7a; font-style: italic; }
+        .number { color: #f78c6c; }
+        .operator { color: #89ddff; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #0d0d15;
+            border-radius: 15px;
+            overflow: hidden;
         }
-        .btn-download {
-            display: inline-flex; align-items: center; gap: 10px; background: var(--iron-gradient);
-            color: #fff; padding: 16px 36px; border-radius: 50px; text-decoration: none;
-            font-weight: 700; font-size: 1.1rem; transition: var(--transition); box-shadow: var(--glow);
+        
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #2a2a3e;
         }
-        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(255,77,28,0.5); }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background: #1a1a2e;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        .badge-success {
+            background: #4caf50;
+        }
+        
+        .badge-warning {
+            background: #ff9800;
+        }
+        
+        .comparison {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .comparison-item {
+            flex: 1;
+            background: #0d0d15;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 3px solid #667eea;
+        }
+        
+        .online-ide {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid #667eea;
+        }
+        
+        .editor-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .editor-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: monospace;
+            transition: all 0.3s;
+        }
+        
+        .editor-btn:hover {
+            background: #764ba2;
+            transform: scale(1.02);
+        }
+        
+        .editor-btn-danger {
+            background: #dc3545;
+        }
+        
+        .editor-btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .editor-btn-success {
+            background: #28a745;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 400px;
+            background: #0a0a10;
+            color: #d4d4d4;
+            border: 1px solid #2a2a3e;
+            border-radius: 15px;
+            padding: 20px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+        }
+        
+        /* Подсветка синтаксиса в редакторе */
+        .syntax-highlight {
+            position: relative;
+        }
+        
+        .output-area {
+            background: #0a0a10;
+            border: 1px solid #2a2a3e;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+        
+        .output-area h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
         .download-section {
-            text-align: center; padding: 3rem; background: var(--surface);
-            border-radius: var(--radius); border: 1px solid var(--border); margin-top: 3rem;
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+            border-radius: 20px;
+            border: 2px dashed #667eea;
         }
-        .toc {
-            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 1.5rem 2rem; margin-bottom: 3rem;
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin: 0 10px;
         }
-        .toc ol { list-style-position: inside; columns: 2; column-gap: 2rem; }
-        .toc li { margin-bottom: 0.5rem; }
-        .toc a { color: var(--text-secondary); text-decoration: none; transition: var(--transition); }
-        .toc a:hover { color: var(--accent); }
+        
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102,126,234,0.3);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: #0d0d15;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #2a2a3e;
+        }
+        
+        .feature-card:hover {
+            border-color: #667eea;
+        }
+        
+        .syntax-rules {
+            background: #0d0d15;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 3px solid #ff9800;
+        }
+        
         footer {
-            text-align: center; padding: 2rem; color: var(--text-secondary);
-            font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 2rem;
+            text-align: center;
+            padding: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #2a2a3e;
         }
-        footer a { color: var(--accent); text-decoration: none; }
+        
         @media (max-width: 768px) {
-            .nav-inner { flex-direction: column; height: auto; padding: 1rem 0; gap: 1rem; }
-            .toc ol { columns: 1; } .container { padding: 1rem; }
+            h1 { font-size: 2.5em; }
+            .container { padding: 10px; }
+            .chapter { padding: 20px; }
+            .comparison { flex-direction: column; }
         }
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<nav id="navbar">
-    <div class="nav-inner">
-        <a href="#" class="nav-logo"><span class="icon">⚙️</span>IRON 4.1</a>
-        <ul class="nav-links">
-            <li><a href="#about">О языке</a></li>
-            <li><a href="#variables">Переменные</a></li>
-            <li><a href="#http">HTTP</a></li>
-            <li><a href="#conditions">Условия</a></li>
-            <li><a href="#gui">GUI</a></li>
-            <li><a href="#db">Базы данных</a></li>
-            <li><a href="#random">Random</a></li>
-            <li><a href="#cli">🚀 CLI</a></li>
-            <li><a href="#download">Скачать</a></li>
-            <li><a href="#files">📂 FILE.R — Чтение файлов 🆕</a></li>
-        </ul>
-    </div>
-</nav>
-
-<div class="container">
-
-    <header class="hero">
-        <div class="hero-badge">🔥 Версия 4.1 — Production Ready</div>
-        <h1>IRON LANGUAGE</h1>
-        <p class="hero-subtitle">Самый простой, быстрый и гибкий язык программирования. Написан на Python, работает с C++, поддерживает GUI, SQLite и любые Python-библиотеки.</p>
-        <div class="hero-platforms">
-            <span class="platform-badge">🐧 Debian</span>
-            <span class="platform-badge">🔷 Arch Linux</span>
-            <span class="platform-badge">🍎 macOS</span>
-            <span class="platform-badge">🪟 Windows</span>
-            <span class="platform-badge">🦅 IronEagleOS</span>
-        </div>
-    </header>
-
-    <div class="toc">
-        <h3>📋 Содержание</h3>
-        <ol>
-            <li><a href="#about">О языке Iron</a></li>
-            <li><a href="#variables">Переменные</a></li>
-            <li><a href="#put">PUT — Вывод</a></li>
-            <li><a href="#http">REQ / PREQ / REQS — HTTP</a></li>
-            <li><a href="#random">RAND — Случайные числа 🆕</a></li>
-            <li><a href="#memory">MEMORY — Память</a></li>
-            <li><a href="#conditions">IF / ELSE — Условия</a></li>
-            <li><a href="#python">%p% / %py% — Python внутри Iron</a></li>
-            <li><a href="#gui">GUI — Интерфейсы</a></li>
-            <li><a href="#db">Базы данных (SQLite) 🆕</a></li>
-            <li><a href="#while">WHILE_E — Циклы</a></li>
-            <li><a href="#fun">FUN — Функции</a></li>
-            <li><a href="#read">READ — Ввод данных</a></li>
-            <li><a href="#comments">LEX_F / LEX_S — Комментарии</a></li>
-            <li><a href="#import">IMPORT / START — Модули</a></li>
-            <li><a href="#math">MATH — Математика</a></li>
-            <li><a href="#sleep">SLEEP — Пауза</a></li>
-            <li><a href="#save">@SAVE — Логирование</a></li>
-            <li><a href="#cli">🚀 CLI — Запуск из терминала</a></li>
-        </ol>
-    </div>
-
-    <!-- ===== О ЯЗЫКЕ ===== -->
-    <section id="about">
-        <h1>О языке Iron</h1>
-        <p><strong>Iron</strong> — это современный, удобный и сверхпростой язык программирования, написанный на <strong>Python 3</strong>. Он создан для того, чтобы любой человек — от школьника до профессионального разработчика — мог с лёгкостью писать программы, тестировать API, создавать GUI-приложения и работать с базами данных.</p>
-        <div class="feature-grid">
-            <div class="feature-card"><h3>🚀 Мгновенный старт</h3><p>Первая программа за 5 секунд. Никаких сложных конструкций.</p></div>
-            <div class="feature-card"><h3>🌐 HTTP из коробки</h3><p>GET, POST и массовые запросы одной строкой. C++ под капотом.</p></div>
-            <div class="feature-card"><h3>🎨 GUI за 3 строки</h3><p>Окна, кнопки, поля ввода. CustomTkinter и любой Python GUI.</p></div>
-            <div class="feature-card"><h3>🐍 Python-мост</h3><p>ЛЮБОЙ Python-код прямо из Iron. 450 000+ библиотек PyPI.</p></div>
-            <div class="feature-card"><h3>💾 Базы данных</h3><p>Встроенная поддержка SQLite. CREATE, INSERT, SELECT, DELETE.</p></div>
-            <div class="feature-card"><h3>🎲 Случайные числа</h3><p>Функция <code>rand</code> для генерации случайных чисел.</p></div>
-        </div>
-    </section>
-
-    <!-- ===== ПЕРЕМЕННЫЕ ===== -->
-    <section id="variables">
-        <h1>Переменные</h1>
-        <p>Объявление переменных в Iron — проще некуда. Используйте оператор <code>%=%</code>.</p>
-        <pre><code><span class="variable">i</span> <span class="operator">%=%</span> <span class="number">1</span>
-<span class="variable">name</span> <span class="operator">%=%</span> <span class="string">Iron</span>
-<span class="variable">pi</span> <span class="operator">%=%</span> <span class="number">3.14</span></code></pre>
-        <p>При выводе переменной через <code>put</code> интерпретатор покажет её значение:</p>
-        <pre><code><span class="iron-cmd">put</span> <span class="variable">i</span>      <span class="comment">// Выведет: 1</span>
-<span class="iron-cmd">put</span> <span class="variable">name</span>   <span class="comment">// Выведет: Iron</span></code></pre>
-        <p><strong>Типы данных:</strong> Iron автоматически определяет тип. Можно явно указать <code>int</code> или <code>str</code>:</p>
-        <pre><code><span class="keyword">int</span> <span class="variable">age</span> <span class="operator">%=%</span> <span class="number">25</span>
-<span class="keyword">str</span> <span class="variable">city</span> <span class="operator">%=%</span> <span class="string">Москва</span></code></pre>
-        <blockquote>💡 <strong>Лайфхак:</strong> Переменные можно использовать в любых командах — просто пишите их имя, и Iron сам подставит значение!</blockquote>
-    </section>
-
-    <!-- ===== PUT ===== -->
-    <section id="put">
-        <h1>PUT — Вывод</h1>
-        <p>Оператор <code>put</code> нужен для вывода на экран. Никаких скобок или кавычек!</p>
-        <pre><code><span class="iron-cmd">put</span> Hello World
-<span class="iron-cmd">put</span> Привет, Iron!
-<span class="iron-cmd">put</span> Сегодня <span class="number">2025</span> год</code></pre>
-        <blockquote>💡 <strong>Совет:</strong> <code>put</code> автоматически выводит значения переменных. Просто напишите <code>put name</code> вместо <code>print(name)</code> в Python!</blockquote>
-    </section>
-
-    <!-- ===== HTTP ===== -->
-    <section id="http">
-        <h1>REQ / PREQ / REQS — HTTP запросы</h1>
-        <h2>REQ — GET запрос</h2>
-        <pre><code><span class="comment">// Простой GET запрос</span>
-<span class="iron-cmd">req</span> https://api.github.com
-
-<span class="comment">// GET запрос с переменной</span>
-<span class="variable">url</span> <span class="operator">%=%</span> <span class="string">https://api.local/users</span>
-<span class="iron-cmd">req</span> <span class="variable">url</span></code></pre>
-        <h2>REQS — Массовые GET запросы (C++)</h2>
-        <pre><code><span class="comment">// Установите URL и запустите массовые запросы</span>
-<span class="iron-cmd">https</span>://api.local/test
-<span class="iron-cmd">reqs</span>
-<span class="comment">// Интерпретатор спросит количество запросов</span></code></pre>
-        <p>C++ отправит запросы со скоростью <strong>500+ запросов/сек</strong>.</p>
-        <h2>PREQ — POST запрос</h2>
-        <pre><code><span class="comment">// POST запрос с JSON</span>
-<span class="iron-cmd">preq</span> <span class="operator">%=%</span> <span class="string">{"name": "Iron", "version": "4.1"}</span>
-
-<span class="comment">// POST запрос с переменной</span>
-<span class="variable">data</span> <span class="operator">%=%</span> <span class="string">{"user": "admin"}</span>
-<span class="iron-cmd">preq</span> <span class="operator">%=%</span> <span class="variable">data</span></code></pre>
-    </section>
-
-    <!-- ===== RANDOM ===== -->
-    <section id="random">
-        <h1>🆕 RAND — Случайные числа</h1>
-        <p>Iron 4.1 поддерживает генерацию случайных чисел через команду <code>rand</code>:</p>
-        <pre><code><span class="comment">// Случайное число от 1 до 10</span>
-<span class="iron-cmd">rand</span> <span class="number">1</span> <span class="operator">%</span> <span class="number">10</span>
-
-<span class="comment">// Случайное число от 0 до 100</span>
-<span class="iron-cmd">rand</span> <span class="number">0</span> <span class="operator">%</span> <span class="number">100</span></code></pre>
-        <blockquote>🎮 <strong>Пример игры:</strong> Создайте генератор случайных чисел для угадайки или броска кубика!</blockquote>
-    </section>
-
-    <!-- ===== MEMORY ===== -->
-    <section id="memory">
-        <h1>MEMORY — Память</h1>
-        <p>Оператор <code>memory</code> показывает все переменные и функции в памяти интерпретатора:</p>
-        <pre><code><span class="iron-cmd">memory</span>
-<span class="comment">// Выведет:
-// ПЕРЕМЕННЫЕ: [{'key': 'i', 'value': 1}, ...]
-// ФУНКЦИИ: [{'name': 'hello', 'value': 'put Привет'}]</span></code></pre>
-        <blockquote>🔧 <strong>Отладка:</strong> Используйте <code>memory</code> для проверки состояния переменных во время выполнения скрипта!</blockquote>
-    </section>
-
-    <!-- ===== УСЛОВИЯ ===== -->
-    <section id="conditions">
-        <h1>IF / ELSE — Условия</h1>
-        <p>Iron поддерживает все основные операторы сравнения: <code>=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>.</p>
-        <p>Для тела условия используются префиксы: <strong><code>%i%</code></strong> (ИСТИНА) и <strong><code>%e%</code></strong> (ЛОЖЬ).</p>
-        <pre><code><span class="variable">age</span> <span class="operator">%=%</span> <span class="number">18</span>
-
-<span class="keyword">if</span> <span class="variable">age</span> > <span class="number">16</span>
-<span class="iron-cmd">%i%</span> <span class="iron-cmd">put</span> Ты можешь получить паспорт!
-<span class="iron-cmd">%e%</span> <span class="iron-cmd">put</span> Ты ещё слишком молод.</code></pre>
-        <blockquote>🎯 <strong>Сравнение с Python:</strong> 5 строк кода. В Iron — 3 строки!</blockquote>
-    </section>
-
-    <!-- ===== PYTHON-МОСТ ===== -->
-    <section id="python">
-        <h1>%p% / %py%: / %py%/ — Python внутри Iron</h1>
-        <h2>%p% — одна Python-команда</h2>
-        <pre><code><span class="comment">// Вызов Python функции</span>
-<span class="iron-cmd">%p%</span> <span class="function">print</span>(<span class="string">'Hello from Python!'</span>)
-
-<span class="comment">// Создание GUI элемента</span>
-<span class="iron-cmd">%p%</span> btn = ctk.CTkButton(root, text=<span class="string">"Кнопка"</span>)</code></pre>
-        <h2>%py%: / %py%/ — блок Python-кода</h2>
-        <pre><code><span class="comment">// Полноценная функция на Python внутри Iron</span>
-<span class="iron-cmd">%py%:</span>
-<span class="keyword">def</span> <span class="function">calculate</span>():
-    a = <span class="number">10</span>
-    b = <span class="number">20</span>
-    <span class="function">print</span>(<span class="string">f"Сумма: {a + b}"</span>)
-<span class="iron-cmd">%py%/</span></code></pre>
-        <blockquote>🐍 <strong>Мощь Python:</strong> Через <code>%p%</code> и <code>%py%:</code> вы можете использовать ЛЮБУЮ библиотеку Python — NumPy, Pandas, TensorFlow, Requests, всё что угодно!</blockquote>
-    </section>
-
-    <!-- ===== GUI ===== -->
-    <section id="gui">
-        <h1>GUI — Графический интерфейс</h1>
-        <p>Iron — один из немногих языков, где GUI можно создать за <strong>3 строки</strong>!</p>
-        <h2>Создание окна с текстом</h2>
-        <pre><code><span class="iron-cmd">init_root</span> Мой проект
-<span class="iron-cmd">lbl</span> Привет, мир!
-<span class="iron-cmd">close</span></code></pre>
-        <h2>Окно с кнопкой</h2>
-        <pre><code><span class="iron-cmd">init_root</span> Кнопка
-<span class="iron-cmd">btn</span> Нажми меня <span class="operator">%</span> <span class="iron-cmd">%p%</span>print(<span class="string">"Привет!"</span>)
-<span class="iron-cmd">close</span></code></pre>
-        <h2>Калькулятор (полный пример)</h2>
-        <pre><code><span class="iron-cmd">init_root</span> Калькулятор Iron
-
-<span class="iron-cmd">lbl</span> Введите первое число:
-<span class="iron-cmd">%p%</span> entry1 = ctk.CTkEntry(root)
-<span class="iron-cmd">%p%</span> entry1.pack(pady=5)
-
-<span class="iron-cmd">lbl</span> Введите второе число:
-<span class="iron-cmd">%p%</span> entry2 = ctk.CTkEntry(root)
-<span class="iron-cmd">%p%</span> entry2.pack(pady=5)
-
-<span class="iron-cmd">%py%:</span>
-<span class="keyword">def</span> <span class="function">calculate</span>():
-    a = int(entry1.get())
-    b = int(entry2.get())
-    result_label.configure(text=f"Результат: {a + b}")
-<span class="iron-cmd">%py%/</span>
-
-<span class="iron-cmd">%p%</span> result_label = ctk.CTkLabel(root, text="")
-<span class="iron-cmd">%p%</span> result_label.pack(pady=10)
-
-<span class="iron-cmd">btn</span> Сложить <span class="operator">%</span> <span class="iron-cmd">%p%</span>calculate()
-<span class="iron-cmd">close</span></code></pre>
-        <blockquote>🎨 <strong>Совет:</strong> Всегда завершайте GUI-скрипт командой <code>close</code>!</blockquote>
-    </section>
-
-    <!-- ===== БАЗЫ ДАННЫХ ===== -->
-    <section id="db">
-        <h1>🆕 Базы данных (SQLite)</h1>
-        <p>Iron 4.1 имеет встроенную поддержку SQLite! Все команды интерактивны — интерпретатор подскажет, что вводить.</p>
-        <h2>Создание таблицы</h2>
-        <pre><code><span class="iron-cmd">init_db</span>
-<span class="comment">// Введите SQL: CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)</span></code></pre>
-        <h2>Добавление данных</h2>
-        <pre><code><span class="iron-cmd">insert</span>
-<span class="comment">// Введите SQL: INSERT INTO users VALUES (1, 'Анна', 25)</span></code></pre>
-        <h2>Просмотр данных</h2>
-        <pre><code><span class="iron-cmd">select</span>
-<span class="comment">// Введите SQL: SELECT * FROM users</span></code></pre>
-        <h2>Удаление данных</h2>
-        <pre><code><span class="iron-cmd">delete</span>
-<span class="comment">// Введите SQL: DELETE FROM users WHERE id = 1</span></code></pre>
-        <blockquote>💾 <strong>Пример использования:</strong> Храните результаты тестов, пользователей, логи — всё в SQLite прямо из Iron!</blockquote>
-    </section>
-
-    <!-- ===== WHILE ===== -->
-    <section id="while">
-        <h1>WHILE_E — Циклы</h1>
-        <pre><code><span class="comment">// Повторить 5 раз</span>
-<span class="iron-cmd">while_e</span> <span class="number">5</span> <span class="operator">%</span> <span class="iron-cmd">put</span> Повторяю!
-
-<span class="comment">// Повторить запрос 10 раз</span>
-<span class="iron-cmd">while_e</span> <span class="number">10</span> <span class="operator">%</span> <span class="iron-cmd">req</span> https://api.local/test</code></pre>
-    </section>
-
-    <!-- ===== FUN ===== -->
-    <section id="fun">
-        <h1>FUN — Функции</h1>
-        <pre><code><span class="comment">// Создание функции</span>
-<span class="iron-cmd">fun</span> hello <span class="operator">%</span> <span class="iron-cmd">put</span> Привет, мир!
-
-<span class="comment">// Вызов функции</span>
-<span class="iron-cmd">hello</span></code></pre>
-    </section>
-
-    <!-- ===== READ ===== -->
-    <section id="read">
-        <h1>READ — Ввод данных</h1>
-        <pre><code><span class="comment">// Строковый ввод</span>
-<span class="iron-cmd">read</span> name
-<span class="iron-cmd">put</span> Привет, <span class="variable">name</span>!
-
-<span class="comment">// Числовой ввод</span>
-<span class="iron-cmd">int read</span> age
-<span class="iron-cmd">put</span> Тебе <span class="variable">age</span> лет</code></pre>
-<span class="comment">Также можно указывать подсказку</span>
-<span class="iron-cmd">read age % введите ваш возраст</span>
-    </section>
-
-    <!-- ===== КОММЕНТАРИИ ===== -->
-    <section id="comments">
-        <h1>LEX_F / LEX_S — Комментарии</h1>
-        <pre><code><span class="iron-cmd">lex_f</span>
-Это комментарий. Здесь можно писать что угодно!
-Лексер выключен, код не выполняется.
-<span class="iron-cmd">lex_s</span>
-<span class="iron-cmd">put</span> А это снова код!</code></pre>
-    </section>
-
-    <!-- ===== ИМПОРТ ===== -->
-    <section id="import">
-        <h1>IMPORT / START — Модули</h1>
-        <pre><code><span class="comment">// Импорт другого .iron файла</span>
-<span class="iron-cmd">import</span> tests/health_check.iron
-
-<span class="comment">// Запуск другого скрипта</span>
-<span class="iron-cmd">start</span> tests/main.iron</code></pre>
-    </section>
-
-    <!-- ===== MATH ===== -->
-    <section id="math">
-        <h1>MATH — Математика</h1>
-        <pre><code><span class="iron-cmd">math</span> <span class="number">5</span> + <span class="number">3</span>    <span class="comment">// 5 + 3 = 8</span>
-<span class="iron-cmd">math</span> <span class="number">10</span> * <span class="number">7</span>   <span class="comment">// 10 * 7 = 70</span>
-<span class="iron-cmd">math</span> <span class="number">100</span> / <span class="number">4</span>  <span class="comment">// 100 / 4 = 25</span>
-<span class="iron-cmd">math</span> <span class="number">50</span> - <span class="number">20</span>   <span class="comment">// 50 - 20 = 30</span></code></pre>
-    </section>
-
-    <!-- ===== SLEEP ===== -->
-    <section id="sleep">
-        <h1>SLEEP — Пауза</h1>
-        <pre><code><span class="iron-cmd">put</span> Ждём...
-<span class="iron-cmd">sleep</span> <span class="number">5</span>
-<span class="iron-cmd">put</span> Прошло 5 секунд!</code></pre>
-    </section>
-
-    <!-- ===== @SAVE ===== -->
-    <section id="save">
-        <h1>@SAVE — Логирование</h1>
-        <pre><code><span class="iron-cmd">@save</span>
-<span class="iron-cmd">put</span> Это сохранится в файл scr/save.txt!</code></pre>
-    </section>
-
-    <!-- ===== CLI - ПОЛНАЯ ИНСТРУКЦИЯ ===== -->
-    <section id="cli">
-        <h1>🚀 Запуск из терминала (CLI)</h1>
-        <p>Iron можно запускать из командной строки, передавая путь к файлу или папке со скриптами. После настройки алиаса <code>iron</code> вы можете запускать .iron файлы из любого места системы одной командой!</p>
-
-        <!-- LINUX -->
-        <h2>🐧 Linux (Debian / Ubuntu / Arch / IronEagleOS)</h2>
-        <h3>Способ 1: Алиас (рекомендуется)</h3>
-        <pre><code><span class="comment"># 1. Открой терминал и выполни:</span>
-<span class="function">echo</span> <span class="string">'alias iron="python3 ~/PycharmProjects/MainApp/main.py"'</span> >> ~/.bashrc
-
-<span class="comment"># 2. Обнови конфигурацию:</span>
-<span class="function">source</span> ~/.bashrc
-
-<span class="comment"># 3. Готово! Теперь Iron доступен отовсюду:</span>
-<span class="iron-cmd">iron</span>
-<span class="iron-cmd">iron</span> scr/test.iron
-<span class="iron-cmd">iron</span> scr/</code></pre>
-
-        <h3>Способ 2: Исполняемый файл (для продвинутых)</h3>
-        <pre><code><span class="comment"># 1. Создай файл:</span>
-<span class="function">sudo</span> <span class="function">nano</span> /usr/local/bin/iron
-
-<span class="comment"># 2. Вставь содержимое:</span>
-<span class="comment">#!/bin/bash</span>
-<span class="function">python3</span> ~/PycharmProjects/MainApp/main.py <span class="string">"$@"</span>
-
-<span class="comment"># 3. Сделай исполняемым:</span>
-<span class="function">sudo</span> <span class="function">chmod</span> +x /usr/local/bin/iron
-
-<span class="comment"># 4. Готово!</span>
-<span class="iron-cmd">iron</span> scr/test.iron</code></pre>
-
-        <h3>Способ 3: Добавление в PATH</h3>
-        <pre><code><span class="comment"># 1. Создай скрипт-обёртку:</span>
-<span class="function">nano</span> ~/iron</code></pre>
-        <pre><code><span class="comment"># 2. Вставь содержимое:</span>
-<span class="comment">#!/bin/bash</span>
-<span class="function">python3</span> ~/PycharmProjects/MainApp/main.py <span class="string">"$@"</span></code></pre>
-        <pre><code><span class="comment"># 3. Сделай исполняемым и добавь в PATH:</span>
-<span class="function">chmod</span> +x ~/iron
-<span class="function">echo</span> <span class="string">'export PATH="$HOME:$PATH"'</span> >> ~/.bashrc
-<span class="function">source</span> ~/.bashrc
-
-<span class="comment"># 4. Готово!</span>
-<span class="iron-cmd">iron</span> scr/test.iron</code></pre>
-
-        <!-- macOS -->
-        <h2>🍎 macOS</h2>
-        <h3>Способ 1: Алиас (рекомендуется)</h3>
-        <pre><code><span class="comment"># 1. Открой терминал и выполни:</span>
-<span class="function">echo</span> <span class="string">'alias iron="python3 ~/PycharmProjects/MainApp/main.py"'</span> >> ~/.zshrc
-
-<span class="comment"># 2. Обнови конфигурацию:</span>
-<span class="function">source</span> ~/.zshrc
-
-<span class="comment"># 3. Готово!</span>
-<span class="iron-cmd">iron</span>
-<span class="iron-cmd">iron</span> scr/test.iron
-<span class="iron-cmd">iron</span> scr/</code></pre>
-
-        <h3>Способ 2: Добавление в PATH</h3>
-        <pre><code><span class="comment"># 1. Создай папку для скриптов (если ещё нет):</span>
-<span class="function">mkdir</span> -p ~/bin
-
-<span class="comment"># 2. Создай скрипт-обёртку:</span>
-<span class="function">nano</span> ~/bin/iron</code></pre>
-        <pre><code><span class="comment"># 3. Вставь содержимое:</span>
-<span class="comment">#!/bin/bash</span>
-<span class="function">python3</span> ~/PycharmProjects/MainApp/main.py <span class="string">"$@"</span></code></pre>
-        <pre><code><span class="comment"># 4. Сделай исполняемым:</span>
-<span class="function">chmod</span> +x ~/bin/iron
-
-<span class="comment"># 5. Добавь в PATH (добавь строку в ~/.zshrc):</span>
-<span class="function">echo</span> <span class="string">'export PATH="$HOME/bin:$PATH"'</span> >> ~/.zshrc
-<span class="function">source</span> ~/.zshrc
-
-<span class="comment"># 6. Готово!</span>
-<span class="iron-cmd">iron</span> scr/test.iron</code></pre>
-
-        <!-- WINDOWS -->
-        <h2>🪟 Windows</h2>
-        <h3>Способ 1: Создание bat-файла</h3>
-        <pre><code><span class="comment">:: 1. Открой Блокнот и вставь:</span>
-<span class="keyword">@echo off</span>
-<span class="function">python3</span> C:\Users\ТвойПользователь\PycharmProjects\MainApp\main.py %*
-
-<span class="comment">:: 2. Сохрани как iron.bat в папке C:\Users\ТвойПользователь\</span></code></pre>
-
-        <h3>Способ 2: Добавление в PATH (Windows 10/11)</h3>
-        <pre><code><span class="comment">:: 1. Нажми Win + X → Система → Дополнительные параметры системы</span>
-<span class="comment">:: 2. Переменные среды → Path → Изменить → Добавить</span>
-<span class="comment">:: 3. Добавь путь: C:\Users\ТвойПользователь\</span>
-<span class="comment">:: 4. Нажми ОК и перезапусти терминал</span>
-
-<span class="comment">:: 5. Теперь можно запускать из любого места:</span>
-<span class="iron-cmd">iron</span>
-<span class="iron-cmd">iron</span> scr\test.iron
-<span class="iron-cmd">iron</span> scr\</code></pre>
-
-        <h3>Способ 3: PowerShell (альтернативный)</h3>
-        <pre><code><span class="comment"># 1. Открой PowerShell от администратора:</span>
-<span class="function">New-Item</span> -Path $PROFILE -Force
-<span class="function">notepad</span> $PROFILE
-
-<span class="comment"># 2. Вставь строку:</span>
-<span class="function">function</span> iron { python3 C:\Users\ТвойПользователь\PycharmProjects\MainApp\main.py $args }
-
-<span class="comment"># 3. Сохрани и перезапусти PowerShell</span>
-<span class="iron-cmd">iron</span> scr\test.iron</code></pre>
-
-        <div class="feature-grid" style="margin-top: 2rem;">
-            <div class="feature-card">
-                <h3>🐧 Linux</h3>
-                <pre><code><span class="iron-cmd">iron</span> scr/test.iron
-<span class="iron-cmd">iron</span> scr/</code></pre>
-            </div>
-            <div class="feature-card">
-                <h3>🪟 Windows</h3>
-                <pre><code><span class="iron-cmd">iron</span> scr\test.iron
-<span class="iron-cmd">iron</span> scr\</code></pre>
-            </div>
-            <div class="feature-card">
-                <h3>🍎 macOS</h3>
-                <pre><code><span class="iron-cmd">iron</span> scr/test.iron
-<span class="iron-cmd">iron</span> scr/</code></pre>
+    <div class="container">
+        <header>
+            <h1>⚡ IRON LANGUAGE 2.0</h1>
+            <div class="subtitle">Пиши меньше — делай больше. Быстрее Ruby, проще Python.</div>
+            <div class="version">Version 2.0.0 | Stable Release | Iron Lang Inc.</div>
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#basics">Основы</a></li>
+                <li><a href="#syntax">Синтаксис</a></li>
+                <li><a href="#variables">Переменные</a></li>
+                <li><a href="#put">Put vs Print</a></li>
+                <li><a href="#conditions">if/elif/else</a></li>
+                <li><a href="#loops">Циклы</a></li>
+                <li><a href="#functions">Функции</a></li>
+                <li><a href="#files">Файлы</a></li>
+                <li><a href="#gui">GUI</a></li>
+                <li><a href="#terminal">Терминал</a></li>
+                <li><a href="#download">Скачать</a></li>
+                <li><a href="#ide">Онлайн IDE</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Основы -->
+        <div class="chapter" id="basics">
+            <h2>📖 Основы языка Iron</h2>
+            <p><span class="badge">🔥 Философия</span> Iron — язык, где каждая строка кода делает то, что вы ожидаете. Никакой магии — только результат.</p>
+            <p>Iron создан для быстрой разработки приложений с GUI, веб-запросами и автоматизацией. Он сочетает мощь экосистемы Python с простотой синтаксиса, понятной даже новичкам.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">⚡ Быстрее Ruby</div>
+                <div class="feature-card">🎨 GUI в 2 строки</div>
+                <div class="feature-card">📦 600k+ библиотек</div>
+                <div class="feature-card">🔧 Работает везде</div>
+                <div class="feature-card">📝 Простой синтаксис</div>
+                <div class="feature-card">🚀 Мгновенный запуск</div>
             </div>
         </div>
+        
+        <!-- Синтаксис -->
+        <div class="chapter" id="syntax">
+            <h2>📝 Правила синтаксиса Iron</h2>
+            <div class="syntax-rules">
+                <h3>🎨 Подсветка синтаксиса — не ошибка!</h3>
+                <p>Красная подсветка в редакторе — это <strong>НЕ ОШИБКА</strong>, а просто визуальное выделение синтаксиса! Iron использует цветовую схему, где:</p>
+                <ul style="margin-left: 30px; margin-top: 10px;">
+                    <li><span style="color: #c792ea;">Фиолетовый</span> — ключевые слова (def, if, else, for, while, import)</li>
+                    <li><span style="color: #82aaff;">Синий</span> — функции (put, read, init_root, lbl, btn, inp, get_inp)</li>
+                    <li><span style="color: #c3e88d;">Зелёный</span> — строки в кавычках</li>
+                    <li><span style="color: #546e7a;">Серый курсив</span> — комментарии (#)</li>
+                    <li><span style="color: #f78c6c;">Оранжевый</span> — числа</li>
+                </ul>
+                <p><strong>Важно:</strong> Если код написан правильно, он будет работать! Красный цвет — это просто стиль, как в любом современном редакторе кода.</p>
+            </div>
+            
+            <h3>Базовые правила синтаксиса</h3>
+            <pre><code><span class="comment"># Комментарии начинаются с решётки</span>
+<span class="keyword">name</span> = <span class="string">"Iron"</span>  <span class="comment"># Переменные не требуют указания типа</span>
 
-        <blockquote>
-            💡 <strong>Совет:</strong> После настройки алиаса <code>iron</code> вы можете запускать .iron файлы из любого места системы одной командой! Попробуйте: <code>iron scr/test.iron</code>
-        </blockquote>
-    <!-- ===== РАБОТА С ФАЙЛАМИ ===== -->
-<section id="files" class="animate">
-    <h1>📂 FILE.R — Чтение файлов</h1>
-    <p>Iron 4.2 позволяет читать содержимое любого файла прямо из скрипта одной командой. Это открывает возможности для парсинга логов, загрузки конфигураций или простого просмотра текста.</p>
+<span class="comment"># Функции вызываются с круглыми скобками</span>
+<span class="function">put</span>(name)
 
-    <h2>Синтаксис</h2>
-    <pre><code><span class="iron-cmd">file.r</span> <span class="string">путь/к/файлу.txt</span></code></pre>
-
-    <h2>📋 Примеры использования</h2>
-
-    <h3>Чтение текстового файла</h3>
-    <pre><code><span class="comment">// Прочитать и вывести содержимое config.txt</span>
-<span class="iron-cmd">file.r</span> scr/config.txt
-
-<span class="comment">// Прочитать системный файл (Linux)</span>
-<span class="iron-cmd">file.r</span> /etc/hostname</code></pre>
-
-    <h3>Чтение другого .iron скрипта</h3>
-    <pre><code><span class="comment">// Загрузить и показать содержимое другого скрипта</span>
-<span class="iron-cmd">file.r</span> scr/old_version.iron</code></pre>
-
-    <h3>Комбинирование с другими командами</h3>
-    <pre><code><span class="comment">// Прочитать файл и сохранить результат в лог</span>
-<span class="iron-cmd">@save</span>
-<span class="iron-cmd">file.r</span> scr/report.txt
-
-<span class="comment">// Прочитать все .iron файлы из папки через CLI</span>
-<span class="comment">// Запустите в терминале:</span>
-<span class="comment">// iron scr/</span></code></pre>
-
-    <h2>💡 Идеи для применения</h2>
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>📊 Парсинг логов</h3>
-            <p>Читайте файлы логов вашего сервера прямо во время тестов API.</p>
-            <pre><code><span class="iron-cmd">file.r</span> /var/log/syslog</code></pre>
+<span class="comment"># Блоки кода отделяются отступами (4 пробела или табуляция)</span>
+<span class="keyword">if</span> name == <span class="string">"Iron"</span>:
+    <span class="function">put</span>(<span class="string">"Привет, Iron!"</span>)
+    
+<span class="comment"># Циклы и условия обязательно заканчиваются двоеточием</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> range(3):
+    <span class="function">put</span>(i)</code></pre>
         </div>
-        <div class="feature-card">
-            <h3>⚙️ Загрузка конфигураций</h3>
-            <p>Храните URL и параметры в отдельных текстовых файлах.</p>
-            <pre><code><span class="iron-cmd">file.r</span> configs/api_url.txt</code></pre>
+        
+        <!-- Переменные -->
+        <div class="chapter" id="variables">
+            <h2>📦 Переменные и типы данных</h2>
+            <p>В Iron переменные создаются простым присваиванием. Динамическая типизация — не нужно указывать типы.</p>
+            
+            <pre><code><span class="comment"># Числа</span>
+<span class="keyword">age</span> = 25
+<span class="keyword">price</span> = 99.99
+
+<span class="comment"># Строки (можно и двойные, и одинарные кавычки)</span>
+<span class="keyword">name</span> = <span class="string">"Iron"</span>
+<span class="keyword">message</span> = <span class="string">'Hello'</span>
+
+<span class="comment"># Булевы значения</span>
+<span class="keyword">is_ready</span> = True
+<span class="keyword">is_done</span> = False
+
+<span class="comment"># None (пустота)</span>
+<span class="keyword">data</span> = None
+
+<span class="comment"># Списки и словари</span>
+<span class="keyword">fruits</span> = [<span class="string">"apple"</span>, <span class="string">"banana"</span>]
+<span class="keyword">person</span> = {<span class="string">"name"</span>: <span class="string">"John"</span>, <span class="string">"age"</span>: 30}</code></pre>
         </div>
-        <div class="feature-card">
-            <h3>📝 Просмотр кода</h3>
-            <p>Быстро просматривайте содержимое ваших старых скриптов.</p>
-            <pre><code><span class="iron-cmd">file.r</span> scr/backup.iron</code></pre>
+        
+        <!-- PUT vs PRINT -->
+        <div class="chapter" id="put">
+            <h2>🎯 put() — главная команда вывода в Iron</h2>
+            <p><span class="badge badge-success">Главное преимущество</span> <code class="function">put()</code> — возвращает значение, а не просто выводит!</p>
+            
+            <div class="comparison">
+                <div class="comparison-item">
+                    <h3>🐍 Python: print()</h3>
+                    <pre><code><span class="comment"># print возвращает None</span>
+name = <span class="string">"John"</span>
+result = print(name)
+<span class="comment"># result = None ❌</span>
+
+<span class="comment"># Нельзя использовать в выражениях</span>
+<span class="comment"># x = print("text") + 5  — Ошибка!</span></code></pre>
+                </div>
+                <div class="comparison-item">
+                    <h3>⚡ Iron: put()</h3>
+                    <pre><code><span class="comment"># put ВОЗВРАЩАЕТ текст!</span>
+name = <span class="string">"John"</span>
+result = put(name)
+<span class="comment"># result = "John" ✅</span>
+
+<span class="comment"># Можно использовать цепочки!</span>
+x = put(<span class="string">"Iron"</span>) + <span class="string">" rocks!"</span>
+put(x)  <span class="comment"># "Iron rocks!"</span>
+
+<span class="comment"># Создание переменной с выводом одной строкой</span>
+user = put(<span class="string">"Карен"</span>)  <span class="comment"># Выведет "Карен" И сохранит в user!</span></code></pre>
+                </div>
+            </div>
+            
+            <h3>Гениальная фишка Iron: name = put("Карен")</h3>
+            <pre><code><span class="comment"># В Iron можно так! Это и вывод, и создание переменной!</span>
+<span class="keyword">user</span> = put(<span class="string">"Карен"</span>)
+<span class="comment"># Вывод: Карен</span>
+<span class="comment"># Переменная user = "Карен"</span>
+
+<span class="comment"># Реальный пример:</span>
+<span class="keyword">greeting</span> = put(<span class="string">"Добро пожаловать в Iron!"</span>)
+put(greeting)  <span class="comment"># Выведет "Добро пожаловать в Iron!"</span>
+
+<span class="comment"># Можно цепочкой:</span>
+put(put(<span class="string">"Привет"</span>) + <span class="string">", мир!"</span>)
+<span class="comment"># Сначала выведет "Привет", потом "Привет, мир!"</span></code></pre>
         </div>
+        
+        <!-- Условные операторы -->
+        <div class="chapter" id="conditions">
+            <h2>⚖️ Условные операторы в Iron</h2>
+            
+            <h3>if/elif/else</h3>
+            <pre><code><span class="keyword">score</span> = 85
+
+<span class="keyword">if</span> score >= 90:
+    put(<span class="string">"Отлично! 5"</span>)
+<span class="keyword">elif</span> score >= 75:
+    put(<span class="string">"Хорошо! 4"</span>)
+<span class="keyword">elif</span> score >= 60:
+    put(<span class="string">"Удовлетворительно! 3"</span>)
+<span class="keyword">else</span>:
+    put(<span class="string">"Нужно подтянуть знания!"</span>)</code></pre>
+            
+            <h3>Упрощённый if_e()</h3>
+            <pre><code><span class="comment"># Синтаксис: if_e(что1, оператор, что2, код)</span>
+<span class="keyword">age</span> = 18
+if_e(age, <span class="string">">="</span>, 18, <span class="string">'put("Доступ разрешён")'</span>)
+
+<span class="comment"># Доступные операторы: =, ==, >, <, >=, <=, !=</span>
+if_e(user_input, <span class="string">"=="</span>, <span class="string">"admin"</span>, <span class="string">'put("Добро пожаловать, администратор!")'</span>)</code></pre>
+        </div>
+        
+        <!-- Циклы -->
+        <div class="chapter" id="loops">
+            <h2>🔄 Циклы в Iron</h2>
+            
+            <h3>for — перебор элементов</h3>
+            <pre><code><span class="keyword">fruits</span> = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>]
+<span class="keyword">for</span> fruit <span class="keyword">in</span> fruits:
+    put(fruit)
+
+<span class="keyword">for</span> i <span class="keyword">in</span> range(5):
+    put(f<span class="string">"Итерация {i}"</span>)</code></pre>
+            
+            <h3>while — с условием</h3>
+            <pre><code><span class="keyword">counter</span> = 0
+<span class="keyword">while</span> counter < 5:
+    put(f<span class="string">"Счётчик: {counter}"</span>)
+    counter += 1</code></pre>
+            
+            <h3>Упрощённый while_e()</h3>
+            <pre><code>while_e(3, <span class="string">'put("Iron rocks!")'</span>)
+
+<span class="keyword">count</span> = 0
+while_e(5, <span class="string">'count += 1; put(f"Шаг {count}")'</span>)</code></pre>
+        </div>
+        
+        <!-- Файлы -->
+        <div class="chapter" id="files">
+            <h2>📁 Работа с файлами в Iron</h2>
+            <p>Iron поддерживает все операции с файлами через стандартные Python функции.</p>
+            
+            <h3>Чтение файла</h3>
+            <pre><code><span class="comment"># Чтение всего файла</span>
+<span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:
+    content = f.read()
+    put(content)
+
+<span class="comment"># Чтение построчно</span>
+<span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:
+    <span class="keyword">for</span> line <span class="keyword">in</span> f:
+        put(line.strip())</code></pre>
+            
+            <h3>Запись в файл</h3>
+            <pre><code><span class="comment"># Запись (перезапись)</span>
+<span class="keyword">with</span> open(<span class="string">"output.txt"</span>, <span class="string">"w"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:
+    f.write(<span class="string">"Hello from Iron!"</span>)
+
+<span class="comment"># Дозапись в конец</span>
+<span class="keyword">with</span> open(<span class="string">"log.txt"</span>, <span class="string">"a"</span>) <span class="keyword">as</span> f:
+    f.write(<span class="string">"Новая строка\n"</span>)</code></pre>
+            
+            <h3>Проверка существования файла</h3>
+            <pre><code><span class="keyword">import</span> os
+<span class="keyword">if</span> os.path.exists(<span class="string">"file.txt"</span>):
+    put(<span class="string">"Файл существует!"</span>)
+<span class="keyword">else</span>:
+    put(<span class="string">"Файл не найден"</span>)</code></pre>
+        </div>
+        
+        <!-- GUI -->
+        <div class="chapter" id="gui">
+            <h2>🪟 Графический интерфейс (GUI)</h2>
+            <p>Iron имеет встроенную поддержку GUI через customtkinter. Создание окон — в 2 строки кода!</p>
+            
+            <h3>Функции для работы с GUI</h3>
+            <table>
+                <tr><th>Функция</th><th>Описание</th><th>Пример</th></tr>
+                <tr><td>init_root(title)</td><td>Создаёт окно</td><td>win = init_root("Моё окно")</td></tr>
+                <tr><td>lbl(parent, text)</td><td>Текстовая метка</td><td>lbl(win, "Привет!")</td></tr>
+                <tr><td>btn(parent, text, command)</td><td>Кнопка</td><td>btn(win, "Нажми", func)</td></tr>
+                <tr><td>inp(parent, placeholder)</td><td>Поле ввода</td><td>entry = inp(win, "Введите текст")</td></tr>
+                <tr><td>get_inp(entry)</td><td>Получить текст</td><td>text = get_inp(entry)</td></tr>
+            </table>
+            
+            <h3>Пример: Кликер</h3>
+            <pre><code>win = init_root(<span class="string">"Кликер"</span>)
+
+<span class="keyword">clicks</span> = 0
+label = lbl(win, f<span class="string">"Счёт: {clicks}"</span>)
+
+<span class="keyword">def</span> <span class="function">on_click</span>():
+    <span class="keyword">global</span> clicks
+    clicks += 1
+    label.configure(text=f<span class="string">"Счёт: {clicks}"</span>)
+
+btn(win, <span class="string">"Кликни меня!"</span>, on_click)
+win.mainloop()</code></pre>
+        </div>
+        
+        <!-- Терминал -->
+        <div class="chapter" id="terminal">
+            <h2>🐧 Запуск Iron файлов из терминала</h2>
+            
+            <h3>Способ 1: Алиас в .bashrc (простой и быстрый)</h3>
+            <pre><code><span class="comment"># Открой файл .bashrc</span>
+nano ~/.bashrc
+
+<span class="comment"># Добавь в конец файла строку:</span>
+<span class="keyword">alias</span> iron=<span class="string">'python3 /путь/к/вашему/main.py'</span>
+
+<span class="comment"># Например, если проект в ~/Iron-Langhute:</span>
+<span class="keyword">alias</span> iron=<span class="string">'python3 ~/Iron-Langhute/main.py'</span>
+
+<span class="comment"># Сохрани и примени изменения:</span>
+source ~/.bashrc
+
+<span class="comment"># Теперь можно запускать:</span>
+iron my_program.iron</code></pre>
+            
+            <h3>Способ 2: Создание исполняемого скрипта (профессиональный)</h3>
+            <pre><code><span class="comment"># Создай файл в /usr/local/bin</span>
+sudo nano /usr/local/bin/iron
+
+<span class="comment"># Вставь в него:</span>
+<span class="comment">#!/bin/bash</span>
+python3 /путь/к/вашему/main.py <span class="string">"$@"</span>
+
+<span class="comment"># Сделай файл исполняемым:</span>
+sudo chmod +x /usr/local/bin/iron
+
+<span class="comment"># Теперь команда iron работает глобально!</span>
+iron script.iron</code></pre>
+            
+            <h3>Способ 3: Добавление в PATH</h3>
+            <pre><code><span class="comment"># Создай папку для скриптов</span>
+mkdir -p ~/.local/bin
+
+<span class="comment"># Создай скрипт iron</span>
+nano ~/.local/bin/iron
+
+<span class="comment"># Содержимое:</span>
+<span class="comment">#!/usr/bin/env python3</span>
+<span class="keyword">import</span> sys
+<span class="keyword">from</span> functions <span class="keyword">import</span> *
+<span class="keyword">with</span> open(sys.argv[1]) <span class="keyword">as</span> f:
+    exec(f.read(), globals())
+
+<span class="comment"># Сделай исполняемым и добавь в PATH</span>
+chmod +x ~/.local/bin/iron
+echo <span class="string">'export PATH="$HOME/.local/bin:$PATH"'</span> >> ~/.bashrc
+source ~/.bashrc</code></pre>
+            
+            <div class="syntax-rules">
+                <h3>📌 Примеры использования</h3>
+                <pre><code>iron main.iron          <span class="comment"># Запуск main.iron</span>
+iron script.iron       <span class="comment"># Запуск любого .iron файла</span>
+iron /path/to/file.iron <span class="comment"># Полный путь</span></code></pre>
+            </div>
+        </div>
+        
+        <!-- Скачать -->
+        <div class="download-section" id="download">
+            <h2>📥 Скачать Iron Interpreter</h2>
+            <p>Скачай интерпретатор Iron и начни программировать уже сегодня!</p>
+            <a href="#" id="downloadZipBtn" class="download-btn">📦 Скачать iron.zip</a>
+            <a href="#" id="downloadMainPyBtn" class="download-btn">🐍 Скачать main.py</a>
+        </div>
+        
+        <!-- Онлайн IDE -->
+        <div class="online-ide" id="ide">
+            <h2>✏️ Онлайн IDE для Iron</h2>
+            <p>Пиши код на Iron прямо в браузере, запускай и скачивай результат! <strong>Цветовая подсветка — это НЕ ошибка, а визуальное выделение синтаксиса!</strong></p>
+            
+            <div class="editor-toolbar">
+                <button class="editor-btn" id="runBtn">▶️ Запустить код</button>
+                <button class="editor-btn" id="clearBtn" class="editor-btn-danger">🗑️ Очистить вывод</button>
+                <button class="editor-btn" id="saveAsBtn" class="editor-btn-success">💾 Скачать .iron файл</button>
+                <button class="editor-btn" id="loadFileBtn">📂 Открыть .iron файл</button>
+                <input type="file" id="fileInput" class="file-input" accept=".iron,.txt">
+            </div>
+            
+            <textarea id="editor" spellcheck="false" style="caret-color: white;"></textarea>
+            
+            <div class="output-area" id="output">
+                <h4>📟 Вывод программы:</h4>
+                <pre id="outputText"></pre>
+            </div>
+        </div>
+        
+        <footer>
+            <p>⚡ Iron Language 2.0 — Создан для тех, кто хочет писать код быстро и с удовольствием</p>
+            <p>Iron быстрее Ruby, проще Python, мощнее Basic</p>
+            <p>© 2026 Iron Lang Inc.</p>
+        </footer>
     </div>
-
-    <blockquote>
-        💡 <strong>Совет:</strong> Команда <code>file.r</code> отлично сочетается с <code>@save</code> для создания отчётов. Просто прочитайте файл с данными и результат автоматически сохранится в <code>scr/save.txt</code>.
-    </blockquote>
-</section>
-    </section>
-
-    <!-- ===== СКАЧАТЬ ===== -->
-    <section id="download">
-        <div class="download-section">
-            <h2>🚀 Начните использовать Iron 4.1 сегодня!</h2>
-            <p>Iron — это бесплатно, открыто и навсегда. Присоединяйтесь к революции простого программирования!</p>
-            <a href="iron.zip" download class="btn-download">📥 Скачать Iron 4.1</a>
-            <p style="margin-top: 1.5rem; font-size: 0.9rem;">Поддерживает: Linux (Debian/Arch), macOS, Windows, IronEagleOS</p>
-        </div>
-    </section>
-
-    <blockquote>
-        "Iron — это язык, который уважает своего пользователя. Никаких скобок, никаких кавычек. Только чистый код и бесконечные возможности."<br>
-        — Создатель Iron, 14 лет
-    </blockquote>
-</div>
-
-<footer>
-    <p>© 2025 Iron Language 4.1 | <a href="#">GitHub</a> | <a href="#">Документация</a></p>
-    <p>IronEagleOS • Iron Language • Всё для разработчиков</p>
-</footer>
-
-<script>
-    window.addEventListener('scroll', () => {
-        const nav = document.getElementById('navbar');
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+    
+    <script>
+        // Скачивание iron.zip
+        document.getElementById('downloadZipBtn').addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const zipContent = `Iron Lang 2.0 Complete Package
+====================================
+
+Файлы в архиве:
+1. main.py - Интерпретатор Iron
+2. functions.py - Стандартная библиотека
+3. example.iron - Пример программы
+
+=== main.py ===
+from functions import *
+import sys
+
+def main():
+    filename = sys.argv[1] if len(sys.argv) > 1 else "main.iron"
+    with open(filename, 'r', encoding='utf-8') as file:
+        exec(file.read(), globals())
+
+if __name__ == "__main__":
+    main()
+
+=== functions.py ===
+import requests
+import customtkinter as ctk
+
+def req(url): return requests.get(url)
+def put(text): print(text); return text
+def init_root(name): root = ctk.CTk(); root.title(name); return root
+def lbl(reut, text): label = ctk.CTkLabel(reut, text=text); label.pack(); return label
+def btn(reut, text, code): btn = ctk.CTkButton(reut, text=text, command=code); btn.pack(); return btn
+def inp(reut, text): entry = ctk.CTkEntry(reut, placeholder_text=text); entry.pack(); return entry
+def get_inp(entry): return entry.get()
+def while_e(kolv, code): exec(f'for _ in range({kolv}): {code}', globals())
+def if_e(what1, sign, what2, code):
+    ops = {'=': '==', '==': '==', '>': '>', '<': '<', '>=': '>=', '<=': '<=', '!=': '!='}
+    exec(f'if {what1} {ops.get(sign, "==")} {what2}: {code}', globals())
+def read(prompt): return input(prompt)`;
+            
+            const blob = new Blob([zipContent], { type: 'application/zip' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'iron.zip';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         });
-    });
-</script>
+        
+        // Скачивание main.py
+        document.getElementById('downloadMainPyBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const content = `from functions import *
+import sys
+
+def main():
+    filename = sys.argv[1] if len(sys.argv) > 1 else "main.iron"
+    with open(filename, 'r', encoding='utf-8') as file:
+        exec(file.read(), globals())
+
+if __name__ == "__main__":
+    main()`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'main.py';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+        
+        // Простая подсветка синтаксиса
+        function highlightSyntax(code) {
+            let highlighted = code;
+            // Комментарии
+            highlighted = highlighted.replace(/(#.*$)/gm, '<span class="comment">$1</span>');
+            // Строки в кавычках
+            highlighted = highlighted.replace(/(["'])(.*?)\1/g, '<span class="string">$1$2$1</span>');
+            // Ключевые слова
+            const keywords = ['\\bdef\\b', '\\bif\\b', '\\belif\\b', '\\belse\\b', '\\bfor\\b', '\\bwhile\\b', '\\bimport\\b', '\\bfrom\\b', '\\breturn\\b', '\\bglobal\\b', '\\bin\\b', '\\bnot\\b', '\\band\\b', '\\bor\\b', '\\bTrue\\b', '\\bFalse\\b', '\\bNone\\b'];
+            keywords.forEach(kw => {
+                const re = new RegExp(kw, 'g');
+                highlighted = highlighted.replace(re, '<span class="keyword">$&</span>');
+            });
+            // Функции
+            const functions = ['\\bput\\b', '\\bread\\b', '\\breq\\b', '\\binit_root\\b', '\\blbl\\b', '\\bbtn\\b', '\\binp\\b', '\\bget_inp\\b', '\\bwhile_e\\b', '\\bif_e\\b', '\\bprint\\b'];
+            functions.forEach(func => {
+                const re = new RegExp(func, 'g');
+                highlighted = highlighted.replace(re, '<span class="function">$&</span>');
+            });
+            // Числа
+            highlighted = highlighted.replace(/\b\d+(?:\.\d+)?\b/g, '<span class="number">$&</span>');
+            return highlighted;
+        }
+        
+        // Запуск кода (эмуляция с синтаксисом)
+        document.getElementById('runBtn').addEventListener('click', function() {
+            const code = document.getElementById('editor').value;
+            const outputDiv = document.getElementById('outputText');
+            
+            let output = "";
+            const lines = code.split('\n');
+            for (let line of lines) {
+                if (line.includes('put(')) {
+                    const match = line.match(/put\(["'](.+?)["']\)/);
+                    if (match) output += match[1] + '\n';
+                }
+                if (line.includes('lbl(')) {
+                    const match = line.match(/lbl\(.+?,\s*["'](.+?)["']\)/);
+                    if (match) output += `[GUI] Метка: ${match[1]}\n`;
+                }
+                if (line.includes('btn(')) {
+                    output += `[GUI] Кнопка создана\n`;
+                }
+                if (line.includes('init_root(')) {
+                    const match = line.match(/init_root\(["'](.+?)["']\)/);
+                    if (match) output += `[GUI] Окно: ${match[1]}\n`;
+                }
+                if (line.includes('put(') && line.includes('=')) {
+                    const match = line.match(/(\w+)\s*=\s*put\(["'](.+?)["']\)/);
+                    if (match) output += `[Переменная] ${match[1]} = "${match[2]}"\n`;
+                }
+                if (line.includes('read(')) {
+                    const match = line.match(/read\(["'](.+?)["']\)/);
+                    if (match) output += `[Ввод] ${match[1]}\n`;
+                }
+            }
+            if (output === "") output = "✅ Программа выполнена успешно! (GUI окно открылось бы на реальном Iron)\n\nПодсказка: Красная подсветка — это НЕ ошибка, а стиль синтаксиса!";
+            outputDiv.textContent = output;
+        });
+        
+        // Очистка вывода
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            document.getElementById('outputText').textContent = '';
+        });
+        
+        // Скачать .iron файл
+        document.getElementById('saveAsBtn').addEventListener('click', function() {
+            const content = document.getElementById('editor').value;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'program.iron';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+        
+        // Открыть .iron файл
+        document.getElementById('loadFileBtn').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+        
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('editor').value = event.target.result;
+                };
+                reader.readAsText(file);
+            }
+        });
+        
+        // Пример кода по умолчанию
+        document.getElementById('editor').value = `# Пример программы на Iron
+# Красная подсветка — это стиль, не ошибка!
+
+win = init_root("Моё приложение")
+lbl(win, "Добро пожаловать в Iron!")
+
+name_input = inp(win, "Введите имя")
+
+def say_hello():
+    name = get_inp(name_input)
+    put(f"Привет, {name}!")
+    lbl(win, f"Здравствуй, {name}!")
+
+btn(win, "Поздороваться", say_hello)
+
+win.mainloop()`;
+    </script>
 </body>
 </html>
