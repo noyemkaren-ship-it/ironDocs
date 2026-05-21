@@ -15,4 +15,10 @@ public class MainIron {
      public String getMethodNam() {
           return "biblia.html";
      }
+
+     @GetMapping("/")
+     public String mains() {
+          return "index.html";
+     }
+
 }

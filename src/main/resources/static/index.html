@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>MAIN || IRON</title>
+     <style>
+          * {
+               margin: 0;
+               padding: 0;
+               box-sizing: border-box;
+          }
+
+          body {
+               font-family: 'Segoe UI', 'Fira Code', monospace;
+               background: #050510;
+               color: #e0e0e0;
+               min-height: 100vh;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               overflow-x: hidden;
+               position: relative;
+          }
+
+          /* Анимированный фон */
+          body::before {
+               content: '';
+               position: fixed;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               background:
+                    radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                    radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                    radial-gradient(ellipse at 50% 80%, rgba(130, 170, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(ellipse at 10% 10%, rgba(199, 146, 234, 0.08) 0%, transparent 50%);
+               pointer-events: none;
+               z-index: -1;
+               animation: backgroundShift 20s ease-in-out infinite;
+          }
+
+          @keyframes backgroundShift {
+
+               0%,
+               100% {
+                    opacity: 0.8;
+               }
+
+               25% {
+                    opacity: 1;
+               }
+
+               50% {
+                    opacity: 0.6;
+               }
+
+               75% {
+                    opacity: 0.9;
+               }
+          }
+
+          /* Плавающие частицы */
+          .particles {
+               position: fixed;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               pointer-events: none;
+               z-index: 0;
+          }
+
+          .particle {
+               position: absolute;
+               background: rgba(102, 126, 234, 0.4);
+               border-radius: 50%;
+               animation: float 20s infinite;
+               filter: blur(1px);
+          }
+
+          .particle:nth-child(even) {
+               background: rgba(199, 146, 234, 0.3);
+          }
+
+          .particle:nth-child(3n) {
+               background: rgba(130, 170, 255, 0.35);
+          }
+
+          @keyframes float {
+
+               0%,
+               100% {
+                    transform: translateY(0) translateX(0) scale(1);
+                    opacity: 0;
+               }
+
+               10% {
+                    opacity: 1;
+               }
+
+               90% {
+                    opacity: 1;
+               }
+
+               25% {
+                    transform: translateY(-40vh) translateX(30px) scale(1.5);
+               }
+
+               50% {
+                    transform: translateY(-80vh) translateX(-20px) scale(0.8);
+               }
+
+               75% {
+                    transform: translateY(-40vh) translateX(-50px) scale(1.2);
+               }
+          }
+
+          /* Основной контейнер */
+          .main-container {
+               position: relative;
+               z-index: 1;
+               text-align: center;
+               padding: 60px 40px;
+               max-width: 900px;
+               width: 90%;
+          }
+
+          /* Анимированная рамка */
+          .glow-border {
+               position: relative;
+               background: linear-gradient(145deg, #12122a, #0a0a1a);
+               border-radius: 30px;
+               padding: 60px 40px;
+               border: 1px solid rgba(102, 126, 234, 0.3);
+               box-shadow:
+                    0 20px 60px rgba(102, 126, 234, 0.15),
+                    0 0 100px rgba(102, 126, 234, 0.05),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+               overflow: hidden;
+          }
+
+          .glow-border::before {
+               content: '';
+               position: absolute;
+               top: -2px;
+               left: -2px;
+               right: -2px;
+               bottom: -2px;
+               background: linear-gradient(45deg,
+                         #667eea,
+                         #764ba2,
+                         #82aaff,
+                         #c792ea,
+                         #667eea);
+               border-radius: 32px;
+               z-index: -1;
+               animation: borderGlow 4s linear infinite;
+               background-size: 400% 400%;
+               filter: blur(10px);
+               opacity: 0.5;
+          }
+
+          @keyframes borderGlow {
+
+               0%,
+               100% {
+                    background-position: 0% 50%;
+               }
+
+               50% {
+                    background-position: 100% 50%;
+               }
+          }
+
+          /* Железный логотип */
+          .iron-logo {
+               font-size: 5em;
+               margin-bottom: 20px;
+               display: block;
+               animation: logoFloat 3s ease-in-out infinite;
+          }
+
+          @keyframes logoFloat {
+
+               0%,
+               100% {
+                    transform: translateY(0);
+               }
+
+               50% {
+                    transform: translateY(-10px);
+               }
+          }
+
+          /* Заголовок */
+          h1 {
+               font-size: 3.5em;
+               margin-bottom: 20px;
+               background: linear-gradient(135deg, #667eea, #c792ea, #82aaff);
+               -webkit-background-clip: text;
+               -webkit-text-fill-color: transparent;
+               background-clip: text;
+               font-weight: 900;
+               letter-spacing: 3px;
+               text-transform: uppercase;
+               animation: titleShine 3s ease-in-out infinite;
+               background-size: 200% 200%;
+          }
+
+          @keyframes titleShine {
+
+               0%,
+               100% {
+                    background-position: 0% 50%;
+               }
+
+               50% {
+                    background-position: 100% 50%;
+               }
+          }
+
+          /* Описание */
+          .description {
+               font-size: 1.3em;
+               color: #aab;
+               margin-bottom: 50px;
+               line-height: 1.8;
+               max-width: 700px;
+               margin-left: auto;
+               margin-right: auto;
+          }
+
+          .description strong {
+               color: #c792ea;
+               font-weight: 600;
+          }
+
+          /* Контейнер для кнопок */
+          .buttons-container {
+               display: flex;
+               gap: 25px;
+               justify-content: center;
+               flex-wrap: wrap;
+          }
+
+          /* Стили для кнопок-ссылок */
+          .btn {
+               display: inline-block;
+               padding: 18px 40px;
+               font-size: 1.1em;
+               font-weight: bold;
+               text-decoration: none;
+               border-radius: 50px;
+               transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+               position: relative;
+               overflow: hidden;
+               letter-spacing: 1px;
+               text-transform: uppercase;
+               cursor: pointer;
+               font-family: 'Segoe UI', 'Fira Code', monospace;
+          }
+
+          .btn-docs {
+               background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+               color: white;
+               box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+          }
+
+          .btn-docs::before {
+               content: '';
+               position: absolute;
+               top: 0;
+               left: -100%;
+               width: 100%;
+               height: 100%;
+               background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+               transition: 0.5s;
+          }
+
+          .btn-docs:hover::before {
+               left: 100%;
+          }
+
+          .btn-docs:hover {
+               transform: translateY(-5px) scale(1.05);
+               box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+          }
+
+          .btn-libs {
+               background: transparent;
+               color: #82aaff;
+               border: 2px solid rgba(130, 170, 255, 0.5);
+               box-shadow: 0 0 20px rgba(130, 170, 255, 0.1);
+          }
+
+          .btn-libs:hover {
+               background: rgba(130, 170, 255, 0.1);
+               border-color: #82aaff;
+               transform: translateY(-5px) scale(1.05);
+               box-shadow: 0 15px 40px rgba(130, 170, 255, 0.3);
+          }
+
+          /* Иконки в кнопках */
+          .btn-icon {
+               margin-right: 8px;
+               font-size: 1.2em;
+          }
+
+          /* Декоративная линия */
+          .divider {
+               width: 100px;
+               height: 3px;
+               background: linear-gradient(90deg, transparent, #667eea, #c792ea, transparent);
+               margin: 30px auto;
+               border-radius: 50%;
+          }
+
+          /* Версия */
+          .version-info {
+               margin-top: 30px;
+               font-size: 0.9em;
+               color: #667;
+               letter-spacing: 2px;
+          }
+
+          .version-info span {
+               color: #82aaff;
+               font-weight: bold;
+          }
+
+          /* Адаптивность */
+          @media (max-width: 768px) {
+               h1 {
+                    font-size: 2.5em;
+               }
+
+               .description {
+                    font-size: 1.1em;
+               }
+
+               .buttons-container {
+                    flex-direction: column;
+                    align-items: center;
+               }
+
+               .btn {
+                    width: 100%;
+                    text-align: center;
+               }
+
+               .glow-border {
+                    padding: 40px 25px;
+               }
+          }
+     </style>
+</head>
+
+<body>
+     <!-- Плавающие частицы -->
+     <div class="particles" id="particles"></div>
+
+     <!-- Основной контент -->
+     <div class="main-container">
+          <div class="glow-border">
+               <span class="iron-logo">⚙️</span>
+               <h1>Iron Language</h1>
+
+               <p class="description">
+                    Современный язык программирования с <strong>приятным синтаксисом</strong>,
+                    созданный разработчиком <strong>Геворгяном Кареном</strong>.
+                    Простота, мощь и элегантность в каждой строке кода.
+               </p>
+
+               <div class="divider"></div>
+
+               <div class="buttons-container">
+                    <a href="/iron" class="btn btn-docs">
+                         <span class="btn-icon">📖</span> Документация языка
+                    </a>
+                    <a href="/bib" class="btn btn-libs">
+                         <span class="btn-icon">📚</span> Библиотеки
+                    </a>
+               </div>
+
+               <div class="version-info">
+                    Iron Language <span>v2.0</span> | © 2026 Геворгян Карен
+               </div>
+          </div>
+     </div>
+
+     <script>
+          // Генерация плавающих частиц
+          const particlesContainer = document.getElementById('particles');
+          const numberOfParticles = 40;
+
+          for (let i = 0; i < numberOfParticles; i++) {
+               const particle = document.createElement('div');
+               particle.className = 'particle';
+
+               // Случайный размер
+               const size = Math.random() * 4 + 1;
+               particle.style.width = size + 'px';
+               particle.style.height = size + 'px';
+
+               // Случайная позиция
+               particle.style.left = Math.random() * 100 + '%';
+               particle.style.top = Math.random() * 100 + '%';
+
+               // Случайная задержка анимации
+               particle.style.animationDelay = Math.random() * 20 + 's';
+
+               // Случайная длительность
+               particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+
+               particlesContainer.appendChild(particle);
+          }
+
+          // Добавляем эффект следования за мышью для фона (опционально)
+          document.addEventListener('mousemove', (e) => {
+               const x = e.clientX / window.innerWidth;
+               const y = e.clientY / window.innerHeight;
+
+               const mainContainer = document.querySelector('.main-container');
+               const moveX = (x - 0.5) * 10;
+               const moveY = (y - 0.5) * 10;
+
+               mainContainer.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg)`;
+          });
+
+          // Возвращаем в исходное положение при уходе мыши
+          document.addEventListener('mouseleave', () => {
+               const mainContainer = document.querySelector('.main-container');
+               mainContainer.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+          });
+     </script>
+</body>
+
+</html>
