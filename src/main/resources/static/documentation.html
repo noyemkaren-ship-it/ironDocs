@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +11,20 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', 'Fira Code', 'Consolas', monospace;
             background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 100%);
             color: #e0e0e0;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
             text-align: center;
             padding: 80px 20px;
@@ -33,7 +34,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         header::before {
             content: "⚡";
             position: absolute;
@@ -42,27 +43,27 @@
             right: -50px;
             bottom: -80px;
         }
-        
+
         h1 {
             font-size: 5em;
             margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
         }
-        
+
         .subtitle {
             font-size: 1.4em;
             opacity: 0.95;
         }
-        
+
         .version {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 5px 20px;
             border-radius: 30px;
             margin-top: 20px;
             font-family: monospace;
         }
-        
+
         nav {
             background: #1a1a2e;
             border-radius: 20px;
@@ -74,7 +75,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid #2a2a3e;
         }
-        
+
         nav ul {
             display: flex;
             flex-wrap: wrap;
@@ -82,7 +83,7 @@
             gap: 15px;
             list-style: none;
         }
-        
+
         nav a {
             color: #a0a0ff;
             text-decoration: none;
@@ -91,13 +92,13 @@
             transition: all 0.3s;
             font-weight: 500;
         }
-        
+
         nav a:hover {
             background: #667eea;
             color: white;
             transform: translateY(-2px);
         }
-        
+
         .chapter {
             background: #12121c;
             border-radius: 20px;
@@ -106,11 +107,11 @@
             border-left: 4px solid #667eea;
             transition: transform 0.2s;
         }
-        
+
         .chapter:hover {
             transform: translateX(5px);
         }
-        
+
         .chapter h2 {
             color: #667eea;
             margin-bottom: 25px;
@@ -119,19 +120,19 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .chapter h3 {
             color: #a0a0ff;
             margin: 25px 0 15px 0;
             font-size: 1.4em;
         }
-        
+
         .chapter h4 {
             color: #c792ea;
             margin: 20px 0 10px 0;
             font-size: 1.1em;
         }
-        
+
         pre {
             background: #0a0a10;
             padding: 20px;
@@ -141,19 +142,38 @@
             border: 1px solid #2a2a3e;
             font-size: 0.9em;
         }
-        
+
         code {
             font-family: 'Fira Code', 'Consolas', monospace;
             color: #d4d4d4;
         }
-        
-        .keyword { color: #c792ea; font-weight: bold; }
-        .function { color: #82aaff; }
-        .string { color: #c3e88d; }
-        .comment { color: #546e7a; font-style: italic; }
-        .number { color: #f78c6c; }
-        .operator { color: #89ddff; }
-        
+
+        .keyword {
+            color: #c792ea;
+            font-weight: bold;
+        }
+
+        .function {
+            color: #82aaff;
+        }
+
+        .string {
+            color: #c3e88d;
+        }
+
+        .comment {
+            color: #546e7a;
+            font-style: italic;
+        }
+
+        .number {
+            color: #f78c6c;
+        }
+
+        .operator {
+            color: #89ddff;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -162,23 +182,24 @@
             border-radius: 15px;
             overflow: hidden;
         }
-        
-        th, td {
+
+        th,
+        td {
             padding: 14px;
             text-align: left;
             border-bottom: 1px solid #2a2a3e;
         }
-        
+
         th {
             background: #667eea;
             color: white;
             font-weight: bold;
         }
-        
+
         tr:hover {
             background: #1a1a2e;
         }
-        
+
         .badge {
             display: inline-block;
             background: #667eea;
@@ -188,33 +209,41 @@
             margin-right: 8px;
             font-weight: bold;
         }
-        
+
         .badge-success {
             background: #4caf50;
         }
-        
+
         .badge-warning {
             background: #ff9800;
         }
-        
+
         .badge-new {
             background: #ff5722;
             animation: pulse 2s infinite;
         }
-        
+
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
-        
+
         .comparison {
             display: flex;
             gap: 20px;
             margin: 20px 0;
             flex-wrap: wrap;
         }
-        
+
         .comparison-item {
             flex: 1;
             background: #0d0d15;
@@ -222,7 +251,7 @@
             border-radius: 15px;
             border-left: 3px solid #667eea;
         }
-        
+
         .online-ide {
             background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
             border-radius: 20px;
@@ -230,14 +259,14 @@
             margin-top: 40px;
             border: 1px solid #667eea;
         }
-        
+
         .editor-toolbar {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-        
+
         .editor-btn {
             background: #667eea;
             color: white;
@@ -248,24 +277,24 @@
             font-family: monospace;
             transition: all 0.3s;
         }
-        
+
         .editor-btn:hover {
             background: #764ba2;
             transform: scale(1.02);
         }
-        
+
         .editor-btn-danger {
             background: #dc3545;
         }
-        
+
         .editor-btn-danger:hover {
             background: #c82333;
         }
-        
+
         .editor-btn-success {
             background: #28a745;
         }
-        
+
         textarea {
             width: 100%;
             height: 400px;
@@ -279,11 +308,11 @@
             line-height: 1.5;
             resize: vertical;
         }
-        
+
         .syntax-highlight {
             position: relative;
         }
-        
+
         .output-area {
             background: #0a0a10;
             border: 1px solid #2a2a3e;
@@ -294,16 +323,16 @@
             overflow-y: auto;
             font-family: monospace;
         }
-        
+
         .output-area h4 {
             color: #667eea;
             margin-bottom: 10px;
         }
-        
+
         .file-input {
             display: none;
         }
-        
+
         .download-section {
             text-align: center;
             margin: 40px 0;
@@ -312,7 +341,7 @@
             border-radius: 20px;
             border: 2px dashed #667eea;
         }
-        
+
         .download-btn {
             display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -326,19 +355,19 @@
             text-decoration: none;
             margin: 0 10px;
         }
-        
+
         .download-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(102,126,234,0.3);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
-        
+
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin: 20px 0;
         }
-        
+
         .feature-card {
             background: #0d0d15;
             padding: 20px;
@@ -346,11 +375,11 @@
             text-align: center;
             border: 1px solid #2a2a3e;
         }
-        
+
         .feature-card:hover {
             border-color: #667eea;
         }
-        
+
         .syntax-rules {
             background: #0d0d15;
             padding: 15px;
@@ -358,7 +387,7 @@
             margin: 15px 0;
             border-left: 3px solid #ff9800;
         }
-        
+
         .info-box {
             background: #0d0d15;
             padding: 15px;
@@ -366,7 +395,7 @@
             margin: 15px 0;
             border-left: 3px solid #4caf50;
         }
-        
+
         .warning-box {
             background: #1a1a0d;
             padding: 15px;
@@ -374,22 +403,34 @@
             margin: 15px 0;
             border-left: 3px solid #ff9800;
         }
-        
+
         footer {
             text-align: center;
             padding: 40px;
             margin-top: 40px;
             border-top: 1px solid #2a2a3e;
         }
-        
+
         @media (max-width: 768px) {
-            h1 { font-size: 2.5em; }
-            .container { padding: 10px; }
-            .chapter { padding: 20px; }
-            .comparison { flex-direction: column; }
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .chapter {
+                padding: 20px;
+            }
+
+            .comparison {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -397,7 +438,7 @@
             <div class="subtitle">Пиши меньше — делай больше. Быстрее Ruby, проще Python.</div>
             <div class="version">Version 2.0.0 | Stable Release | Iron Lang Inc.</div>
         </header>
-        
+
         <nav>
             <ul>
                 <li><a href="#basics">Основы</a></li>
@@ -416,13 +457,13 @@
                 <li><a href="#ide">Онлайн IDE</a></li>
             </ul>
         </nav>
-        
-        <!-- Основы -->
         <div class="chapter" id="basics">
             <h2>📖 Основы языка Iron</h2>
-            <p><span class="badge">🔥 Философия</span> Iron — язык, где каждая строка кода делает то, что вы ожидаете. Никакой магии — только результат.</p>
-            <p>Iron создан для быстрой разработки приложений с GUI, веб-запросами и автоматизацией. Он сочетает мощь экосистемы Python с простотой синтаксиса, понятной даже новичкам.</p>
-            
+            <p><span class="badge">🔥 Философия</span> Iron — язык, где каждая строка кода делает то, что вы ожидаете.
+                Никакой магии — только результат.</p>
+            <p>Iron создан для быстрой разработки приложений с GUI, веб-запросами и автоматизацией. Он сочетает мощь
+                экосистемы Python с простотой синтаксиса, понятной даже новичкам.</p>
+
             <div class="feature-grid">
                 <div class="feature-card">⚡ Быстрее Ruby</div>
                 <div class="feature-card">🎨 GUI в 2 строки</div>
@@ -432,23 +473,25 @@
                 <div class="feature-card">🚀 Мгновенный запуск</div>
             </div>
         </div>
-        
-        <!-- Синтаксис -->
         <div class="chapter" id="syntax">
             <h2>📝 Правила синтаксиса Iron</h2>
             <div class="syntax-rules">
                 <h3>🎨 Подсветка синтаксиса — не ошибка!</h3>
-                <p>Красная подсветка в редакторе — это <strong>НЕ ОШИБКА</strong>, а просто визуальное выделение синтаксиса! Iron использует цветовую схему, где:</p>
+                <p>Красная подсветка в редакторе — это <strong>НЕ ОШИБКА</strong>, а просто визуальное выделение
+                    синтаксиса! Iron использует цветовую схему, где:</p>
                 <ul style="margin-left: 30px; margin-top: 10px;">
-                    <li><span style="color: #c792ea;">Фиолетовый</span> — ключевые слова (def, if, else, for, while, import)</li>
-                    <li><span style="color: #82aaff;">Синий</span> — функции (put, read, init_root, lbl, btn, inp, get_inp)</li>
+                    <li><span style="color: #c792ea;">Фиолетовый</span> — ключевые слова (def, if, else, for, while,
+                        import)</li>
+                    <li><span style="color: #82aaff;">Синий</span> — функции (put, read, init_root, lbl, btn, inp,
+                        get_inp)</li>
                     <li><span style="color: #c3e88d;">Зелёный</span> — строки в кавычках</li>
                     <li><span style="color: #546e7a;">Серый курсив</span> — комментарии (#)</li>
                     <li><span style="color: #f78c6c;">Оранжевый</span> — числа</li>
                 </ul>
-                <p><strong>Важно:</strong> Если код написан правильно, он будет работать! Красный цвет — это просто стиль, как в любом современном редакторе кода.</p>
+                <p><strong>Важно:</strong> Если код написан правильно, он будет работать! Красный цвет — это просто
+                    стиль, как в любом современном редакторе кода.</p>
             </div>
-            
+
             <h3>Базовые правила синтаксиса</h3>
             <pre><code><span class="comment"># Комментарии начинаются с решётки</span>
 <span class="keyword">name</span> = <span class="string">"Iron"</span>  <span class="comment"># Переменные не требуют указания типа</span>
@@ -464,12 +507,10 @@
 <span class="keyword">for</span> i <span class="keyword">in</span> range(3):
     <span class="function">put</span>(i)</code></pre>
         </div>
-        
-        <!-- Переменные -->
         <div class="chapter" id="variables">
             <h2>📦 Переменные и типы данных</h2>
             <p>В Iron переменные создаются простым присваиванием. Динамическая типизация — не нужно указывать типы.</p>
-            
+
             <pre><code><span class="comment"># Числа</span>
 <span class="keyword">age</span> = 25
 <span class="keyword">price</span> = 99.99
@@ -489,12 +530,11 @@
 <span class="keyword">fruits</span> = [<span class="string">"apple"</span>, <span class="string">"banana"</span>]
 <span class="keyword">person</span> = {<span class="string">"name"</span>: <span class="string">"John"</span>, <span class="string">"age"</span>: 30}</code></pre>
         </div>
-        
-        <!-- PUT vs PRINT -->
         <div class="chapter" id="put">
             <h2>🎯 put() — главная команда вывода в Iron</h2>
-            <p><span class="badge badge-success">Главное преимущество</span> <code class="function">put()</code> — возвращает значение, а не просто выводит!</p>
-            
+            <p><span class="badge badge-success">Главное преимущество</span> <code class="function">put()</code> —
+                возвращает значение, а не просто выводит!</p>
+
             <div class="comparison">
                 <div class="comparison-item">
                     <h3>🐍 Python: print()</h3>
@@ -521,7 +561,7 @@ put(x)  <span class="comment"># "Iron rocks!"</span>
 user = put(<span class="string">"Карен"</span>)  <span class="comment"># Выведет "Карен" И сохранит в user!</span></code></pre>
                 </div>
             </div>
-            
+
             <h3>Гениальная фишка Iron: name = put("Карен")</h3>
             <pre><code><span class="comment"># В Iron можно так! Это и вывод, и создание переменной!</span>
 <span class="keyword">user</span> = put(<span class="string">"Карен"</span>)
@@ -536,11 +576,9 @@ put(greeting)  <span class="comment"># Выведет "Добро пожалов
 put(put(<span class="string">"Привет"</span>) + <span class="string">", мир!"</span>)
 <span class="comment"># Сначала выведет "Привет", потом "Привет, мир!"</span></code></pre>
         </div>
-        
-        <!-- Условные операторы -->
         <div class="chapter" id="conditions">
             <h2>⚖️ Условные операторы в Iron</h2>
-            
+
             <h3>if/elif/else</h3>
             <pre><code><span class="keyword">score</span> = 85
 
@@ -552,7 +590,7 @@ put(put(<span class="string">"Привет"</span>) + <span class="string">", м
     put(<span class="string">"Удовлетворительно! 3"</span>)
 <span class="keyword">else</span>:
     put(<span class="string">"Нужно подтянуть знания!"</span>)</code></pre>
-            
+
             <h3>Упрощённый if_e()</h3>
             <pre><code><span class="comment"># Синтаксис: if_e(что1, оператор, что2, код)</span>
 <span class="keyword">age</span> = 18
@@ -561,11 +599,9 @@ if_e(age, <span class="string">">="</span>, 18, <span class="string">'put("До�
 <span class="comment"># Доступные операторы: =, ==, >, <, >=, <=, !=</span>
 if_e(user_input, <span class="string">"=="</span>, <span class="string">"admin"</span>, <span class="string">'put("Добро пожаловать, администратор!")'</span>)</code></pre>
         </div>
-        
-        <!-- Циклы -->
         <div class="chapter" id="loops">
             <h2>🔄 Циклы в Iron</h2>
-            
+
             <h3>for — перебор элементов</h3>
             <pre><code><span class="keyword">fruits</span> = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>]
 <span class="keyword">for</span> fruit <span class="keyword">in</span> fruits:
@@ -573,24 +609,22 @@ if_e(user_input, <span class="string">"=="</span>, <span class="string">"admin"<
 
 <span class="keyword">for</span> i <span class="keyword">in</span> range(5):
     put(f<span class="string">"Итерация {i}"</span>)</code></pre>
-            
+
             <h3>while — с условием</h3>
             <pre><code><span class="keyword">counter</span> = 0
 <span class="keyword">while</span> counter < 5:
     put(f<span class="string">"Счётчик: {counter}"</span>)
     counter += 1</code></pre>
-            
+
             <h3>Упрощённый while_e()</h3>
             <pre><code>while_e(3, <span class="string">'put("Iron rocks!")'</span>)
 
 <span class="keyword">count</span> = 0
 while_e(5, <span class="string">'count += 1; put(f"Шаг {count}")'</span>)</code></pre>
         </div>
-        
-        <!-- Функции -->
         <div class="chapter" id="functions">
             <h2>🔧 Функции в Iron</h2>
-            
+
             <h3>Определение функций</h3>
             <pre><code><span class="comment"># Базовая функция</span>
 <span class="keyword">def</span> <span class="function">greet</span>(name):
@@ -606,12 +640,10 @@ while_e(5, <span class="string">'count += 1; put(f"Шаг {count}")'</span>)</co
 greet(<span class="string">"Анна"</span>)
 sum_value = calculate(5, 3)</code></pre>
         </div>
-        
-        <!-- Файлы -->
         <div class="chapter" id="files">
             <h2>📁 Работа с файлами в Iron</h2>
             <p>Iron поддерживает все операции с файлами через стандартные Python функции.</p>
-            
+
             <h3>Чтение файла</h3>
             <pre><code><span class="comment"># Чтение всего файла</span>
 <span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"r"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:
@@ -622,7 +654,7 @@ sum_value = calculate(5, 3)</code></pre>
 <span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:
     <span class="keyword">for</span> line <span class="keyword">in</span> f:
         put(line.strip())</code></pre>
-            
+
             <h3>Запись в файл</h3>
             <pre><code><span class="comment"># Запись (перезапись)</span>
 <span class="keyword">with</span> open(<span class="string">"output.txt"</span>, <span class="string">"w"</span>, encoding=<span class="string">"utf-8"</span>) <span class="keyword">as</span> f:
@@ -631,7 +663,7 @@ sum_value = calculate(5, 3)</code></pre>
 <span class="comment"># Дозапись в конец</span>
 <span class="keyword">with</span> open(<span class="string">"log.txt"</span>, <span class="string">"a"</span>) <span class="keyword">as</span> f:
     f.write(<span class="string">"Новая строка\n"</span>)</code></pre>
-            
+
             <h3>Проверка существования файла</h3>
             <pre><code><span class="keyword">import</span> os
 <span class="keyword">if</span> os.path.exists(<span class="string">"file.txt"</span>):
@@ -639,14 +671,13 @@ sum_value = calculate(5, 3)</code></pre>
 <span class="keyword">else</span>:
     put(<span class="string">"Файл не найден"</span>)</code></pre>
         </div>
-        
-        <!-- НОВЫЕ ФУНКЦИИ -->
         <div class="chapter" id="new-functions">
             <h2>🆕 Новые функции в Iron 2.0</h2>
-            
+
             <h3><span class="badge badge-new">NEW</span> read_file() — чтение файла в список строк</h3>
-            <p>Функция <code class="function">read_file()</code> читает файл и возвращает список строк. Это намного проще, чем использовать стандартные методы Python!</p>
-            
+            <p>Функция <code class="function">read_file()</code> читает файл и возвращает список строк. Это намного
+                проще, чем использовать стандартные методы Python!</p>
+
             <pre><code><span class="comment"># Синтаксис: read_file(имя_файла)</span>
 <span class="comment"># Возвращает список строк файла</span>
 
@@ -675,10 +706,11 @@ put(f<span class="string">"Сумма: {total}"</span>)</code></pre>
                     <li>Игнорирует пустые строки в конце файла</li>
                 </ul>
             </div>
-            
+
             <h3><span class="badge badge-new">NEW</span> sleep() — пауза в программе</h3>
-            <p>Функция <code class="function">sleep()</code> приостанавливает выполнение программы на указанное количество секунд.</p>
-            
+            <p>Функция <code class="function">sleep()</code> приостанавливает выполнение программы на указанное
+                количество секунд.</p>
+
             <pre><code><span class="comment"># Синтаксис: sleep(секунды)</span>
 
 <span class="comment"># Пример 1: Простая пауза</span>
@@ -698,10 +730,11 @@ put(<span class="string">"Установка Iron..."</span>)
     put(<span class="string">"."</span>, end=<span class="string">""</span>)
     sleep(0.5)
 put(<span class="string">"\n✅ Установка завершена!"</span>)</code></pre>
-            
+
             <h3><span class="badge badge-new">NEW</span> rand() — генерация случайных чисел</h3>
-            <p>Функция <code class="function">rand()</code> возвращает случайное число в заданном диапазоне (включая границы).</p>
-            
+            <p>Функция <code class="function">rand()</code> возвращает случайное число в заданном диапазоне (включая
+                границы).</p>
+
             <pre><code><span class="comment"># Синтаксис: rand(минимум, максимум)</span>
 <span class="comment"># Возвращает случайное целое число от минимум до максимум</span>
 
@@ -729,12 +762,10 @@ put(f<span class="string">"Выпало: {roll_dice()}"</span>)
 <span class="keyword">random_index</span> = rand(0, len(fruits) - 1)
 put(f<span class="string">"Сегодня едим: {fruits[random_index]}"</span>)</code></pre>
         </div>
-        
-        <!-- GUI -->
         <div class="chapter" id="gui">
             <h2>🪟 Графический интерфейс (GUI) — Подробное руководство</h2>
             <p>Iron имеет встроенную поддержку GUI через customtkinter. Создание окон — невероятно просто!</p>
-            
+
             <div class="info-box">
                 <h4>🚀 Быстрый старт GUI</h4>
                 <p>Всего 2 строки кода для создания окна с надписью:</p>
@@ -742,10 +773,15 @@ put(f<span class="string">"Сегодня едим: {fruits[random_index]}"</spa
 lbl(win, <span class="string">"Привет, Iron!"</span>)
 win.mainloop()</code></pre>
             </div>
-            
+
             <h3>Полный список функций GUI</h3>
             <table>
-                <tr><th>Функция</th><th>Описание</th><th>Параметры</th><th>Возвращает</th></tr>
+                <tr>
+                    <th>Функция</th>
+                    <th>Описание</th>
+                    <th>Параметры</th>
+                    <th>Возвращает</th>
+                </tr>
                 <tr>
                     <td><code class="function">init_root(title)</code></td>
                     <td>Создаёт главное окно приложения</td>
@@ -777,7 +813,7 @@ win.mainloop()</code></pre>
                     <td>Строка с введённым текстом</td>
                 </tr>
             </table>
-            
+
             <h3>Пример 1: Простой кликер</h3>
             <pre><code>win = init_root(<span class="string">"Кликер"</span>)
 
@@ -791,7 +827,7 @@ label = lbl(win, f<span class="string">"Счёт: {clicks}"</span>)
 
 btn(win, <span class="string">"Кликни меня!"</span>, on_click)
 win.mainloop()</code></pre>
-            
+
             <h3>Пример 2: Калькулятор</h3>
             <pre><code>win = init_root(<span class="string">"Калькулятор"</span>)
 
@@ -810,7 +846,7 @@ result_label = lbl(win, <span class="string">"Результат: "</span>)
 
 btn(win, <span class="string">"Сложить"</span>, calculate)
 win.mainloop()</code></pre>
-            
+
             <h3>Пример 3: Игра "Угадай число" с GUI</h3>
             <pre><code>win = init_root(<span class="string">"Угадай число"</span>)
 
@@ -835,7 +871,7 @@ message_label = lbl(win, <span class="string">""</span>)
 
 btn(win, <span class="string">"Проверить"</span>, check_guess)
 win.mainloop()</code></pre>
-            
+
             <div class="warning-box">
                 <h4>⚠️ Важные правила GUI</h4>
                 <ul style="margin-left: 20px;">
@@ -846,22 +882,24 @@ win.mainloop()</code></pre>
                 </ul>
             </div>
         </div>
-        
+
         <!-- VS Code -->
         <div class="chapter" id="vscode">
             <h2>💻 Расширение Iron для VS Code</h2>
-            <p><span class="badge badge-new">NEW</span> Теперь в папке с интерпретатором Iron доступно расширение <strong>iron-vscode</strong> для Visual Studio Code!</p>
-            
+            <p><span class="badge badge-new">NEW</span> Теперь в папке с интерпретатором Iron доступно расширение
+                <strong>iron-vscode</strong> для Visual Studio Code!</p>
+
             <div class="info-box">
                 <h4>🎨 Что даёт iron-vscode?</h4>
                 <ul style="margin-left: 20px;">
-                    <li><strong>Подсветка синтаксиса</strong> — все ключевые слова и функции Iron подсвечиваются правильно</li>
+                    <li><strong>Подсветка синтаксиса</strong> — все ключевые слова и функции Iron подсвечиваются
+                        правильно</li>
                     <li><strong>Автодополнение</strong> — IntelliSense для всех встроенных функций</li>
                     <li><strong>Сниппеты</strong> — быстрые шаблоны кода (if, for, def, gui и др.)</li>
                     <li><strong>Проверка синтаксиса</strong> — базовая валидация .iron файлов</li>
                 </ul>
             </div>
-            
+
             <h3>Установка расширения</h3>
             <pre><code><span class="comment"># Способ 1: Через VS Code Marketplace</span>
 <span class="comment"># 1. Откройте VS Code</span>
@@ -873,7 +911,7 @@ win.mainloop()</code></pre>
 <span class="comment"># Расширение находится в папке iron-vscode/ рядом с main.py</span>
 <span class="comment"># Скопируйте папку в ~/.vscode/extensions/</span>
 cp -r iron-vscode ~/.vscode/extensions/</code></pre>
-            
+
             <h3>Использование сниппетов</h3>
             <pre><code><span class="comment"># Введите сокращение и нажмите Tab:</span>
 <span class="comment"># iron-gui → создаст шаблон GUI приложения</span>
@@ -881,11 +919,11 @@ cp -r iron-vscode ~/.vscode/extensions/</code></pre>
 <span class="comment"># iron-for → создаст цикл for</span>
 <span class="comment"># iron-if → создаст условный блок</span></code></pre>
         </div>
-        
+
         <!-- Терминал -->
         <div class="chapter" id="terminal">
             <h2>🐧 Запуск Iron файлов из терминала</h2>
-            
+
             <h3>Способ 1: Алиас в .bashrc (простой и быстрый)</h3>
             <pre><code><span class="comment"># Открой файл .bashrc</span>
 nano ~/.bashrc
@@ -901,7 +939,7 @@ source ~/.bashrc
 
 <span class="comment"># Теперь можно запускать:</span>
 iron my_program.iron</code></pre>
-            
+
             <h3>Способ 2: Создание исполняемого скрипта (профессиональный)</h3>
             <pre><code><span class="comment"># Создай файл в /usr/local/bin</span>
 sudo nano /usr/local/bin/iron
@@ -915,7 +953,7 @@ sudo chmod +x /usr/local/bin/iron
 
 <span class="comment"># Теперь команда iron работает глобально!</span>
 iron script.iron</code></pre>
-            
+
             <h3>Способ 3: Добавление в PATH</h3>
             <pre><code><span class="comment"># Создай папку для скриптов</span>
 mkdir -p ~/.local/bin
@@ -934,7 +972,7 @@ nano ~/.local/bin/iron
 chmod +x ~/.local/bin/iron
 echo <span class="string">'export PATH="$HOME/.local/bin:$PATH"'</span> >> ~/.bashrc
 source ~/.bashrc</code></pre>
-            
+
             <div class="syntax-rules">
                 <h3>📌 Примеры использования</h3>
                 <pre><code>iron main.iron          <span class="comment"># Запуск main.iron</span>
@@ -942,22 +980,23 @@ iron script.iron       <span class="comment"># Запуск любого .iron �
 iron /path/to/file.iron <span class="comment"># Полный путь</span></code></pre>
             </div>
         </div>
-        
+
         <!-- Скачать -->
         <div class="download-section" id="download">
             <h2>📥 Скачать Iron Interpreter</h2>
             <p>Скачай интерпретатор Iron и начни программировать уже сегодня!</p>
-            <p style="margin-top: 10px;"><span class="badge badge-new">NEW</span> В пакет включено расширение iron-vscode для подсветки синтаксиса!</p>
+            <p style="margin-top: 10px;"><span class="badge badge-new">NEW</span> В пакет включено расширение
+                iron-vscode для подсветки синтаксиса!</p>
             <a href="#" id="downloadZipBtn" class="download-btn">📦 Скачать iron.zip</a>
-            <a href="/bib" id="downloadZipBtn" class="download-btn">📦 БИблиоТЕКИ НА IRON и ИХ ИСПОЛЬЗОВАНИЯ И УСТАНОВКА!</a>
+            <a href="/bib" id="downloadZipBtn" class="download-btn">📦 БИблиоТЕКИ НА IRON и ИХ ИСПОЛЬЗОВАНИЯ И
+                УСТАНОВКА!</a>
             <a href="#" id="downloadMainPyBtn" class="download-btn">🐍 Скачать main.py</a>
         </div>
-        
-        <!-- Онлайн IDE -->
         <div class="online-ide" id="ide">
             <h2>✏️ Онлайн IDE для Iron</h2>
-            <p>Пиши код на Iron прямо в браузере, запускай и скачивай результат! <strong>Цветовая подсветка — это НЕ ошибка, а визуальное выделение синтаксиса!</strong></p>
-            
+            <p>Пиши код на Iron прямо в браузере, запускай и скачивай результат! <strong>Цветовая подсветка — это НЕ
+                    ошибка, а визуальное выделение синтаксиса!</strong></p>
+
             <div class="editor-toolbar">
                 <button class="editor-btn" id="runBtn">▶️ Запустить код</button>
                 <button class="editor-btn editor-btn-danger" id="clearBtn">🗑️ Очистить вывод</button>
@@ -965,25 +1004,24 @@ iron /path/to/file.iron <span class="comment"># Полный путь</span></co
                 <button class="editor-btn" id="loadFileBtn">📂 Открыть .iron файл</button>
                 <input type="file" id="fileInput" class="file-input" accept=".iron,.txt">
             </div>
-            
+
             <textarea id="editor" spellcheck="false" style="caret-color: white;"></textarea>
-            
+
             <div class="output-area" id="output">
                 <h4>📟 Вывод программы:</h4>
                 <pre id="outputText"></pre>
             </div>
         </div>
-        
+
         <footer>
             <p>⚡ Iron Language 2.0 — Создан для тех, кто хочет писать код быстро и с удовольствием</p>
             <p>Iron быстрее Ruby, проще Python, мощнее Basic</p>
             <p>© 2026 Iron Lang Inc.</p>
         </footer>
     </div>
-    
+
     <script>
-        // Скачивание iron.zip
-        document.getElementById('downloadZipBtn').addEventListener('click', function(e) {
+        document.getElementById('downloadZipBtn').addEventListener('click', function (e) {
             e.preventDefault();
             const zipContent = `Iron Lang 2.0 Complete Package
 ====================================
@@ -1031,7 +1069,7 @@ def sleep(seconds):
     time.sleep(seconds)
 def rand(min_val, max_val):
     return random.randint(min_val, max_val)`;
-            
+
             const blob = new Blob([zipContent], { type: 'application/zip' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -1042,9 +1080,9 @@ def rand(min_val, max_val):
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         });
-        
+
         // Скачивание main.py
-        document.getElementById('downloadMainPyBtn').addEventListener('click', function(e) {
+        document.getElementById('downloadMainPyBtn').addEventListener('click', function (e) {
             e.preventDefault();
             const content = `from functions import *
 import sys
@@ -1056,7 +1094,7 @@ def main():
 
 if __name__ == "__main__":
     main()`;
-            
+
             const blob = new Blob([content], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -1067,7 +1105,7 @@ if __name__ == "__main__":
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         });
-        
+
         // Простая подсветка синтаксиса
         function highlightSyntax(code) {
             let highlighted = code;
@@ -1091,12 +1129,12 @@ if __name__ == "__main__":
             highlighted = highlighted.replace(/\b\d+(?:\.\d+)?\b/g, '<span class="number">$&</span>');
             return highlighted;
         }
-        
+
         // Запуск кода (эмуляция с синтаксисом)
-        document.getElementById('runBtn').addEventListener('click', function() {
+        document.getElementById('runBtn').addEventListener('click', function () {
             const code = document.getElementById('editor').value;
             const outputDiv = document.getElementById('outputText');
-            
+
             let output = "";
             const lines = code.split('\n');
             for (let line of lines) {
@@ -1139,14 +1177,14 @@ if __name__ == "__main__":
             if (output === "") output = "✅ Программа выполнена успешно! (GUI окно открылось бы на реальном Iron)\n\nПодсказка: Красная подсветка — это НЕ ошибка, а стиль синтаксиса!";
             outputDiv.textContent = output;
         });
-        
+
         // Очистка вывода
-        document.getElementById('clearBtn').addEventListener('click', function() {
+        document.getElementById('clearBtn').addEventListener('click', function () {
             document.getElementById('outputText').textContent = '';
         });
-        
+
         // Скачать .iron файл
-        document.getElementById('saveAsBtn').addEventListener('click', function() {
+        document.getElementById('saveAsBtn').addEventListener('click', function () {
             const content = document.getElementById('editor').value;
             const blob = new Blob([content], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
@@ -1158,23 +1196,23 @@ if __name__ == "__main__":
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         });
-        
+
         // Открыть .iron файл
-        document.getElementById('loadFileBtn').addEventListener('click', function() {
+        document.getElementById('loadFileBtn').addEventListener('click', function () {
             document.getElementById('fileInput').click();
         });
-        
-        document.getElementById('fileInput').addEventListener('change', function(e) {
+
+        document.getElementById('fileInput').addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     document.getElementById('editor').value = event.target.result;
                 };
                 reader.readAsText(file);
             }
         });
-        
+
         // Пример кода по умолчанию
         document.getElementById('editor').value = `# Пример программы на Iron 2.0
 # Красная подсветка — это стиль, не ошибка!
@@ -1211,4 +1249,5 @@ btn(win, "Поздороваться", say_hello)
 win.mainloop()`;
     </script>
 </body>
+
 </html>

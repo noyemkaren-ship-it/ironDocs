@@ -7,7 +7,7 @@ def e_graf(x, y, title: str):
 def circle_diogram(values, names, title):
      fig = px.pie(values=values, names=names, title=title)
      fig.show()
-
+          
 def help_grafic():
     put('=== ГРАФИКИ ===')
     put('')

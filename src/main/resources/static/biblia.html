@@ -20,7 +20,6 @@
                overflow-x: hidden;
           }
 
-          /* Анимированный фон */
           body::before {
                content: '';
                position: fixed;
@@ -36,7 +35,6 @@
                z-index: -1;
           }
 
-          /* Плавающие частицы */
           .particles {
                position: fixed;
                top: 0;
@@ -786,7 +784,6 @@ def help_grafic():
                          filename = 'grafic.iron';
                          content = graficIron;
                     }
-
                     const blob = new Blob([content], { type: 'text/plain' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
