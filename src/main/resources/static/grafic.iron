@@ -1,0 +1,28 @@
+import plotly.express as px
+
+def e_graf(x, y, title: str):
+     fig = px.line(x=x, y=y, title=title)
+     fig.show()
+
+def circle_diogram(values, names, title):
+     fig = px.pie(values=values, names=names, title=title)
+     fig.show()
+
+def help_grafic():
+    put('=== ГРАФИКИ ===')
+    put('')
+    put('1. Линейный график (e_graf):')
+    put('   Параметры:')
+    put('   - x: список значений по оси X')
+    put('   - y: список значений по оси Y')
+    put('   - title: заголовок графика')
+    put('   Пример:')
+    put('   e_graf(x=[1, 2, 3, 4], y=[10, 15, 13, 17], title="Линейный график")')
+    put('')
+    put('2. Круговая диаграмма (circle_diogram):')
+    put('   Параметры:')
+    put('   - values: список значений')
+    put('   - names: список названий секторов')
+    put('   - title: заголовок диаграммы')
+    put('   Пример:')
+    put('   circle_diogram(values=[30, 20, 50], names=["А", "Б", "В"], title="Круговая диаграмма")')
