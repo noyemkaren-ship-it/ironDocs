@@ -6,4 +6,4 @@ def bar_progress(max: int):
 
 def help_progress():
      put("I can create progress bar")
-     put("bar_progress(maxnum))
+     put("bar_progress(maxnum)")

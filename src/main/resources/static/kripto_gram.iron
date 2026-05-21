@@ -16,6 +16,7 @@ def get_coin_oper_24h(coin_id: int):
 
 def get_coin(id: int):
      result = req(f"https://api.coinlore.net/api/ticker/?id={id}")
+     put(result.text)
      return result
 
 def search_coin(keyword: str):
